@@ -15,20 +15,23 @@ We have submitted a paper to the IEEE Transactions on Energy Conversion, which w
 
 ## Review of the ALSETLab Volta Facility
 
-PHIL testing, particularly for power electronics systems like smart inverters, has gained popularity due to its advantages over traditional testing methods \cite{huerta2016power}.
-The ALSETLab research team at Rensselaer Polytechnic Institute established the ALSETLab Volta Facility to facilitate research and development in power electronics systems.
-This power hardware-in-the-loop laboratory is designed for testing inverter functionality at a 15 kW capacity, utilizing Opal-RT simulators and a 4-quadrant bi-directional controllable power converter from Opal-RT.\cite{AlsetLab_Volta}.
+PHIL testing, particularly for power electronics systems like smart inverters, has gained popularity due to its advantages over traditional testing methods.
+The ALSETLab research team at Rensselaer Polytechnic Institute established the [ALSETLab Volta Facility](https://alsetlab.github.io/lab/ "Volta's Homepage") to facilitate research and development in power electronics systems.
+This power hardware-in-the-loop laboratory is designed for testing inverter functionality at a 15 kW capacity, utilizing Opal-RT simulators and a 4-quadrant bi-directional controllable power converter from Opal-RT.
 The PHIL setup was conceptualized such the researcher is capable of testing the inverter in different control modes, such as volt-var mode and constant power factor (PF) mode.
-Figure \ref{fig:VoltaLabSchematic} illustrates the electrical design schematic of the lab, showcasing the components that make up the equipment setup: Power Inverter, Transformer, and Grid Simulation. 
-The Sunny Highpower SHP-150-20 inverter is located in the Power Inverter group in Fig. \ref{fig:VoltaLabSchematic}, thus power flows from the power inverter in direction to the grid simulation group, passing through a 30 kVA 125 Maddox three-phase dry-type auto-transformer. 
-The SEL-735 PQ Meter highlighted in Fig. \ref{fig:VoltaLabSchematic} is the meter used by the authors to collect experiment data for the purpose of the inverter model validation.
-The power amplifier (OP8100 4-Quadrant power amplifier) has been employed with a capability to absorb or inject 15 kVA of power. 
-This amplifier serves as a power grid emulator for the connected PV inverter. 
+The figure bellow illustrates the electrical design schematic of the lab, showcasing the components that make up the equipment setup: Power Inverter, Transformer, and Grid Simulation.
+
+![VoltaSetup](docs/Figures/VoltaSetup.png "ALSETLab Volta Facility Diagram")
+
+The Sunny Highpower SHP-150-20 inverter is located in the Power Inverter group, thus power flows from the power inverter in direction to the grid simulation group, passing through a 30 kVA 125 Maddox three-phase dry-type auto-transformer. The SEL-735 PQ Meter is the meter used by the authors to collect experiment data for the purpose of the inverter model validation.
+The power amplifier (OP8100 4-Quadrant power amplifier) has been employed with a capability to absorb or inject 15 kVA of power. This amplifier serves as a power grid emulator for the connected PV inverter. 
 A common method for providing DC voltage/current to the smart inverter and replicating the behavior of a photovoltaic (PV) array during equipment testing is to utilize a DC power supply. 
 The lab setup utilizes a Magna-Power programmable DC power supply, which provides programmable voltage, current, protection settings, and accurate measurements. 
 The recreation of a photovoltaic power profile is conducted utilizing a photovoltaic power profile emulator (PPPE). 
 The PPPE software automatically produces solar array voltage and current profiles according to predefined parameters. 
 These profiles are then sequentially provided to the Magna-Power supply for emulation.
+
+In case the reader would like to read more about the Volta Facility, [folder](docs/Lab_Documents "Folder with all the documents for the equipment utilized in the implementation of the Volta Facility") contains additional information.
 
 
 ## OpenRESV Library Structure
