@@ -1,0 +1,4 @@
+within OpenRESV.Electrical.Renewables;
+package Original_PV_Model "This package contains the original version of the WECC PV model"
+
+end Original_PV_Model;

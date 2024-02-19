@@ -1,0 +1,1917 @@
+within OpenRESV.RES_Model_vs_PHIL_Inverter.ConstantPFTerminalVoltageVariance;
+package Under085PowerFactor
+  "Model validation for inverter experiment with constant power factor mode - 0.85 Underexcited."
+
+  model VoltageVariation_350_to_340_V
+    extends Modelica.Icons.Example;
+    OpenIPSL.Electrical.Renewables.PSSE.PV pV1(
+      V_b=353.92049703035,
+      P_0(displayUnit="W") = EXPERIMENT_P.table[1, 2],
+      Q_0(displayUnit="V.A") = EXPERIMENT_Q.table[1, 2],
+      angle_0(displayUnit="rad"),
+      QFunctionality=0,
+      redeclare
+        OpenIPSL.Electrical.Renewables.PSSE.InverterInterface.REGCA1
+        RenewableGenerator(Tg=0.01, Tfltr=0.01),
+      redeclare
+        OpenIPSL.Electrical.Renewables.PSSE.ElectricalController.REECB1_modified
+        RenewableController(
+        Trv=0.01,
+        dbd1=-0.00001,
+        dbd2=0.00001,
+        Kqv=0.011,
+        Tp=0.01,
+        Tiq=0.01,
+        Tpord=0.01),
+      redeclare OpenIPSL.Electrical.Renewables.PSSE.PlantController.REPCA1
+        PlantController) annotation (Placement(transformation(extent={{-120,
+              110},{-100,130}})));
+    OpenIPSL.Electrical.Buses.Bus InverterBus1(V_b=353.92049703035, angle_0
+        =0)
+      annotation (Placement(transformation(extent={{-80,110},{-60,130}})));
+    OpenIPSL.Electrical.Sources.VoltageSourceReImInput voltageSourceReImInput(V_b=
+          353.920497030345)
+      annotation (Placement(transformation(extent={{30,110},{10,130}})));
+    inner OpenIPSL.Electrical.SystemBase SysData(fn=60, S_b(displayUnit=
+            "V.A") = 30000)
+      annotation (Placement(transformation(extent={{-128,194},{-88,214}})));
+    OpenIPSL.Electrical.Buses.Bus GridBus2(V_b=353.92049703035, angle_0=0)
+      annotation (Placement(transformation(extent={{-20,110},{0,130}})));
+    OpenIPSL.Electrical.Branches.PwLine pwLine1(
+      R=0,
+      X=0.0000000000001,
+      G=0,
+      B=0)
+      annotation (Placement(transformation(extent={{-50,110},{-30,130}})));
+    Modelica.Blocks.Math.Atan SIMULATION_IAng_REECB
+      annotation (Placement(transformation(extent={{-44,74},{-24,94}})));
+    Modelica.Blocks.Sources.RealExpression SIMULATION_I_Ang_REECB(y=pwLine1.is.im/
+          pwLine1.is.re)
+      annotation (Placement(transformation(extent={{-88,74},{-68,94}})));
+    Modelica.Blocks.Sources.CombiTimeTable EXPERIMENT_P(table=[0.12907,
+          1029.7; 0.19065,1029.7; 0.33222,1029.3; 0.39474,1029.4; 0.5059,
+          1029.8; 0.58502,1027.7; 0.69704,1027.2; 0.793,1030.3; 0.94964,
+          1031.3; 0.99666,1031.3; 1.1222,1030.3; 1.1863,1030.3; 1.3281,
+          1030.5; 1.3906,1028.3; 1.5004,1028.8; 1.5631,1030.9; 1.6896,
+          1030.9; 1.7521,1030.1; 1.9095,1030.7; 1.9719,1030.7; 2.114,1030.4;
+          2.1771,1030.4; 2.3041,1031; 2.3681,1031; 2.4962,1030.2; 2.5755,
+          1030.1; 2.6833,1030.1; 2.7457,1030.5; 2.8856,1030.4; 2.9475,
+          1031.5; 3.0752,1031.5; 3.1375,1029.2; 3.1998,1029.2; 3.3412,
+          1029.1; 3.4667,1029.1; 3.5297,1030.5; 3.5926,1030.5; 3.7011,1031;
+          3.7486,1032.1; 3.9059,1032.1; 3.9686,1030.4; 4.1106,1030.5;
+          4.1576,1030.4; 4.2994,1030.4; 4.3771,1028.2; 4.4886,1028.8; 4.568,
+          1030.9; 4.7086,1030.7; 4.7721,1030.8; 4.9139,1030.8; 4.9768,
+          1030.8; 5.1012,1036; 5.1481,1056.5; 5.2747,1056.5; 5.3376,1029.2;
+          5.4796,1029.2; 5.5437,1029.6; 5.6686,1029.6; 5.7315,1030.1; 5.887,
+          1030.1; 5.9811,1028.6; 6.1216,1028.3; 6.1854,1030.4; 6.294,1030.4;
+          6.358,1030.4; 6.485,1030.4; 6.548,1028.1; 6.7065,1028.1; 6.7696,
+          1030.1; 6.9296,1030.6; 6.9916,1027.6; 7.134,1027.2; 7.1961,1027.2;
+          7.3074,1029.4; 7.3867,1029.4; 7.5117,1029.1; 7.5905,1029.1; 7.716,
+          1029.4; 7.7797,1030.5; 7.9215,1030.4; 7.9837,1028.3; 8.1246,
+          1028.3; 8.1718,1028.3; 8.2964,1027.9; 8.3736,1026.9; 8.4996,
+          1027.4; 8.5626,1027.4; 8.7029,1027.5; 8.7658,1030.5],
+                          extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint)
+      annotation (Placement(transformation(extent={{-68,180},{-48,200}})));
+    Modelica.Blocks.Sources.CombiTimeTable EXPERIMENT_Q(table=[0.12907,-552.48;
+          0.19065,-552.48; 0.33222,-553.15; 0.39474,-553.13; 0.5059,-552.35;
+          0.58502,-551.25; 0.69704,-552.09; 0.793,-553.75; 0.94964,-552.02;
+          0.99666,-552.02; 1.1222,-553.88; 1.1863,-553.88; 1.3281,-553.58;
+          1.3906,-552.46; 1.5004,-551.57; 1.5631,-552.68; 1.6896,-552.68;
+          1.7521,-554.1; 1.9095,-553.09; 1.9719,-553.1; 2.114,-553.69;
+          2.1771,-553.68; 2.3041,-552.55; 2.3681,-552.56; 2.4962,-554.11;
+          2.5755,-554.1; 2.6833,-554.1; 2.7457,-553.57; 2.8856,-553.63;
+          2.9475,-554.13; 3.0752,-554.13; 3.1375,-553.36; 3.1998,-553.36;
+          3.3412,-553.62; 3.4667,-553.62; 3.5297,-553.45; 3.5926,-553.45;
+          3.7011,-552.49; 3.7486,-553.04; 3.9059,-553.04; 3.9686,-553.64;
+          4.1106,-553.58; 4.1576,-553.57; 4.2994,-553.69; 4.3771,-552.83;
+          4.4886,-551.65; 4.568,-552.75; 4.7086,-553.04; 4.7721,-553.05;
+          4.9139,-552.93; 4.9768,-552.9; 5.1012,-542.98; 5.1481,-553.68;
+          5.2747,-553.68; 5.3376,-557.15; 5.4796,-557.15; 5.5437,-544.38;
+          5.6686,-544.38; 5.7315,-545.91; 5.887,-545.91; 5.9811,-543.79;
+          6.1216,-544.32; 6.1854,-545.38; 6.294,-545.32; 6.358,-545.32;
+          6.485,-545.32; 6.548,-544.67; 6.7065,-544.67; 6.7696,-545.79;
+          6.9296,-544.89; 6.9916,-543.3; 7.134,-543.95; 7.1961,-543.94;
+          7.3074,-544.79; 7.3867,-544.79; 7.5117,-545.33; 7.5905,-545.32;
+          7.716,-544.6; 7.7797,-545.15; 7.9215,-545.39; 7.9837,-544.3;
+          8.1246,-544.41; 8.1718,-544.44; 8.2964,-545.1; 8.3736,-544.54;
+          8.4996,-543.57; 8.5626,-543.59; 8.7029,-543.47; 8.7658,-545.08],
+                   extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint)
+      annotation (Placement(transformation(extent={{-38,180},{-18,200}})));
+    Modelica.Blocks.Sources.CombiTimeTable V(table=[0.12907,1; 0.19065,1;
+          0.33222,1; 0.39474,1; 0.5059,1; 0.58502,1; 0.69704,1; 0.793,1;
+          0.94964,1; 0.99666,1; 1.1222,1; 1.1863,1; 1.3281,1; 1.3906,
+          0.99997; 1.5004,0.99997; 1.5631,1; 1.6896,1; 1.7521,0.99999;
+          1.9095,0.99999; 1.9719,1; 2.114,1; 2.1771,1; 2.3041,1; 2.3681,1;
+          2.4962,1; 2.5755,1; 2.6833,1; 2.7457,1; 2.8856,1; 2.9475,1;
+          3.0752,1; 3.1375,0.99997; 3.1998,0.99997; 3.3412,0.99999; 3.4667,
+          0.99999; 3.5297,1; 3.5926,1; 3.7011,1; 3.7486,1; 3.9059,1; 3.9686,
+          1; 4.1106,1; 4.1576,0.99999; 4.2994,0.99999; 4.3771,1; 4.4886,1;
+          4.568,1; 4.7086,1; 4.7721,1; 4.9139,1; 4.9768,0.99998; 5.1012,
+          0.99998; 5.1481,0.99579; 5.2747,0.99579; 5.3376,0.9723; 5.4796,
+          0.9723; 5.5437,0.97233; 5.6686,0.97233; 5.7315,0.97232; 5.887,
+          0.97232; 5.9811,0.97233; 6.1216,0.97233; 6.1854,0.97233; 6.294,
+          0.97233; 6.358,0.97233; 6.485,0.97233; 6.548,0.97231; 6.7065,
+          0.97231; 6.7696,0.97233; 6.9296,0.97233; 6.9916,0.97233; 7.134,
+          0.97233; 7.1961,0.97231; 7.3074,0.97232; 7.3867,0.97232; 7.5117,
+          0.97232; 7.5905,0.97231; 7.716,0.97231; 7.7797,0.97235; 7.9215,
+          0.97235; 7.9837,0.97232; 8.1246,0.97232; 8.1718,0.97232; 8.2964,
+          0.97232; 8.3736,0.97229; 8.4996,0.97229; 8.5626,0.97232; 8.7029,
+          0.97232; 8.7658,0.97233],
+        extrapolation=Modelica.Blocks.Types.Extrapolation.LastTwoPoints)
+      annotation (Placement(transformation(extent={{100,120},{80,140}})));
+    Modelica.Blocks.Sources.CombiTimeTable A(table=[0.12907,-0.52325;
+          0.19065,-0.52325; 0.33222,-0.52331; 0.39474,-0.52331; 0.5059,-0.52337;
+          0.58502,-0.52337; 0.69704,-0.52325; 0.793,-0.52325; 0.94964,-0.52325;
+          0.99666,-0.52325; 1.1222,-0.52331; 1.1863,-0.52331; 1.3281,-0.52331;
+          1.3906,-0.52331; 1.5004,-0.52325; 1.5631,-0.52325; 1.6896,-0.52325;
+          1.7521,-0.52325; 1.9095,-0.52325; 1.9719,-0.52325; 2.114,-0.52331;
+          2.1771,-0.52331; 2.3041,-0.52325; 2.3681,-0.52325; 2.4962,-0.52325;
+          2.5755,-0.52325; 2.6833,-0.52325; 2.7457,-0.52325; 2.8856,-0.52331;
+          2.9475,-0.52331; 3.0752,-0.52331; 3.1375,-0.52331; 3.1998,-0.52331;
+          3.3412,-0.52337; 3.4667,-0.52337; 3.5297,-0.52325; 3.5926,-0.52325;
+          3.7011,-0.52325; 3.7486,-0.52325; 3.9059,-0.52325; 3.9686,-0.52325;
+          4.1106,-0.52325; 4.1576,-0.52325; 4.2994,-0.52337; 4.3771,-0.52337;
+          4.4886,-0.52325; 4.568,-0.52325; 4.7086,-0.52325; 4.7721,-0.52325;
+          4.9139,-0.52325; 4.9768,-0.52325; 5.1012,-0.52354; 5.1481,-0.52354;
+          5.2747,-0.52354; 5.3376,-0.52325; 5.4796,-0.52325; 5.5437,-0.52325;
+          5.6686,-0.52325; 5.7315,-0.52331; 5.887,-0.52331; 5.9811,-0.52331;
+          6.1216,-0.52331; 6.1854,-0.52331; 6.294,-0.52331; 6.358,-0.52331;
+          6.485,-0.52331; 6.548,-0.52331; 6.7065,-0.52331; 6.7696,-0.52331;
+          6.9296,-0.52331; 6.9916,-0.52331; 7.134,-0.52337; 7.1961,-0.52337;
+          7.3074,-0.52331; 7.3867,-0.52331; 7.5117,-0.52325; 7.5905,-0.52325;
+          7.716,-0.52331; 7.7797,-0.52331; 7.9215,-0.52331; 7.9837,-0.52331;
+          8.1246,-0.52337; 8.1718,-0.52337; 8.2964,-0.52331; 8.3736,-0.52331;
+          8.4996,-0.52331; 8.5626,-0.52331; 8.7029,-0.52331; 8.7658,-0.52331],
+        extrapolation=Modelica.Blocks.Types.Extrapolation.LastTwoPoints)
+      annotation (Placement(transformation(extent={{100,100},{80,120}})));
+    Modelica.Blocks.Math.Cos COS
+      annotation (Placement(transformation(extent={{60,84},{52,92}})));
+    Modelica.Blocks.Math.Sin SIN
+      annotation (Placement(transformation(extent={{60,96},{52,104}})));
+    Modelica.Blocks.Math.Product product1 annotation (Placement(transformation(
+          extent={{-3,-3},{3,3}},
+          rotation=180,
+          origin={41,131})));
+    Modelica.Blocks.Math.Product product2 annotation (Placement(transformation(
+          extent={{-3,-3},{3,3}},
+          rotation=180,
+          origin={41,111})));
+    Modelica.Blocks.Sources.CombiTimeTable EXPERIMENT_IAngle(table=[0.12907,
+          -0.030791; 0.19065,-0.030791; 0.33222,-0.030206; 0.39474,-0.030229;
+          0.5059,-0.031048; 0.58502,-0.031033; 0.69704,-0.030097; 0.793,-0.030096;
+          0.94964,-0.031782; 0.99666,-0.031782; 1.1222,-0.030046; 1.1863,-0.030046;
+          1.3281,-0.030334; 1.3906,-0.030319; 1.5004,-0.031128; 1.5631,-0.031144;
+          1.6896,-0.031144; 1.7521,-0.029754; 1.9095,-0.030737; 1.9719,-0.030737;
+          2.114,-0.030219; 2.1771,-0.030219; 2.3041,-0.03126; 2.3681,-0.03126;
+          2.4962,-0.029753; 2.5755,-0.029753; 2.6833,-0.029753; 2.7457,-0.030276;
+          2.8856,-0.030276; 2.9475,-0.030341; 3.0752,-0.030341; 3.1375,-0.029978;
+          3.1998,-0.029978; 3.3412,-0.029805; 3.4667,-0.029805; 3.5297,-0.030387;
+          3.5926,-0.030387; 3.7011,-0.031318; 3.7486,-0.031326; 3.9059,-0.031326;
+          3.9686,-0.030218; 4.1106,-0.030274; 4.1576,-0.030274; 4.2994,-0.030274;
+          4.3771,-0.030031; 4.4886,-0.031065; 4.568,-0.031082; 4.7086,-0.030796;
+          4.7721,-0.030796; 4.9139,-0.030912; 4.9768,-0.030912; 5.1012,-0.040804;
+          5.1481,-0.040803; 5.2747,-0.040803; 5.3376,-0.027063; 5.4796,-0.027063;
+          5.5437,-0.036888; 5.6686,-0.036888; 5.7315,-0.035971; 5.887,-0.035971;
+          5.9811,-0.037002; 6.1216,-0.036478; 6.1854,-0.036492; 6.294,-0.03655;
+          6.358,-0.03655; 6.485,-0.03655; 6.548,-0.036129; 6.7065,-0.036129;
+          6.7696,-0.036086; 6.9296,-0.036958; 6.9916,-0.036958; 7.134,-0.036377;
+          7.1961,-0.036377; 7.3074,-0.036543; 7.3867,-0.036543; 7.5117,-0.035961;
+          7.5905,-0.035961; 7.716,-0.036715; 7.7797,-0.036723; 7.9215,-0.03649;
+          7.9837,-0.036496; 8.1246,-0.036444; 8.1718,-0.036421; 8.2964,-0.03572;
+          8.3736,-0.035734; 8.4996,-0.036671; 8.5626,-0.036671; 8.7029,-0.036782;
+          8.7658,-0.036782],               extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint)
+      annotation (Placement(transformation(extent={{20,180},{40,200}})));
+    Modelica.Blocks.Sources.RealExpression EXPERIMENT_PF(y=EXPERIMENT_P.y[1]/sqrt(
+           EXPERIMENT_P.y[1]^2 + EXPERIMENT_Q.y[1]^2))
+      annotation (Placement(transformation(extent={{66,186},{86,206}})));
+    Modelica.Blocks.Sources.RealExpression PF_Simulation_REECB(y=pwLine1.P12/sqrt(
+           pwLine1.P12^2 + pwLine1.Q12^2))
+      annotation (Placement(transformation(extent={{66,194},{86,174}})));
+    OpenIPSL.Electrical.Renewables.PSSE.Wind wind(
+      V_b=353.92049703035,
+      P_0(displayUnit="W") = EXPERIMENT_P.table[1, 2],
+      Q_0(displayUnit="V.A") = EXPERIMENT_Q.table[1, 2],
+      angle_0(displayUnit="rad"),
+      QFunctionality=0,
+      redeclare
+        OpenIPSL.Electrical.Renewables.PSSE.InverterInterface.REGCA1
+        RenewableGenerator(Tg=0.01, Tfltr=0.01),
+      redeclare
+        OpenIPSL.Electrical.Renewables.PSSE.ElectricalController.REECA1
+        RenewableController(
+        dbd1=-0.0001,
+        dbd2=0.0001,
+        Kqv=0.011,
+        Tp=0.01,
+        Tiq=0.01,
+        Tpord=0.01),
+      redeclare OpenIPSL.Electrical.Renewables.PSSE.PlantController.REPCA1
+        PlantController,
+      redeclare OpenIPSL.Electrical.Renewables.PSSE.WindDriveTrain.WTDTA1
+        DriveTrain,
+      W0=0)
+      annotation (Placement(transformation(extent={{-130,-10},{-110,10}})));
+
+    OpenIPSL.Electrical.Buses.Bus InverterBus2(V_b=352.01, angle_0=0)
+      annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
+    OpenIPSL.Electrical.Sources.VoltageSourceReImInput voltageSourceReImInput1(V_b=
+          353.920497030345)
+      annotation (Placement(transformation(extent={{30,-10},{10,10}})));
+    OpenIPSL.Electrical.Buses.Bus GridBus1(V_b=353.92049703035, angle_0=0)
+      annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
+    OpenIPSL.Electrical.Branches.PwLine pwLine2(
+      R=0,
+      X=0.00000000001,
+      G=0,
+      B=0)
+      annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
+    Modelica.Blocks.Sources.CombiTimeTable V1(table=[0.12907,1; 0.19065,1;
+          0.33222,1; 0.39474,1; 0.5059,1; 0.58502,1; 0.69704,1; 0.793,1;
+          0.94964,1; 0.99666,1; 1.1222,1; 1.1863,1; 1.3281,1; 1.3906,
+          0.99997; 1.5004,0.99997; 1.5631,1; 1.6896,1; 1.7521,0.99999;
+          1.9095,0.99999; 1.9719,1; 2.114,1; 2.1771,1; 2.3041,1; 2.3681,1;
+          2.4962,1; 2.5755,1; 2.6833,1; 2.7457,1; 2.8856,1; 2.9475,1;
+          3.0752,1; 3.1375,0.99997; 3.1998,0.99997; 3.3412,0.99999; 3.4667,
+          0.99999; 3.5297,1; 3.5926,1; 3.7011,1; 3.7486,1; 3.9059,1; 3.9686,
+          1; 4.1106,1; 4.1576,0.99999; 4.2994,0.99999; 4.3771,1; 4.4886,1;
+          4.568,1; 4.7086,1; 4.7721,1; 4.9139,1; 4.9768,0.99998; 5.1012,
+          0.99998; 5.1481,0.99579; 5.2747,0.99579; 5.3376,0.9723; 5.4796,
+          0.9723; 5.5437,0.97233; 5.6686,0.97233; 5.7315,0.97232; 5.887,
+          0.97232; 5.9811,0.97233; 6.1216,0.97233; 6.1854,0.97233; 6.294,
+          0.97233; 6.358,0.97233; 6.485,0.97233; 6.548,0.97231; 6.7065,
+          0.97231; 6.7696,0.97233; 6.9296,0.97233; 6.9916,0.97233; 7.134,
+          0.97233; 7.1961,0.97231; 7.3074,0.97232; 7.3867,0.97232; 7.5117,
+          0.97232; 7.5905,0.97231; 7.716,0.97231; 7.7797,0.97235; 7.9215,
+          0.97235; 7.9837,0.97232; 8.1246,0.97232; 8.1718,0.97232; 8.2964,
+          0.97232; 8.3736,0.97229; 8.4996,0.97229; 8.5626,0.97232; 8.7029,
+          0.97232; 8.7658,0.97233],
+        extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint)
+      annotation (Placement(transformation(extent={{100,0},{80,20}})));
+    Modelica.Blocks.Sources.CombiTimeTable A1(table=[0.12907,-0.52325;
+          0.19065,-0.52325; 0.33222,-0.52331; 0.39474,-0.52331; 0.5059,-0.52337;
+          0.58502,-0.52337; 0.69704,-0.52325; 0.793,-0.52325; 0.94964,-0.52325;
+          0.99666,-0.52325; 1.1222,-0.52331; 1.1863,-0.52331; 1.3281,-0.52331;
+          1.3906,-0.52331; 1.5004,-0.52325; 1.5631,-0.52325; 1.6896,-0.52325;
+          1.7521,-0.52325; 1.9095,-0.52325; 1.9719,-0.52325; 2.114,-0.52331;
+          2.1771,-0.52331; 2.3041,-0.52325; 2.3681,-0.52325; 2.4962,-0.52325;
+          2.5755,-0.52325; 2.6833,-0.52325; 2.7457,-0.52325; 2.8856,-0.52331;
+          2.9475,-0.52331; 3.0752,-0.52331; 3.1375,-0.52331; 3.1998,-0.52331;
+          3.3412,-0.52337; 3.4667,-0.52337; 3.5297,-0.52325; 3.5926,-0.52325;
+          3.7011,-0.52325; 3.7486,-0.52325; 3.9059,-0.52325; 3.9686,-0.52325;
+          4.1106,-0.52325; 4.1576,-0.52325; 4.2994,-0.52337; 4.3771,-0.52337;
+          4.4886,-0.52325; 4.568,-0.52325; 4.7086,-0.52325; 4.7721,-0.52325;
+          4.9139,-0.52325; 4.9768,-0.52325; 5.1012,-0.52354; 5.1481,-0.52354;
+          5.2747,-0.52354; 5.3376,-0.52325; 5.4796,-0.52325; 5.5437,-0.52325;
+          5.6686,-0.52325; 5.7315,-0.52331; 5.887,-0.52331; 5.9811,-0.52331;
+          6.1216,-0.52331; 6.1854,-0.52331; 6.294,-0.52331; 6.358,-0.52331;
+          6.485,-0.52331; 6.548,-0.52331; 6.7065,-0.52331; 6.7696,-0.52331;
+          6.9296,-0.52331; 6.9916,-0.52331; 7.134,-0.52337; 7.1961,-0.52337;
+          7.3074,-0.52331; 7.3867,-0.52331; 7.5117,-0.52325; 7.5905,-0.52325;
+          7.716,-0.52331; 7.7797,-0.52331; 7.9215,-0.52331; 7.9837,-0.52331;
+          8.1246,-0.52337; 8.1718,-0.52337; 8.2964,-0.52331; 8.3736,-0.52331;
+          8.4996,-0.52331; 8.5626,-0.52331; 8.7029,-0.52331; 8.7658,-0.52331],
+        extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint)
+      annotation (Placement(transformation(extent={{100,-20},{80,0}})));
+    Modelica.Blocks.Math.Cos COS1
+      annotation (Placement(transformation(extent={{60,-36},{52,-28}})));
+    Modelica.Blocks.Math.Sin SIN1
+      annotation (Placement(transformation(extent={{60,-24},{52,-16}})));
+    Modelica.Blocks.Math.Product product3 annotation (Placement(transformation(
+          extent={{-3,-3},{3,3}},
+          rotation=180,
+          origin={41,11})));
+    Modelica.Blocks.Math.Product product4 annotation (Placement(transformation(
+          extent={{-3,-3},{3,3}},
+          rotation=180,
+          origin={41,-9})));
+    Modelica.Blocks.Sources.RealExpression PF_Simulation_REECA(y=pwLine1.P12/sqrt(
+           pwLine2.P12^2 + pwLine2.Q12^2))
+      annotation (Placement(transformation(extent={{100,194},{120,174}})));
+    Modelica.Blocks.Math.Atan SIMULATION_IAng_REECA
+      annotation (Placement(transformation(extent={{-48,-40},{-28,-20}})));
+    OpenIPSL.Electrical.Renewables.PSSE.PV pV2(
+      V_b=353.92049703035,
+      P_0(displayUnit="W") = EXPERIMENT_P.table[1, 2],
+      Q_0(displayUnit="V.A") = EXPERIMENT_Q.table[1, 2],
+      angle_0(displayUnit="rad"),
+      QFunctionality=0,
+      redeclare
+        OpenIPSL.Electrical.Renewables.PSSE.InverterInterface.REGCA1
+        RenewableGenerator(Tg=0.01, Tfltr=0.01),
+      redeclare
+        OpenIPSL.Electrical.Renewables.PSSE.ElectricalController.REECB1_modified
+        RenewableController(
+        Trv=0.01,
+        dbd1=-0.0001,
+        dbd2=0.0001,
+        Kqv=0,
+        Tp=0.01,
+        Tiq=0.01,
+        Tpord=0.01),
+      redeclare OpenIPSL.Electrical.Renewables.PSSE.PlantController.REPCA1
+        PlantController) annotation (Placement(transformation(extent={{-130,
+              -130},{-110,-110}})));
+    OpenIPSL.Electrical.Buses.Bus InverterBus3(V_b=353.92049703035, angle_0
+        =0) annotation (Placement(transformation(extent={{-80,-130},{-60,-110}})));
+    OpenIPSL.Electrical.Sources.VoltageSourceReImInput voltageSourceReImInput2(V_b=
+          353.920497030345)
+      annotation (Placement(transformation(extent={{30,-130},{10,-110}})));
+    OpenIPSL.Electrical.Buses.Bus GridBus3(V_b=353.92049703035, angle_0=0)
+      annotation (Placement(transformation(extent={{-20,-130},{0,-110}})));
+    OpenIPSL.Electrical.Branches.PwLine pwLine3(
+      R=0,
+      X=0.0000000000001,
+      G=0,
+      B=0) annotation (Placement(transformation(extent={{-50,-130},{-30,-110}})));
+    Modelica.Blocks.Math.Atan SIMULATION_IAng_REECB_NO_Kqv
+      annotation (Placement(transformation(extent={{-48,-160},{-28,-140}})));
+    Modelica.Blocks.Sources.RealExpression SIMULATION_I_Ang_REECA_NO_Kqv(y=pwLine3.is.im
+          /pwLine3.is.re)
+      annotation (Placement(transformation(extent={{-88,-160},{-68,-140}})));
+    Modelica.Blocks.Sources.CombiTimeTable V2(table=[0.12907,1; 0.19065,1;
+          0.33222,1; 0.39474,1; 0.5059,1; 0.58502,1; 0.69704,1; 0.793,1;
+          0.94964,1; 0.99666,1; 1.1222,1; 1.1863,1; 1.3281,1; 1.3906,
+          0.99997; 1.5004,0.99997; 1.5631,1; 1.6896,1; 1.7521,0.99999;
+          1.9095,0.99999; 1.9719,1; 2.114,1; 2.1771,1; 2.3041,1; 2.3681,1;
+          2.4962,1; 2.5755,1; 2.6833,1; 2.7457,1; 2.8856,1; 2.9475,1;
+          3.0752,1; 3.1375,0.99997; 3.1998,0.99997; 3.3412,0.99999; 3.4667,
+          0.99999; 3.5297,1; 3.5926,1; 3.7011,1; 3.7486,1; 3.9059,1; 3.9686,
+          1; 4.1106,1; 4.1576,0.99999; 4.2994,0.99999; 4.3771,1; 4.4886,1;
+          4.568,1; 4.7086,1; 4.7721,1; 4.9139,1; 4.9768,0.99998; 5.1012,
+          0.99998; 5.1481,0.99579; 5.2747,0.99579; 5.3376,0.9723; 5.4796,
+          0.9723; 5.5437,0.97233; 5.6686,0.97233; 5.7315,0.97232; 5.887,
+          0.97232; 5.9811,0.97233; 6.1216,0.97233; 6.1854,0.97233; 6.294,
+          0.97233; 6.358,0.97233; 6.485,0.97233; 6.548,0.97231; 6.7065,
+          0.97231; 6.7696,0.97233; 6.9296,0.97233; 6.9916,0.97233; 7.134,
+          0.97233; 7.1961,0.97231; 7.3074,0.97232; 7.3867,0.97232; 7.5117,
+          0.97232; 7.5905,0.97231; 7.716,0.97231; 7.7797,0.97235; 7.9215,
+          0.97235; 7.9837,0.97232; 8.1246,0.97232; 8.1718,0.97232; 8.2964,
+          0.97232; 8.3736,0.97229; 8.4996,0.97229; 8.5626,0.97232; 8.7029,
+          0.97232; 8.7658,0.97233],        extrapolation=Modelica.Blocks.Types.Extrapolation.LastTwoPoints)
+      annotation (Placement(transformation(extent={{100,-120},{80,-100}})));
+    Modelica.Blocks.Sources.CombiTimeTable A2(table=[0.12907,-0.52325;
+          0.19065,-0.52325; 0.33222,-0.52331; 0.39474,-0.52331; 0.5059,-0.52337;
+          0.58502,-0.52337; 0.69704,-0.52325; 0.793,-0.52325; 0.94964,-0.52325;
+          0.99666,-0.52325; 1.1222,-0.52331; 1.1863,-0.52331; 1.3281,-0.52331;
+          1.3906,-0.52331; 1.5004,-0.52325; 1.5631,-0.52325; 1.6896,-0.52325;
+          1.7521,-0.52325; 1.9095,-0.52325; 1.9719,-0.52325; 2.114,-0.52331;
+          2.1771,-0.52331; 2.3041,-0.52325; 2.3681,-0.52325; 2.4962,-0.52325;
+          2.5755,-0.52325; 2.6833,-0.52325; 2.7457,-0.52325; 2.8856,-0.52331;
+          2.9475,-0.52331; 3.0752,-0.52331; 3.1375,-0.52331; 3.1998,-0.52331;
+          3.3412,-0.52337; 3.4667,-0.52337; 3.5297,-0.52325; 3.5926,-0.52325;
+          3.7011,-0.52325; 3.7486,-0.52325; 3.9059,-0.52325; 3.9686,-0.52325;
+          4.1106,-0.52325; 4.1576,-0.52325; 4.2994,-0.52337; 4.3771,-0.52337;
+          4.4886,-0.52325; 4.568,-0.52325; 4.7086,-0.52325; 4.7721,-0.52325;
+          4.9139,-0.52325; 4.9768,-0.52325; 5.1012,-0.52354; 5.1481,-0.52354;
+          5.2747,-0.52354; 5.3376,-0.52325; 5.4796,-0.52325; 5.5437,-0.52325;
+          5.6686,-0.52325; 5.7315,-0.52331; 5.887,-0.52331; 5.9811,-0.52331;
+          6.1216,-0.52331; 6.1854,-0.52331; 6.294,-0.52331; 6.358,-0.52331;
+          6.485,-0.52331; 6.548,-0.52331; 6.7065,-0.52331; 6.7696,-0.52331;
+          6.9296,-0.52331; 6.9916,-0.52331; 7.134,-0.52337; 7.1961,-0.52337;
+          7.3074,-0.52331; 7.3867,-0.52331; 7.5117,-0.52325; 7.5905,-0.52325;
+          7.716,-0.52331; 7.7797,-0.52331; 7.9215,-0.52331; 7.9837,-0.52331;
+          8.1246,-0.52337; 8.1718,-0.52337; 8.2964,-0.52331; 8.3736,-0.52331;
+          8.4996,-0.52331; 8.5626,-0.52331; 8.7029,-0.52331; 8.7658,-0.52331],
+                                                            extrapolation=
+          Modelica.Blocks.Types.Extrapolation.LastTwoPoints)
+      annotation (Placement(transformation(extent={{100,-140},{80,-120}})));
+    Modelica.Blocks.Math.Cos COS2
+      annotation (Placement(transformation(extent={{60,-156},{52,-148}})));
+    Modelica.Blocks.Math.Sin SIN2
+      annotation (Placement(transformation(extent={{60,-144},{52,-136}})));
+    Modelica.Blocks.Math.Product product5 annotation (Placement(transformation(
+          extent={{-3,-3},{3,3}},
+          rotation=180,
+          origin={41,-109})));
+    Modelica.Blocks.Math.Product product6 annotation (Placement(transformation(
+          extent={{-3,-3},{3,3}},
+          rotation=180,
+          origin={41,-129})));
+    Modelica.Blocks.Sources.CombiTimeTable EXPERIMENT_IMagnitude(table=[
+          0.12907,3.3298; 0.19065,3.3298; 0.33222,3.3298; 0.39474,3.3298;
+          0.5059,3.3298; 0.58502,3.3231; 0.69704,3.3231; 0.793,3.3331;
+          0.94964,3.3331; 0.99666,3.3331; 1.1222,3.3331; 1.1863,3.3331;
+          1.3281,3.3331; 1.3906,3.3265; 1.5004,3.3264; 1.5631,3.3331;
+          1.6896,3.3331; 1.7521,3.3331; 1.9095,3.3331; 1.9719,3.3331; 2.114,
+          3.3331; 2.1771,3.3331; 2.3041,3.3331; 2.3681,3.3331; 2.4962,
+          3.3331; 2.5755,3.3331; 2.6833,3.3331; 2.7457,3.3331; 2.8856,
+          3.3331; 2.9475,3.3364; 3.0752,3.3364; 3.1375,3.3298; 3.1998,
+          3.3298; 3.3412,3.3298; 3.4667,3.3298; 3.5297,3.3331; 3.5926,
+          3.3331; 3.7011,3.3331; 3.7486,3.3364; 3.9059,3.3364; 3.9686,
+          3.3331; 4.1106,3.3331; 4.1576,3.3331; 4.2994,3.3331; 4.3771,
+          3.3265; 4.4886,3.3264; 4.568,3.3331; 4.7086,3.3331; 4.7721,3.3331;
+          4.9139,3.3331; 4.9768,3.3331; 5.1012,3.3331; 5.1481,3.4131;
+          5.2747,3.4131; 5.3376,3.4298; 5.4796,3.4298; 5.5437,3.4131;
+          5.6686,3.4131; 5.7315,3.4165; 5.887,3.4165; 5.9811,3.4098; 6.1216,
+          3.4098; 6.1854,3.4165; 6.294,3.4165; 6.358,3.4165; 6.485,3.4165;
+          6.548,3.4098; 6.7065,3.4098; 6.7696,3.4165; 6.9296,3.4165; 6.9916,
+          3.4065; 7.134,3.4065; 7.1961,3.4065; 7.3074,3.4131; 7.3867,3.4131;
+          7.5117,3.4131; 7.5905,3.4131; 7.716,3.4131; 7.7797,3.4165; 7.9215,
+          3.4165; 7.9837,3.4098; 8.1246,3.4098; 8.1718,3.4098; 8.2964,
+          3.4098; 8.3736,3.4065; 8.4996,3.4065; 8.5626,3.4065; 8.7029,
+          3.4065; 8.7658,3.4165],
+                   extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint)
+      annotation (Placement(transformation(extent={{-8,180},{12,200}})));
+    Modelica.Blocks.Sources.RealExpression PF_Simulation_REECB_NO_Kqv(y=pwLine3.P12
+          /sqrt(pwLine3.P12^2 + pwLine3.Q12^2))
+      annotation (Placement(transformation(extent={{100,186},{120,206}})));
+    Modelica.Blocks.Sources.RealExpression SIMULATION_I_Mag_REECB(y=sqrt(pwLine1.p.ir
+          ^2 + pwLine1.p.ii^2))
+      annotation (Placement(transformation(extent={{-120,74},{-100,54}})));
+    Modelica.Blocks.Sources.RealExpression SIMULATION_I_Ang_REECA(y=pwLine2.is.im/
+          pwLine2.is.re)
+      annotation (Placement(transformation(extent={{-88,-40},{-68,-20}})));
+    Modelica.Blocks.Sources.RealExpression SIMULATION_I_Mag_REECA(y=sqrt(pwLine2.p.ir
+          ^2 + pwLine2.p.ii^2))
+      annotation (Placement(transformation(extent={{-120,-46},{-100,-66}})));
+    Modelica.Blocks.Sources.RealExpression SIMULATION_I_Mag_REECB_NO_Kqv(y=sqrt(
+          pwLine3.p.ir^2 + pwLine3.p.ii^2))
+      annotation (Placement(transformation(extent={{-120,-160},{-100,-180}})));
+    Modelica.Blocks.Sources.CombiTimeTable VOLTAGE(table=[0.12907,350.94;
+          0.19065,350.94; 0.33222,350.94; 0.39474,350.94; 0.5059,350.94;
+          0.58502,350.94; 0.69704,350.94; 0.793,350.94; 0.94964,350.95;
+          0.99666,350.95; 1.1222,350.95; 1.1863,350.95; 1.3281,350.95;
+          1.3906,350.93; 1.5004,350.93; 1.5631,350.94; 1.6896,350.94;
+          1.7521,350.94; 1.9095,350.94; 1.9719,350.94; 2.114,350.94; 2.1771,
+          350.94; 2.3041,350.94; 2.3681,350.94; 2.4962,350.94; 2.5755,
+          350.94; 2.6833,350.94; 2.7457,350.94; 2.8856,350.94; 2.9475,
+          350.95; 3.0752,350.95; 3.1375,350.93; 3.1998,350.93; 3.3412,
+          350.94; 3.4667,350.94; 3.5297,350.94; 3.5926,350.94; 3.7011,
+          350.94; 3.7486,350.94; 3.9059,350.94; 3.9686,350.94; 4.1106,
+          350.94; 4.1576,350.94; 4.2994,350.94; 4.3771,350.94; 4.4886,
+          350.94; 4.568,350.95; 4.7086,350.95; 4.7721,350.95; 4.9139,350.95;
+          4.9768,350.93; 5.1012,350.93; 5.1481,349.46; 5.2747,349.46;
+          5.3376,341.22; 5.4796,341.22; 5.5437,341.23; 5.6686,341.23;
+          5.7315,341.22; 5.887,341.22; 5.9811,341.23; 6.1216,341.23; 6.1854,
+          341.23; 6.294,341.23; 6.358,341.23; 6.485,341.23; 6.548,341.22;
+          6.7065,341.22; 6.7696,341.23; 6.9296,341.23; 6.9916,341.23; 7.134,
+          341.23; 7.1961,341.22; 7.3074,341.22; 7.3867,341.22; 7.5117,
+          341.22; 7.5905,341.22; 7.716,341.22; 7.7797,341.23; 7.9215,341.23;
+          7.9837,341.22; 8.1246,341.22; 8.1718,341.22; 8.2964,341.22;
+          8.3736,341.21; 8.4996,341.21; 8.5626,341.22; 8.7029,341.22;
+          8.7658,341.23], extrapolation=Modelica.Blocks.Types.Extrapolation.LastTwoPoints)
+      annotation (Placement(transformation(extent={{-68,152},{-48,172}})));
+    Modelica.Blocks.Sources.RealExpression Im1(y=sqrt(pwLine1.p.ir^2 +
+          pwLine1.p.ii^2)*30000/VOLTAGE.table[1, 2])
+      annotation (Placement(transformation(extent={{-120,56},{-100,36}})));
+    Modelica.Blocks.Sources.RealExpression Im2(y=sqrt(pwLine2.p.ir^2 +
+          pwLine2.p.ii^2)*SysData.S_b/VOLTAGE.table[1, 2])
+      annotation (Placement(transformation(extent={{-120,-66},{-100,-86}})));
+    Modelica.Blocks.Sources.RealExpression Im3(y=sqrt(pwLine3.p.ir^2 +
+          pwLine3.p.ii^2)*SysData.S_b/VOLTAGE.table[1, 2])
+      annotation (Placement(transformation(extent={{-120,-180},{-100,-200}})));
+    Modelica.Blocks.Sources.RealExpression VR(y=VOLTAGE.y[1]*COS.y)
+      annotation (Placement(transformation(extent={{-36,174},{-16,154}})));
+    Modelica.Blocks.Sources.RealExpression VI(y=VOLTAGE.y[1]*SIN.y)
+      annotation (Placement(transformation(extent={{-8,174},{12,154}})));
+    Modelica.Blocks.Sources.RealExpression Ir1(y=Im1.y*cos(
+          SIMULATION_IAng_REECB.y))
+      annotation (Placement(transformation(extent={{-88,74},{-68,54}})));
+    Modelica.Blocks.Sources.RealExpression Ii1(y=Im1.y*sin(
+          SIMULATION_IAng_REECB.y))
+      annotation (Placement(transformation(extent={{-88,56},{-68,36}})));
+    Modelica.Blocks.Sources.RealExpression Ir2(y=Im2.y*cos(
+          SIMULATION_IAng_REECA.y))
+      annotation (Placement(transformation(extent={{-92,-46},{-72,-66}})));
+    Modelica.Blocks.Sources.RealExpression Ii2(y=Im2.y*sin(
+          SIMULATION_IAng_REECA.y))
+      annotation (Placement(transformation(extent={{-92,-66},{-72,-86}})));
+    Modelica.Blocks.Sources.RealExpression Ir3(y=Im3.y*cos(
+          SIMULATION_IAng_REECB_NO_Kqv.y))
+      annotation (Placement(transformation(extent={{-90,-160},{-70,-180}})));
+    Modelica.Blocks.Sources.RealExpression Ii3(y=Im3.y*sin(
+          SIMULATION_IAng_REECB_NO_Kqv.y))
+      annotation (Placement(transformation(extent={{-90,-180},{-70,-200}})));
+  equation
+    connect(pV1.pwPin,InverterBus1. p)
+      annotation (Line(points={{-100,120},{-70,120}},color={0,0,255}));
+    connect(GridBus2.p,voltageSourceReImInput. p)
+      annotation (Line(points={{-10,120},{9,120}}, color={0,0,255}));
+    connect(pwLine1.p,InverterBus1. p)
+      annotation (Line(points={{-49,120},{-70,120}}, color={0,0,255}));
+    connect(SIMULATION_I_Ang_REECB.y, SIMULATION_IAng_REECB.u)
+      annotation (Line(points={{-67,84},{-46,84}}, color={0,0,127}));
+    connect(A.y[1],COS. u) annotation (Line(points={{79,110},{78,110},{78,
+            88},{60.8,88}},
+                  color={0,0,127}));
+    connect(SIN.u, A.y[1]) annotation (Line(points={{60.8,100},{78,100},{78,
+            110},{79,110}},
+                  color={0,0,127}));
+    connect(voltageSourceReImInput.vRe, product1.y)
+      annotation (Line(points={{32,124},{32,131},{37.7,131}},
+                                                           color={0,0,127}));
+    connect(voltageSourceReImInput.vIm, product2.y)
+      annotation (Line(points={{32,116},{32,111},{37.7,111}},
+                                                           color={0,0,127}));
+    connect(COS.y, product1.u2) annotation (Line(points={{51.6,88},{44,88},
+            {44,66},{112,66},{112,152},{44.6,152},{44.6,132.8}},
+                                                     color={0,0,127}));
+    connect(V.y[1], product1.u1) annotation (Line(points={{79,130},{50,130},
+            {50,129.2},{44.6,129.2}},
+                          color={0,0,127}));
+    connect(SIN.y, product2.u1) annotation (Line(points={{51.6,100},{48,100},
+            {48,109.2},{44.6,109.2}},
+                          color={0,0,127}));
+    connect(product2.u2, V.y[1])
+      annotation (Line(points={{44.6,112.8},{79,112.8},{79,130}},
+                                                               color={0,0,127}));
+    connect(pwLine1.n, GridBus2.p)
+      annotation (Line(points={{-31,120},{-10,120}},
+                                                 color={0,0,255}));
+    connect(wind.pwPin, InverterBus2.p)
+      annotation (Line(points={{-110,0},{-70,0}},     color={0,0,255}));
+    connect(GridBus1.p, voltageSourceReImInput1.p)
+      annotation (Line(points={{-10,0},{9,0}},    color={0,0,255}));
+    connect(pwLine2.p,InverterBus2. p)
+      annotation (Line(points={{-49,0},{-70,0}},     color={0,0,255}));
+    connect(A1.y[1],COS1. u) annotation (Line(points={{79,-10},{78,-10},{78,
+            -32},{60.8,-32}},
+                        color={0,0,127}));
+    connect(SIN1.u, A1.y[1]) annotation (Line(points={{60.8,-20},{78,-20},{
+            78,-10},{79,-10}},
+                       color={0,0,127}));
+    connect(voltageSourceReImInput1.vRe, product3.y)
+      annotation (Line(points={{32,4},{32,11},{37.7,11}},     color={0,0,127}));
+    connect(voltageSourceReImInput1.vIm, product4.y)
+      annotation (Line(points={{32,-4},{32,-9},{37.7,-9}},    color={0,0,127}));
+    connect(COS1.y, product3.u2) annotation (Line(points={{51.6,-32},{44,
+            -32},{44,-54},{112,-54},{112,32},{44.6,32},{44.6,12.8}},
+                                                                 color={0,0,127}));
+    connect(V1.y[1], product3.u1) annotation (Line(points={{79,10},{50,10},
+            {50,9.2},{44.6,9.2}},
+                           color={0,0,127}));
+    connect(SIN1.y, product4.u1) annotation (Line(points={{51.6,-20},{48,
+            -20},{48,-10.8},{44.6,-10.8}},
+                                  color={0,0,127}));
+    connect(product4.u2, V1.y[1]) annotation (Line(points={{44.6,-7.2},{79,
+            -7.2},{79,10}},
+                       color={0,0,127}));
+    connect(pwLine2.n, GridBus1.p)
+      annotation (Line(points={{-31,0},{-10,0}},   color={0,0,255}));
+    connect(pV2.pwPin,InverterBus3. p)
+      annotation (Line(points={{-110,-120},{-70,-120}},
+                                                     color={0,0,255}));
+    connect(GridBus3.p, voltageSourceReImInput2.p)
+      annotation (Line(points={{-10,-120},{9,-120}},color={0,0,255}));
+    connect(pwLine3.p,InverterBus3. p)
+      annotation (Line(points={{-49,-120},{-70,-120}},
+                                                     color={0,0,255}));
+    connect(SIMULATION_I_Ang_REECA_NO_Kqv.y, SIMULATION_IAng_REECB_NO_Kqv.u)
+      annotation (Line(points={{-67,-150},{-50,-150}}, color={0,0,127}));
+    connect(A2.y[1],COS2. u) annotation (Line(points={{79,-130},{78,-130},{
+            78,-152},{60.8,-152}},
+                                color={0,0,127}));
+    connect(SIN2.u, A2.y[1]) annotation (Line(points={{60.8,-140},{78,-140},
+            {78,-130},{79,-130}},color={0,0,127}));
+    connect(voltageSourceReImInput2.vRe, product5.y) annotation (Line(points={{32,-116},
+            {32,-109},{37.7,-109}},            color={0,0,127}));
+    connect(voltageSourceReImInput2.vIm, product6.y) annotation (Line(points={{32,-124},
+            {32,-129},{37.7,-129}},            color={0,0,127}));
+    connect(COS2.y, product5.u2) annotation (Line(points={{51.6,-152},{44,
+            -152},{44,-174},{112,-174},{112,-88},{44.6,-88},{44.6,-107.2}},
+          color={0,0,127}));
+    connect(V2.y[1], product5.u1) annotation (Line(points={{79,-110},{50,
+            -110},{50,-110.8},{44.6,-110.8}},
+                                        color={0,0,127}));
+    connect(SIN2.y, product6.u1) annotation (Line(points={{51.6,-140},{48,
+            -140},{48,-130.8},{44.6,-130.8}}, color={0,0,127}));
+    connect(product6.u2, V2.y[1]) annotation (Line(points={{44.6,-127.2},{
+            79,-127.2},{79,-110}},
+                                color={0,0,127}));
+    connect(pwLine3.n,GridBus3. p)
+      annotation (Line(points={{-31,-120},{-10,-120}},
+                                                 color={0,0,255}));
+    connect(SIMULATION_I_Ang_REECA.y, SIMULATION_IAng_REECA.u)
+      annotation (Line(points={{-67,-30},{-50,-30}}, color={0,0,127}));
+    annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-140,
+              -240},{140,240}})),                                  Diagram(
+          coordinateSystem(preserveAspectRatio=false, extent={{-140,-240},{
+              140,240}})),
+      experiment(
+        StopTime=7.8,
+        __Dymola_NumberOfIntervals=1000,
+        __Dymola_Algorithm="Dassl"));
+  end VoltageVariation_350_to_340_V;
+
+  model VoltageVariation_350_to_335_V
+    extends Modelica.Icons.Example;
+    OpenIPSL.Electrical.Renewables.PSSE.PV pV1(
+      V_b=353.92049703035,
+      P_0(displayUnit="W") = EXPERIMENT_P.table[1, 2],
+      Q_0(displayUnit="V.A") = EXPERIMENT_Q.table[1, 2],
+      angle_0(displayUnit="rad"),
+      QFunctionality=0,
+      redeclare
+        OpenIPSL.Electrical.Renewables.PSSE.InverterInterface.REGCA1
+        RenewableGenerator(Tg=0.01, Tfltr=0.01),
+      redeclare
+        OpenIPSL.Electrical.Renewables.PSSE.ElectricalController.REECB1_modified
+        RenewableController(
+        Trv=0.01,
+        dbd1=-0.00001,
+        dbd2=0.00001,
+        Kqv=0.011,
+        Tp=0.01,
+        Tiq=0.01,
+        Tpord=0.01),
+      redeclare OpenIPSL.Electrical.Renewables.PSSE.PlantController.REPCA1
+        PlantController) annotation (Placement(transformation(extent={{-120,
+              110},{-100,130}})));
+    OpenIPSL.Electrical.Buses.Bus InverterBus1(V_b=353.92049703035, angle_0
+        =0)
+      annotation (Placement(transformation(extent={{-80,110},{-60,130}})));
+    OpenIPSL.Electrical.Sources.VoltageSourceReImInput voltageSourceReImInput(V_b=
+          353.920497030345)
+      annotation (Placement(transformation(extent={{30,110},{10,130}})));
+    inner OpenIPSL.Electrical.SystemBase SysData(fn=60, S_b(displayUnit=
+            "V.A") = 30000)
+      annotation (Placement(transformation(extent={{-128,194},{-88,214}})));
+    OpenIPSL.Electrical.Buses.Bus GridBus2(V_b=353.92049703035, angle_0=0)
+      annotation (Placement(transformation(extent={{-20,110},{0,130}})));
+    OpenIPSL.Electrical.Branches.PwLine pwLine1(
+      R=0,
+      X=0.0000000000001,
+      G=0,
+      B=0)
+      annotation (Placement(transformation(extent={{-50,110},{-30,130}})));
+    Modelica.Blocks.Math.Atan SIMULATION_IAng_REECB
+      annotation (Placement(transformation(extent={{-44,74},{-24,94}})));
+    Modelica.Blocks.Sources.RealExpression SIMULATION_I_Ang_REECB(y=pwLine1.is.im/
+          pwLine1.is.re)
+      annotation (Placement(transformation(extent={{-88,74},{-68,94}})));
+    Modelica.Blocks.Sources.CombiTimeTable EXPERIMENT_P(table=[0.1029,
+          1029.7; 0.16424,1029.7; 0.2742,1030.7; 0.32103,1030.7; 0.49463,
+          1030.9; 0.54171,1030.9; 0.68271,1031.1; 0.73009,1031.1; 0.87236,
+          1031; 0.93493,1030.7; 1.0606,1030.2; 1.1397,1028.1; 1.2503,1028.1;
+          1.313,1030.8; 1.4387,1030.8; 1.5022,1030.9; 1.5647,1030.9; 1.7077,
+          1028; 1.7554,1028; 1.8966,1028.9; 2.0375,1031; 2.1155,1030.8;
+          2.2414,1030.8; 2.3054,1028.4; 2.4464,1028.5; 2.5094,1031; 2.5553,
+          1031; 2.6963,1030.3; 2.7582,1030.3; 2.9009,1030.1; 3.0579,1028.1;
+          3.1351,1030.7; 3.2589,1031.1; 3.306,1032.2; 3.4474,1032.1; 3.5109,
+          1029; 3.6359,1029; 3.714,1029.4; 3.762,1029.4; 3.9193,1029.6;
+          4.0448,1030.6; 4.1078,1030.5; 4.1696,1030.5; 4.279,1031.1; 4.3577,
+          1031.1; 4.4993,1030.4; 4.5628,1028.4; 4.7039,1030.3; 4.7679,
+          1030.3; 4.8768,1029.1; 4.9551,1029.1; 5.0809,1030.8; 5.1439,
+          1030.8; 5.2686,1030.7; 5.3313,1030.6; 5.4727,1030.6; 5.5509,
+          1027.6; 5.6599,1027.4; 5.738,1030.5; 5.8478,1030.5; 5.9099,1029.4;
+          6.0507,1029.4; 6.113,1032.1; 6.16,1032.1; 6.286,1031.7; 6.3486,
+          1030.6; 6.4744,1030.3; 6.5525,1028.2; 6.6619,1028.2; 6.7416,
+          1029.2; 6.866,1029.9; 6.9447,1032; 7.087,1031.2; 7.1497,1030.1;
+          7.2759,1030.6; 7.338,1030.6; 7.4779,1030.2; 7.5247,1028.2; 7.6508,
+          1028.2; 7.7294,1029.7; 7.8561,1029.7; 7.9187,1030.6; 8.0442,
+          1030.6; 8.1067,1030.5; 8.1694,1030.5; 8.2967,1030.8; 8.3589,
+          1030.8; 8.5006,1030.4; 8.64,1030.4; 8.7325,1030.7; 8.8576,1030.6;
+          8.9201,1030.5; 9.0621,1030.6; 9.1246,1030.6; 9.2672,1030.6;
+          9.3298,1029.2; 9.4724,1029.2; 9.5507,1030; 9.691,1031.2; 9.7538,
+          1032.3; 9.8928,1031.4; 9.939,1030.4; 10.048,1030.4; 10.126,1030.8;
+          10.25,1030.8; 10.314,1029.3; 10.439,1029.3; 10.502,1030.4; 10.644,
+          1030.4; 10.706,1031.7; 10.77,1031.7; 10.896,1030.6; 10.958,1030.6;
+          11.1,1030.6; 11.163,1029.6; 11.273,1030.3; 11.337,1030.3; 11.462,
+          1030.8; 11.524,1030.8; 11.682,1030.8; 11.745,1030.7; 11.87,1032.8;
+          11.934,1060.3; 12.076,1063.3; 12.139,1029.6; 12.266,1028.9;
+          12.343,1028.9; 12.453,1028.8; 12.517,1028.7; 12.673,1028.7;
+          12.736,1028.8; 12.878,1028.7; 12.941,1028.7; 13.083,1029.1;
+          13.147,1029.1; 13.256,1029.3; 13.335,1029.3; 13.462,1029.1;
+          13.526,1029.1; 13.682,1029.8; 13.745,1028.9; 13.886,1028.1; 13.95,
+          1028.1; 14.076,1027.8; 14.155,1025.8; 14.264,1026; 14.342,1028;
+          14.453,1028; 14.53,1028.2; 14.672,1028.3; 14.735,1028.4; 14.862,
+          1028; 14.924,1028.9],
+                          extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint)
+      annotation (Placement(transformation(extent={{-68,180},{-48,200}})));
+    Modelica.Blocks.Sources.CombiTimeTable EXPERIMENT_Q(table=[0.1029,-552.53;
+          0.16424,-552.53; 0.2742,-553.15; 0.32103,-553.15; 0.49463,-552.74;
+          0.54171,-552.75; 0.68271,-552.44; 0.73009,-552.44; 0.87236,-552.5;
+          0.93493,-553.1; 1.0606,-554.05; 1.1397,-552.92; 1.2503,-552.98;
+          1.313,-552.86; 1.4387,-552.86; 1.5022,-552.68; 1.5647,-552.68;
+          1.7077,-553.13; 1.7554,-553.13; 1.8966,-551.47; 2.0375,-552.56;
+          2.1155,-552.98; 2.2414,-552.98; 2.3054,-552.33; 2.4464,-552.27;
+          2.5094,-552.69; 2.5553,-552.69; 2.6963,-553.89; 2.7582,-553.87;
+          2.9009,-554.22; 3.0579,-553.01; 3.1351,-553.16; 3.2589,-552.32;
+          3.306,-552.87; 3.4474,-552.93; 3.5109,-553.73; 3.6359,-553.73;
+          3.714,-553.08; 3.762,-553.08; 3.9193,-552.66; 4.0448,-553.22;
+          4.1078,-553.5; 4.1696,-553.5; 4.279,-552.38; 4.3577,-552.38;
+          4.4993,-553.64; 4.5628,-552.51; 4.7039,-553.87; 4.7679,-553.87;
+          4.8768,-553.61; 4.9551,-553.61; 5.0809,-552.98; 5.1439,-552.98;
+          5.2686,-553.04; 5.3313,-553.27; 5.4727,-553.27; 5.5509,-551.49;
+          5.6599,-551.79; 5.738,-553.46; 5.8478,-553.52; 5.9099,-553.08;
+          6.0507,-553.02; 6.113,-552.99; 6.16,-552.99; 6.286,-553.83;
+          6.3486,-553.27; 6.4744,-553.88; 6.5525,-552.76; 6.6619,-552.8;
+          6.7416,-553.38; 6.866,-552.13; 6.9447,-553.23; 7.087,-554.73;
+          7.1497,-554.17; 7.2759,-553.27; 7.338,-553.28; 7.4779,-554;
+          7.5247,-552.88; 7.6508,-552.82; 7.7294,-552.4; 7.8561,-552.46;
+          7.9187,-553.21; 8.0442,-553.21; 8.1067,-553.45; 8.1694,-553.45;
+          8.2967,-552.98; 8.3589,-552.98; 8.5006,-553.7; 8.64,-553.69;
+          8.7325,-553.1; 8.8576,-553.4; 8.9201,-553.39; 9.0621,-553.33;
+          9.1246,-553.34; 9.2672,-553.4; 9.3298,-553.32; 9.4724,-553.32;
+          9.5507,-554.35; 9.691,-552.08; 9.7538,-552.63; 9.8928,-554.25;
+          9.939,-553.69; 10.048,-553.69; 10.126,-552.99; 10.25,-552.99;
+          10.314,-553.27; 10.439,-553.27; 10.502,-553.69; 10.644,-553.69;
+          10.706,-553.83; 10.77,-553.83; 10.896,-553.21; 10.958,-553.21;
+          11.1,-553.34; 11.163,-552.77; 11.273,-553.87; 11.337,-553.87;
+          11.462,-552.86; 11.524,-552.86; 11.682,-552.92; 11.745,-553.03;
+          11.87,-549.12; 11.934,-563.74; 12.076,-557.97; 12.139,-540.24;
+          12.266,-541.56; 12.343,-541.54; 12.453,-541.66; 12.517,-541.82;
+          12.673,-541.82; 12.736,-541.7; 12.878,-541.76; 12.941,-541.76;
+          13.083,-540.98; 13.147,-540.98; 13.256,-540.69; 13.335,-540.7;
+          13.462,-541.06; 13.526,-541.05; 13.682,-539.68; 13.745,-539.16;
+          13.886,-540.59; 13.95,-540.57; 14.076,-541.16; 14.155,-540.12;
+          14.264,-539.65; 14.342,-540.69; 14.453,-540.69; 14.53,-540.26;
+          14.672,-540.14; 14.735,-539.92; 14.862,-540.81; 14.924,-541.33],
+                   extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint)
+      annotation (Placement(transformation(extent={{-38,180},{-18,200}})));
+    Modelica.Blocks.Sources.CombiTimeTable V(table=[0.1029,1; 0.16424,1;
+          0.2742,0.99999; 0.32103,0.99999; 0.49463,0.99999; 0.54171,1;
+          0.68271,1; 0.73009,1; 0.87236,1; 0.93493,1; 1.0606,1; 1.1397,
+          0.99998; 1.2503,0.99998; 1.313,1; 1.4387,1; 1.5022,1; 1.5647,1;
+          1.7077,0.99998; 1.7554,0.99998; 1.8966,0.99998; 2.0375,1; 2.1155,
+          1; 2.2414,1; 2.3054,0.99998; 2.4464,0.99998; 2.5094,1; 2.5553,1;
+          2.6963,1; 2.7582,0.99998; 2.9009,0.99998; 3.0579,0.99998; 3.1351,
+          1; 3.2589,1; 3.306,1; 3.4474,1; 3.5109,0.99997; 3.6359,0.99997;
+          3.714,0.99998; 3.762,0.99998; 3.9193,0.99998; 4.0448,1; 4.1078,
+          0.99998; 4.1696,0.99998; 4.279,1; 4.3577,1; 4.4993,1; 4.5628,
+          0.99998; 4.7039,0.99999; 4.7679,0.99999; 4.8768,0.99998; 4.9551,
+          0.99998; 5.0809,1; 5.1439,1; 5.2686,1; 5.3313,0.99999; 5.4727,
+          0.99999; 5.5509,0.99999; 5.6599,0.99999; 5.738,1; 5.8478,1;
+          5.9099,0.99998; 6.0507,0.99998; 6.113,1; 6.16,1; 6.286,1; 6.3486,
+          0.99999; 6.4744,0.99999; 6.5525,0.99999; 6.6619,0.99999; 6.7416,
+          0.99999; 6.866,0.99999; 6.9447,1; 7.087,1; 7.1497,0.99998; 7.2759,
+          0.99998; 7.338,1; 7.4779,1; 7.5247,0.99999; 7.6508,0.99999;
+          7.7294,0.99999; 7.8561,0.99999; 7.9187,0.99999; 8.0442,0.99999;
+          8.1067,0.99999; 8.1694,0.99999; 8.2967,1; 8.3589,1; 8.5006,1;
+          8.64,0.99999; 8.7325,1; 8.8576,1; 8.9201,0.99999; 9.0621,0.99999;
+          9.1246,1; 9.2672,1; 9.3298,0.99998; 9.4724,0.99998; 9.5507,
+          0.99999; 9.691,0.99999; 9.7538,1; 9.8928,1; 9.939,0.99999; 10.048,
+          0.99999; 10.126,1; 10.25,1; 10.314,0.99999; 10.439,0.99999;
+          10.502,0.99999; 10.644,0.99999; 10.706,1; 10.77,1; 10.896,0.99999;
+          10.958,0.99999; 11.1,0.99999; 11.163,0.99999; 11.273,0.99999;
+          11.337,0.99999; 11.462,0.99999; 11.524,1; 11.682,1; 11.745,
+          0.99999; 11.87,0.99999; 11.934,0.98236; 12.076,0.98236; 12.139,
+          0.95854; 12.266,0.95854; 12.343,0.9585; 12.453,0.9585; 12.517,
+          0.95847; 12.673,0.95847; 12.736,0.95847; 12.878,0.95847; 12.941,
+          0.95847; 13.083,0.95847; 13.147,0.95848; 13.256,0.95848; 13.335,
+          0.9585; 13.462,0.9585; 13.526,0.95849; 13.682,0.95849; 13.745,
+          0.95852; 13.886,0.95852; 13.95,0.95848; 14.076,0.95848; 14.155,
+          0.95845; 14.264,0.95845; 14.342,0.95848; 14.453,0.95848; 14.53,
+          0.95847; 14.672,0.95847; 14.735,0.95849; 14.862,0.95849; 14.924,
+          0.95847],
+        extrapolation=Modelica.Blocks.Types.Extrapolation.LastTwoPoints)
+      annotation (Placement(transformation(extent={{100,120},{80,140}})));
+    Modelica.Blocks.Sources.CombiTimeTable A(table=[0.1029,-0.030754;
+          0.16424,-0.030754; 0.2742,-0.030687; 0.32103,-0.030687; 0.49463,-0.031083;
+          0.54171,-0.031083; 0.68271,-0.031382; 0.73009,-0.031382; 0.87236,
+          -0.031382; 0.93493,-0.030796; 1.0606,-0.029815; 1.1397,-0.029825;
+          1.2503,-0.029825; 1.313,-0.03103; 1.4387,-0.03103; 1.5022,-0.031143;
+          1.5647,-0.031143; 1.7077,-0.029685; 1.7554,-0.029685; 1.8966,-0.031238;
+          2.0375,-0.031255; 2.1155,-0.030855; 2.2414,-0.030855; 2.3054,-0.030459;
+          2.4464,-0.030459; 2.5094,-0.031145; 2.5553,-0.031145; 2.6963,-0.030044;
+          2.7582,-0.030044; 2.9009,-0.029758; 3.0579,-0.029743; 3.1351,-0.03068;
+          3.2589,-0.031489; 3.306,-0.031496; 3.4474,-0.031496; 3.5109,-0.02963;
+          3.6359,-0.02963; 3.714,-0.030213; 3.762,-0.030213; 3.9193,-0.030611;
+          4.0448,-0.03062; 4.1078,-0.030397; 4.1696,-0.030397; 4.279,-0.031432;
+          4.3577,-0.031432; 4.4993,-0.030274; 4.5628,-0.030283; 4.7039,-0.030042;
+          4.7679,-0.030042; 4.8768,-0.029748; 4.9551,-0.029748; 5.0809,-0.030852;
+          5.1439,-0.030852; 5.2686,-0.030852; 5.3313,-0.030623; 5.4727,-0.030623;
+          5.5509,-0.030741; 5.6599,-0.030391; 5.738,-0.030391; 5.8478,-0.030391;
+          5.9099,-0.030269; 6.0507,-0.030269; 6.113,-0.031381; 6.16,-0.031381;
+          6.286,-0.030633; 6.3486,-0.030627; 6.4744,-0.03004; 6.5525,-0.030049;
+          6.6619,-0.030001; 6.7416,-0.02998; 6.866,-0.031132; 6.9447,-0.031148;
+          7.087,-0.029758; 7.1497,-0.029752; 7.2759,-0.030563; 7.338,-0.030563;
+          7.4779,-0.029924; 7.5247,-0.029933; 7.6508,-0.029933; 7.7294,-0.030871;
+          7.8561,-0.030871; 7.9187,-0.030684; 8.0442,-0.030684; 8.1067,-0.030451;
+          8.1694,-0.030451; 8.2967,-0.030914; 8.3589,-0.030914; 8.5006,-0.030216;
+          8.64,-0.030216; 8.7325,-0.030797; 8.8576,-0.030509; 8.9201,-0.030509;
+          9.0621,-0.030509; 9.1246,-0.030505; 9.2672,-0.030505; 9.3298,-0.030038;
+          9.4724,-0.030038; 9.5507,-0.02958; 9.691,-0.031723; 9.7538,-0.03173;
+          9.8928,-0.030225; 9.939,-0.030219; 10.048,-0.030219; 10.126,-0.03091;
+          10.25,-0.03091; 10.314,-0.030094; 10.439,-0.030094; 10.502,-0.030218;
+          10.644,-0.030218; 10.706,-0.030568; 10.77,-0.030568; 10.896,-0.030627;
+          10.958,-0.030627; 11.1,-0.03056; 11.163,-0.030575; 11.273,-0.029987;
+          11.337,-0.029987; 11.462,-0.03097; 11.524,-0.03097; 11.682,-0.03097;
+          11.745,-0.030857; 11.87,-0.034885; 11.934,-0.034861; 12.076,-0.03983;
+          12.139,-0.039859; 12.266,-0.038752; 12.343,-0.038752; 12.453,-0.038752;
+          12.517,-0.038583; 12.673,-0.038583; 12.736,-0.038697; 12.878,-0.038642;
+          12.941,-0.038642; 13.083,-0.039396; 13.147,-0.039396; 13.256,-0.039684;
+          13.335,-0.039684; 13.462,-0.039338; 13.526,-0.039338; 13.682,-0.040672;
+          13.745,-0.040686; 13.886,-0.039292; 13.95,-0.039292; 14.076,-0.038715;
+          14.155,-0.038702; 14.264,-0.039161; 14.342,-0.039175; 14.453,-0.039175;
+          14.53,-0.039585; 14.672,-0.039585; 14.735,-0.039812; 14.862,-0.039062;
+          14.924,-0.039049],
+        extrapolation=Modelica.Blocks.Types.Extrapolation.LastTwoPoints)
+      annotation (Placement(transformation(extent={{100,100},{80,120}})));
+    Modelica.Blocks.Math.Cos COS
+      annotation (Placement(transformation(extent={{60,84},{52,92}})));
+    Modelica.Blocks.Math.Sin SIN
+      annotation (Placement(transformation(extent={{60,96},{52,104}})));
+    Modelica.Blocks.Math.Product product1 annotation (Placement(transformation(
+          extent={{-3,-3},{3,3}},
+          rotation=180,
+          origin={41,131})));
+    Modelica.Blocks.Math.Product product2 annotation (Placement(transformation(
+          extent={{-3,-3},{3,3}},
+          rotation=180,
+          origin={41,111})));
+    Modelica.Blocks.Sources.CombiTimeTable EXPERIMENT_IAngle(table=[0.1029,
+          -0.030754; 0.16424,-0.030754; 0.2742,-0.030687; 0.32103,-0.030687;
+          0.49463,-0.031083; 0.54171,-0.031083; 0.68271,-0.031382; 0.73009,
+          -0.031382; 0.87236,-0.031382; 0.93493,-0.030796; 1.0606,-0.029815;
+          1.1397,-0.029825; 1.2503,-0.029825; 1.313,-0.03103; 1.4387,-0.03103;
+          1.5022,-0.031143; 1.5647,-0.031143; 1.7077,-0.029685; 1.7554,-0.029685;
+          1.8966,-0.031238; 2.0375,-0.031255; 2.1155,-0.030855; 2.2414,-0.030855;
+          2.3054,-0.030459; 2.4464,-0.030459; 2.5094,-0.031145; 2.5553,-0.031145;
+          2.6963,-0.030044; 2.7582,-0.030044; 2.9009,-0.029758; 3.0579,-0.029743;
+          3.1351,-0.03068; 3.2589,-0.031489; 3.306,-0.031496; 3.4474,-0.031496;
+          3.5109,-0.02963; 3.6359,-0.02963; 3.714,-0.030213; 3.762,-0.030213;
+          3.9193,-0.030611; 4.0448,-0.03062; 4.1078,-0.030397; 4.1696,-0.030397;
+          4.279,-0.031432; 4.3577,-0.031432; 4.4993,-0.030274; 4.5628,-0.030283;
+          4.7039,-0.030042; 4.7679,-0.030042; 4.8768,-0.029748; 4.9551,-0.029748;
+          5.0809,-0.030852; 5.1439,-0.030852; 5.2686,-0.030852; 5.3313,-0.030623;
+          5.4727,-0.030623; 5.5509,-0.030741; 5.6599,-0.030391; 5.738,-0.030391;
+          5.8478,-0.030391; 5.9099,-0.030269; 6.0507,-0.030269; 6.113,-0.031381;
+          6.16,-0.031381; 6.286,-0.030633; 6.3486,-0.030627; 6.4744,-0.03004;
+          6.5525,-0.030049; 6.6619,-0.030001; 6.7416,-0.02998; 6.866,-0.031132;
+          6.9447,-0.031148; 7.087,-0.029758; 7.1497,-0.029752; 7.2759,-0.030563;
+          7.338,-0.030563; 7.4779,-0.029924; 7.5247,-0.029933; 7.6508,-0.029933;
+          7.7294,-0.030871; 7.8561,-0.030871; 7.9187,-0.030684; 8.0442,-0.030684;
+          8.1067,-0.030451; 8.1694,-0.030451; 8.2967,-0.030914; 8.3589,-0.030914;
+          8.5006,-0.030216; 8.64,-0.030216; 8.7325,-0.030797; 8.8576,-0.030509;
+          8.9201,-0.030509; 9.0621,-0.030509; 9.1246,-0.030505; 9.2672,-0.030505;
+          9.3298,-0.030038; 9.4724,-0.030038; 9.5507,-0.02958; 9.691,-0.031723;
+          9.7538,-0.03173; 9.8928,-0.030225; 9.939,-0.030219; 10.048,-0.030219;
+          10.126,-0.03091; 10.25,-0.03091; 10.314,-0.030094; 10.439,-0.030094;
+          10.502,-0.030218; 10.644,-0.030218; 10.706,-0.030568; 10.77,-0.030568;
+          10.896,-0.030627; 10.958,-0.030627; 11.1,-0.03056; 11.163,-0.030575;
+          11.273,-0.029987; 11.337,-0.029987; 11.462,-0.03097; 11.524,-0.03097;
+          11.682,-0.03097; 11.745,-0.030857; 11.87,-0.034885; 11.934,-0.034861;
+          12.076,-0.03983; 12.139,-0.039859; 12.266,-0.038752; 12.343,-0.038752;
+          12.453,-0.038752; 12.517,-0.038583; 12.673,-0.038583; 12.736,-0.038697;
+          12.878,-0.038642; 12.941,-0.038642; 13.083,-0.039396; 13.147,-0.039396;
+          13.256,-0.039684; 13.335,-0.039684; 13.462,-0.039338; 13.526,-0.039338;
+          13.682,-0.040672; 13.745,-0.040686; 13.886,-0.039292; 13.95,-0.039292;
+          14.076,-0.038715; 14.155,-0.038702; 14.264,-0.039161; 14.342,-0.039175;
+          14.453,-0.039175; 14.53,-0.039585; 14.672,-0.039585; 14.735,-0.039812;
+          14.862,-0.039062; 14.924,-0.039049],
+                                           extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint)
+      annotation (Placement(transformation(extent={{20,180},{40,200}})));
+    Modelica.Blocks.Sources.RealExpression EXPERIMENT_PF(y=EXPERIMENT_P.y[1]/sqrt(
+           EXPERIMENT_P.y[1]^2 + EXPERIMENT_Q.y[1]^2))
+      annotation (Placement(transformation(extent={{66,186},{86,206}})));
+    Modelica.Blocks.Sources.RealExpression PF_Simulation_REECB(y=pwLine1.P12/sqrt(
+           pwLine1.P12^2 + pwLine1.Q12^2))
+      annotation (Placement(transformation(extent={{66,194},{86,174}})));
+    OpenIPSL.Electrical.Renewables.PSSE.Wind wind(
+      V_b=353.92049703035,
+      P_0(displayUnit="W") = EXPERIMENT_P.table[1, 2],
+      Q_0(displayUnit="V.A") = EXPERIMENT_Q.table[1, 2],
+      angle_0(displayUnit="rad"),
+      QFunctionality=0,
+      redeclare
+        OpenIPSL.Electrical.Renewables.PSSE.InverterInterface.REGCA1
+        RenewableGenerator(Tg=0.01, Tfltr=0.01),
+      redeclare
+        OpenIPSL.Electrical.Renewables.PSSE.ElectricalController.REECA1
+        RenewableController(
+        dbd1=-0.0001,
+        dbd2=0.0001,
+        Kqv=0.011,
+        Tp=0.01,
+        Tiq=0.01,
+        Tpord=0.01),
+      redeclare OpenIPSL.Electrical.Renewables.PSSE.PlantController.REPCA1
+        PlantController,
+      redeclare OpenIPSL.Electrical.Renewables.PSSE.WindDriveTrain.WTDTA1
+        DriveTrain,
+      W0=0)
+      annotation (Placement(transformation(extent={{-130,-10},{-110,10}})));
+
+    OpenIPSL.Electrical.Buses.Bus InverterBus2(V_b=352.01, angle_0=0)
+      annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
+    OpenIPSL.Electrical.Sources.VoltageSourceReImInput voltageSourceReImInput1(V_b=
+          353.920497030345)
+      annotation (Placement(transformation(extent={{30,-10},{10,10}})));
+    OpenIPSL.Electrical.Buses.Bus GridBus1(V_b=353.92049703035, angle_0=0)
+      annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
+    OpenIPSL.Electrical.Branches.PwLine pwLine2(
+      R=0,
+      X=0.00000000001,
+      G=0,
+      B=0)
+      annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
+    Modelica.Blocks.Sources.CombiTimeTable V1(table=[0.1029,1; 0.16424,1;
+          0.2742,0.99999; 0.32103,0.99999; 0.49463,0.99999; 0.54171,1;
+          0.68271,1; 0.73009,1; 0.87236,1; 0.93493,1; 1.0606,1; 1.1397,
+          0.99998; 1.2503,0.99998; 1.313,1; 1.4387,1; 1.5022,1; 1.5647,1;
+          1.7077,0.99998; 1.7554,0.99998; 1.8966,0.99998; 2.0375,1; 2.1155,
+          1; 2.2414,1; 2.3054,0.99998; 2.4464,0.99998; 2.5094,1; 2.5553,1;
+          2.6963,1; 2.7582,0.99998; 2.9009,0.99998; 3.0579,0.99998; 3.1351,
+          1; 3.2589,1; 3.306,1; 3.4474,1; 3.5109,0.99997; 3.6359,0.99997;
+          3.714,0.99998; 3.762,0.99998; 3.9193,0.99998; 4.0448,1; 4.1078,
+          0.99998; 4.1696,0.99998; 4.279,1; 4.3577,1; 4.4993,1; 4.5628,
+          0.99998; 4.7039,0.99999; 4.7679,0.99999; 4.8768,0.99998; 4.9551,
+          0.99998; 5.0809,1; 5.1439,1; 5.2686,1; 5.3313,0.99999; 5.4727,
+          0.99999; 5.5509,0.99999; 5.6599,0.99999; 5.738,1; 5.8478,1;
+          5.9099,0.99998; 6.0507,0.99998; 6.113,1; 6.16,1; 6.286,1; 6.3486,
+          0.99999; 6.4744,0.99999; 6.5525,0.99999; 6.6619,0.99999; 6.7416,
+          0.99999; 6.866,0.99999; 6.9447,1; 7.087,1; 7.1497,0.99998; 7.2759,
+          0.99998; 7.338,1; 7.4779,1; 7.5247,0.99999; 7.6508,0.99999;
+          7.7294,0.99999; 7.8561,0.99999; 7.9187,0.99999; 8.0442,0.99999;
+          8.1067,0.99999; 8.1694,0.99999; 8.2967,1; 8.3589,1; 8.5006,1;
+          8.64,0.99999; 8.7325,1; 8.8576,1; 8.9201,0.99999; 9.0621,0.99999;
+          9.1246,1; 9.2672,1; 9.3298,0.99998; 9.4724,0.99998; 9.5507,
+          0.99999; 9.691,0.99999; 9.7538,1; 9.8928,1; 9.939,0.99999; 10.048,
+          0.99999; 10.126,1; 10.25,1; 10.314,0.99999; 10.439,0.99999;
+          10.502,0.99999; 10.644,0.99999; 10.706,1; 10.77,1; 10.896,0.99999;
+          10.958,0.99999; 11.1,0.99999; 11.163,0.99999; 11.273,0.99999;
+          11.337,0.99999; 11.462,0.99999; 11.524,1; 11.682,1; 11.745,
+          0.99999; 11.87,0.99999; 11.934,0.98236; 12.076,0.98236; 12.139,
+          0.95854; 12.266,0.95854; 12.343,0.9585; 12.453,0.9585; 12.517,
+          0.95847; 12.673,0.95847; 12.736,0.95847; 12.878,0.95847; 12.941,
+          0.95847; 13.083,0.95847; 13.147,0.95848; 13.256,0.95848; 13.335,
+          0.9585; 13.462,0.9585; 13.526,0.95849; 13.682,0.95849; 13.745,
+          0.95852; 13.886,0.95852; 13.95,0.95848; 14.076,0.95848; 14.155,
+          0.95845; 14.264,0.95845; 14.342,0.95848; 14.453,0.95848; 14.53,
+          0.95847; 14.672,0.95847; 14.735,0.95849; 14.862,0.95849; 14.924,
+          0.95847],
+        extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint)
+      annotation (Placement(transformation(extent={{100,0},{80,20}})));
+    Modelica.Blocks.Sources.CombiTimeTable A1(table=[0.1029,-0.030754;
+          0.16424,-0.030754; 0.2742,-0.030687; 0.32103,-0.030687; 0.49463,-0.031083;
+          0.54171,-0.031083; 0.68271,-0.031382; 0.73009,-0.031382; 0.87236,
+          -0.031382; 0.93493,-0.030796; 1.0606,-0.029815; 1.1397,-0.029825;
+          1.2503,-0.029825; 1.313,-0.03103; 1.4387,-0.03103; 1.5022,-0.031143;
+          1.5647,-0.031143; 1.7077,-0.029685; 1.7554,-0.029685; 1.8966,-0.031238;
+          2.0375,-0.031255; 2.1155,-0.030855; 2.2414,-0.030855; 2.3054,-0.030459;
+          2.4464,-0.030459; 2.5094,-0.031145; 2.5553,-0.031145; 2.6963,-0.030044;
+          2.7582,-0.030044; 2.9009,-0.029758; 3.0579,-0.029743; 3.1351,-0.03068;
+          3.2589,-0.031489; 3.306,-0.031496; 3.4474,-0.031496; 3.5109,-0.02963;
+          3.6359,-0.02963; 3.714,-0.030213; 3.762,-0.030213; 3.9193,-0.030611;
+          4.0448,-0.03062; 4.1078,-0.030397; 4.1696,-0.030397; 4.279,-0.031432;
+          4.3577,-0.031432; 4.4993,-0.030274; 4.5628,-0.030283; 4.7039,-0.030042;
+          4.7679,-0.030042; 4.8768,-0.029748; 4.9551,-0.029748; 5.0809,-0.030852;
+          5.1439,-0.030852; 5.2686,-0.030852; 5.3313,-0.030623; 5.4727,-0.030623;
+          5.5509,-0.030741; 5.6599,-0.030391; 5.738,-0.030391; 5.8478,-0.030391;
+          5.9099,-0.030269; 6.0507,-0.030269; 6.113,-0.031381; 6.16,-0.031381;
+          6.286,-0.030633; 6.3486,-0.030627; 6.4744,-0.03004; 6.5525,-0.030049;
+          6.6619,-0.030001; 6.7416,-0.02998; 6.866,-0.031132; 6.9447,-0.031148;
+          7.087,-0.029758; 7.1497,-0.029752; 7.2759,-0.030563; 7.338,-0.030563;
+          7.4779,-0.029924; 7.5247,-0.029933; 7.6508,-0.029933; 7.7294,-0.030871;
+          7.8561,-0.030871; 7.9187,-0.030684; 8.0442,-0.030684; 8.1067,-0.030451;
+          8.1694,-0.030451; 8.2967,-0.030914; 8.3589,-0.030914; 8.5006,-0.030216;
+          8.64,-0.030216; 8.7325,-0.030797; 8.8576,-0.030509; 8.9201,-0.030509;
+          9.0621,-0.030509; 9.1246,-0.030505; 9.2672,-0.030505; 9.3298,-0.030038;
+          9.4724,-0.030038; 9.5507,-0.02958; 9.691,-0.031723; 9.7538,-0.03173;
+          9.8928,-0.030225; 9.939,-0.030219; 10.048,-0.030219; 10.126,-0.03091;
+          10.25,-0.03091; 10.314,-0.030094; 10.439,-0.030094; 10.502,-0.030218;
+          10.644,-0.030218; 10.706,-0.030568; 10.77,-0.030568; 10.896,-0.030627;
+          10.958,-0.030627; 11.1,-0.03056; 11.163,-0.030575; 11.273,-0.029987;
+          11.337,-0.029987; 11.462,-0.03097; 11.524,-0.03097; 11.682,-0.03097;
+          11.745,-0.030857; 11.87,-0.034885; 11.934,-0.034861; 12.076,-0.03983;
+          12.139,-0.039859; 12.266,-0.038752; 12.343,-0.038752; 12.453,-0.038752;
+          12.517,-0.038583; 12.673,-0.038583; 12.736,-0.038697; 12.878,-0.038642;
+          12.941,-0.038642; 13.083,-0.039396; 13.147,-0.039396; 13.256,-0.039684;
+          13.335,-0.039684; 13.462,-0.039338; 13.526,-0.039338; 13.682,-0.040672;
+          13.745,-0.040686; 13.886,-0.039292; 13.95,-0.039292; 14.076,-0.038715;
+          14.155,-0.038702; 14.264,-0.039161; 14.342,-0.039175; 14.453,-0.039175;
+          14.53,-0.039585; 14.672,-0.039585; 14.735,-0.039812; 14.862,-0.039062;
+          14.924,-0.039049],
+        extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint)
+      annotation (Placement(transformation(extent={{100,-20},{80,0}})));
+    Modelica.Blocks.Math.Cos COS1
+      annotation (Placement(transformation(extent={{60,-36},{52,-28}})));
+    Modelica.Blocks.Math.Sin SIN1
+      annotation (Placement(transformation(extent={{60,-24},{52,-16}})));
+    Modelica.Blocks.Math.Product product3 annotation (Placement(transformation(
+          extent={{-3,-3},{3,3}},
+          rotation=180,
+          origin={41,11})));
+    Modelica.Blocks.Math.Product product4 annotation (Placement(transformation(
+          extent={{-3,-3},{3,3}},
+          rotation=180,
+          origin={41,-9})));
+    Modelica.Blocks.Sources.RealExpression PF_Simulation_REECA(y=pwLine1.P12/sqrt(
+           pwLine2.P12^2 + pwLine2.Q12^2))
+      annotation (Placement(transformation(extent={{100,194},{120,174}})));
+    Modelica.Blocks.Math.Atan SIMULATION_IAng_REECA
+      annotation (Placement(transformation(extent={{-48,-40},{-28,-20}})));
+    OpenIPSL.Electrical.Renewables.PSSE.PV pV2(
+      V_b=353.92049703035,
+      P_0(displayUnit="W") = EXPERIMENT_P.table[1, 2],
+      Q_0(displayUnit="V.A") = EXPERIMENT_Q.table[1, 2],
+      angle_0(displayUnit="rad"),
+      QFunctionality=0,
+      redeclare
+        OpenIPSL.Electrical.Renewables.PSSE.InverterInterface.REGCA1
+        RenewableGenerator(Tg=0.01, Tfltr=0.01),
+      redeclare
+        OpenIPSL.Electrical.Renewables.PSSE.ElectricalController.REECB1_modified
+        RenewableController(
+        Trv=0.01,
+        dbd1=-0.0001,
+        dbd2=0.0001,
+        Kqv=0,
+        Tp=0.01,
+        Tiq=0.01,
+        Tpord=0.01),
+      redeclare OpenIPSL.Electrical.Renewables.PSSE.PlantController.REPCA1
+        PlantController) annotation (Placement(transformation(extent={{-130,
+              -130},{-110,-110}})));
+    OpenIPSL.Electrical.Buses.Bus InverterBus3(V_b=353.92049703035, angle_0
+        =0) annotation (Placement(transformation(extent={{-80,-130},{-60,-110}})));
+    OpenIPSL.Electrical.Sources.VoltageSourceReImInput voltageSourceReImInput2(V_b=
+          353.920497030345)
+      annotation (Placement(transformation(extent={{30,-130},{10,-110}})));
+    OpenIPSL.Electrical.Buses.Bus GridBus3(V_b=353.92049703035, angle_0=0)
+      annotation (Placement(transformation(extent={{-20,-130},{0,-110}})));
+    OpenIPSL.Electrical.Branches.PwLine pwLine3(
+      R=0,
+      X=0.0000000000001,
+      G=0,
+      B=0) annotation (Placement(transformation(extent={{-50,-130},{-30,-110}})));
+    Modelica.Blocks.Math.Atan SIMULATION_IAng_REECB_NO_Kqv
+      annotation (Placement(transformation(extent={{-48,-160},{-28,-140}})));
+    Modelica.Blocks.Sources.RealExpression SIMULATION_I_Ang_REECA_NO_Kqv(y=pwLine3.is.im
+          /pwLine3.is.re)
+      annotation (Placement(transformation(extent={{-88,-160},{-68,-140}})));
+    Modelica.Blocks.Sources.CombiTimeTable V2(table=[0.1029,1; 0.16424,1;
+          0.2742,0.99999; 0.32103,0.99999; 0.49463,0.99999; 0.54171,1;
+          0.68271,1; 0.73009,1; 0.87236,1; 0.93493,1; 1.0606,1; 1.1397,
+          0.99998; 1.2503,0.99998; 1.313,1; 1.4387,1; 1.5022,1; 1.5647,1;
+          1.7077,0.99998; 1.7554,0.99998; 1.8966,0.99998; 2.0375,1; 2.1155,
+          1; 2.2414,1; 2.3054,0.99998; 2.4464,0.99998; 2.5094,1; 2.5553,1;
+          2.6963,1; 2.7582,0.99998; 2.9009,0.99998; 3.0579,0.99998; 3.1351,
+          1; 3.2589,1; 3.306,1; 3.4474,1; 3.5109,0.99997; 3.6359,0.99997;
+          3.714,0.99998; 3.762,0.99998; 3.9193,0.99998; 4.0448,1; 4.1078,
+          0.99998; 4.1696,0.99998; 4.279,1; 4.3577,1; 4.4993,1; 4.5628,
+          0.99998; 4.7039,0.99999; 4.7679,0.99999; 4.8768,0.99998; 4.9551,
+          0.99998; 5.0809,1; 5.1439,1; 5.2686,1; 5.3313,0.99999; 5.4727,
+          0.99999; 5.5509,0.99999; 5.6599,0.99999; 5.738,1; 5.8478,1;
+          5.9099,0.99998; 6.0507,0.99998; 6.113,1; 6.16,1; 6.286,1; 6.3486,
+          0.99999; 6.4744,0.99999; 6.5525,0.99999; 6.6619,0.99999; 6.7416,
+          0.99999; 6.866,0.99999; 6.9447,1; 7.087,1; 7.1497,0.99998; 7.2759,
+          0.99998; 7.338,1; 7.4779,1; 7.5247,0.99999; 7.6508,0.99999;
+          7.7294,0.99999; 7.8561,0.99999; 7.9187,0.99999; 8.0442,0.99999;
+          8.1067,0.99999; 8.1694,0.99999; 8.2967,1; 8.3589,1; 8.5006,1;
+          8.64,0.99999; 8.7325,1; 8.8576,1; 8.9201,0.99999; 9.0621,0.99999;
+          9.1246,1; 9.2672,1; 9.3298,0.99998; 9.4724,0.99998; 9.5507,
+          0.99999; 9.691,0.99999; 9.7538,1; 9.8928,1; 9.939,0.99999; 10.048,
+          0.99999; 10.126,1; 10.25,1; 10.314,0.99999; 10.439,0.99999;
+          10.502,0.99999; 10.644,0.99999; 10.706,1; 10.77,1; 10.896,0.99999;
+          10.958,0.99999; 11.1,0.99999; 11.163,0.99999; 11.273,0.99999;
+          11.337,0.99999; 11.462,0.99999; 11.524,1; 11.682,1; 11.745,
+          0.99999; 11.87,0.99999; 11.934,0.98236; 12.076,0.98236; 12.139,
+          0.95854; 12.266,0.95854; 12.343,0.9585; 12.453,0.9585; 12.517,
+          0.95847; 12.673,0.95847; 12.736,0.95847; 12.878,0.95847; 12.941,
+          0.95847; 13.083,0.95847; 13.147,0.95848; 13.256,0.95848; 13.335,
+          0.9585; 13.462,0.9585; 13.526,0.95849; 13.682,0.95849; 13.745,
+          0.95852; 13.886,0.95852; 13.95,0.95848; 14.076,0.95848; 14.155,
+          0.95845; 14.264,0.95845; 14.342,0.95848; 14.453,0.95848; 14.53,
+          0.95847; 14.672,0.95847; 14.735,0.95849; 14.862,0.95849; 14.924,
+          0.95847],                        extrapolation=Modelica.Blocks.Types.Extrapolation.LastTwoPoints)
+      annotation (Placement(transformation(extent={{100,-120},{80,-100}})));
+    Modelica.Blocks.Sources.CombiTimeTable A2(table=[0.1029,-0.030754;
+          0.16424,-0.030754; 0.2742,-0.030687; 0.32103,-0.030687; 0.49463,-0.031083;
+          0.54171,-0.031083; 0.68271,-0.031382; 0.73009,-0.031382; 0.87236,
+          -0.031382; 0.93493,-0.030796; 1.0606,-0.029815; 1.1397,-0.029825;
+          1.2503,-0.029825; 1.313,-0.03103; 1.4387,-0.03103; 1.5022,-0.031143;
+          1.5647,-0.031143; 1.7077,-0.029685; 1.7554,-0.029685; 1.8966,-0.031238;
+          2.0375,-0.031255; 2.1155,-0.030855; 2.2414,-0.030855; 2.3054,-0.030459;
+          2.4464,-0.030459; 2.5094,-0.031145; 2.5553,-0.031145; 2.6963,-0.030044;
+          2.7582,-0.030044; 2.9009,-0.029758; 3.0579,-0.029743; 3.1351,-0.03068;
+          3.2589,-0.031489; 3.306,-0.031496; 3.4474,-0.031496; 3.5109,-0.02963;
+          3.6359,-0.02963; 3.714,-0.030213; 3.762,-0.030213; 3.9193,-0.030611;
+          4.0448,-0.03062; 4.1078,-0.030397; 4.1696,-0.030397; 4.279,-0.031432;
+          4.3577,-0.031432; 4.4993,-0.030274; 4.5628,-0.030283; 4.7039,-0.030042;
+          4.7679,-0.030042; 4.8768,-0.029748; 4.9551,-0.029748; 5.0809,-0.030852;
+          5.1439,-0.030852; 5.2686,-0.030852; 5.3313,-0.030623; 5.4727,-0.030623;
+          5.5509,-0.030741; 5.6599,-0.030391; 5.738,-0.030391; 5.8478,-0.030391;
+          5.9099,-0.030269; 6.0507,-0.030269; 6.113,-0.031381; 6.16,-0.031381;
+          6.286,-0.030633; 6.3486,-0.030627; 6.4744,-0.03004; 6.5525,-0.030049;
+          6.6619,-0.030001; 6.7416,-0.02998; 6.866,-0.031132; 6.9447,-0.031148;
+          7.087,-0.029758; 7.1497,-0.029752; 7.2759,-0.030563; 7.338,-0.030563;
+          7.4779,-0.029924; 7.5247,-0.029933; 7.6508,-0.029933; 7.7294,-0.030871;
+          7.8561,-0.030871; 7.9187,-0.030684; 8.0442,-0.030684; 8.1067,-0.030451;
+          8.1694,-0.030451; 8.2967,-0.030914; 8.3589,-0.030914; 8.5006,-0.030216;
+          8.64,-0.030216; 8.7325,-0.030797; 8.8576,-0.030509; 8.9201,-0.030509;
+          9.0621,-0.030509; 9.1246,-0.030505; 9.2672,-0.030505; 9.3298,-0.030038;
+          9.4724,-0.030038; 9.5507,-0.02958; 9.691,-0.031723; 9.7538,-0.03173;
+          9.8928,-0.030225; 9.939,-0.030219; 10.048,-0.030219; 10.126,-0.03091;
+          10.25,-0.03091; 10.314,-0.030094; 10.439,-0.030094; 10.502,-0.030218;
+          10.644,-0.030218; 10.706,-0.030568; 10.77,-0.030568; 10.896,-0.030627;
+          10.958,-0.030627; 11.1,-0.03056; 11.163,-0.030575; 11.273,-0.029987;
+          11.337,-0.029987; 11.462,-0.03097; 11.524,-0.03097; 11.682,-0.03097;
+          11.745,-0.030857; 11.87,-0.034885; 11.934,-0.034861; 12.076,-0.03983;
+          12.139,-0.039859; 12.266,-0.038752; 12.343,-0.038752; 12.453,-0.038752;
+          12.517,-0.038583; 12.673,-0.038583; 12.736,-0.038697; 12.878,-0.038642;
+          12.941,-0.038642; 13.083,-0.039396; 13.147,-0.039396; 13.256,-0.039684;
+          13.335,-0.039684; 13.462,-0.039338; 13.526,-0.039338; 13.682,-0.040672;
+          13.745,-0.040686; 13.886,-0.039292; 13.95,-0.039292; 14.076,-0.038715;
+          14.155,-0.038702; 14.264,-0.039161; 14.342,-0.039175; 14.453,-0.039175;
+          14.53,-0.039585; 14.672,-0.039585; 14.735,-0.039812; 14.862,-0.039062;
+          14.924,-0.039049],                                extrapolation=
+          Modelica.Blocks.Types.Extrapolation.LastTwoPoints)
+      annotation (Placement(transformation(extent={{100,-140},{80,-120}})));
+    Modelica.Blocks.Math.Cos COS2
+      annotation (Placement(transformation(extent={{60,-156},{52,-148}})));
+    Modelica.Blocks.Math.Sin SIN2
+      annotation (Placement(transformation(extent={{60,-144},{52,-136}})));
+    Modelica.Blocks.Math.Product product5 annotation (Placement(transformation(
+          extent={{-3,-3},{3,3}},
+          rotation=180,
+          origin={41,-109})));
+    Modelica.Blocks.Math.Product product6 annotation (Placement(transformation(
+          extent={{-3,-3},{3,3}},
+          rotation=180,
+          origin={41,-129})));
+    Modelica.Blocks.Sources.CombiTimeTable EXPERIMENT_IMagnitude(table=[
+          0.1029,3.3298; 0.16424,3.3298; 0.2742,3.3331; 0.32103,3.3331;
+          0.49463,3.3331; 0.54171,3.3331; 0.68271,3.3331; 0.73009,3.3331;
+          0.87236,3.3331; 0.93493,3.3331; 1.0606,3.3331; 1.1397,3.3264;
+          1.2503,3.3264; 1.313,3.3331; 1.4387,3.3331; 1.5022,3.3331; 1.5647,
+          3.3331; 1.7077,3.3265; 1.7554,3.3265; 1.8966,3.3264; 2.0375,
+          3.3331; 2.1155,3.3331; 2.2414,3.3331; 2.3054,3.3265; 2.4464,
+          3.3265; 2.5094,3.3331; 2.5553,3.3331; 2.6963,3.3331; 2.7582,
+          3.3331; 2.9009,3.3331; 3.0579,3.3265; 3.1351,3.3331; 3.2589,
+          3.3331; 3.306,3.3364; 3.4474,3.3364; 3.5109,3.3298; 3.6359,3.3298;
+          3.714,3.3298; 3.762,3.3298; 3.9193,3.3298; 4.0448,3.3331; 4.1078,
+          3.3331; 4.1696,3.3331; 4.279,3.3331; 4.3577,3.3331; 4.4993,3.3331;
+          4.5628,3.3265; 4.7039,3.3331; 4.7679,3.3331; 4.8768,3.3298;
+          4.9551,3.3298; 5.0809,3.3331; 5.1439,3.3331; 5.2686,3.3331;
+          5.3313,3.3331; 5.4727,3.3331; 5.5509,3.3231; 5.6599,3.3231; 5.738,
+          3.3331; 5.8478,3.3331; 5.9099,3.3298; 6.0507,3.3298; 6.113,3.3364;
+          6.16,3.3364; 6.286,3.3365; 6.3486,3.3331; 6.4744,3.3331; 6.5525,
+          3.3265; 6.6619,3.3265; 6.7416,3.3298; 6.866,3.3298; 6.9447,3.3364;
+          7.087,3.3365; 7.1497,3.3331; 7.2759,3.3331; 7.338,3.3331; 7.4779,
+          3.3331; 7.5247,3.3265; 7.6508,3.3265; 7.7294,3.3298; 7.8561,
+          3.3298; 7.9187,3.3331; 8.0442,3.3331; 8.1067,3.3331; 8.1694,
+          3.3331; 8.2967,3.3331; 8.3589,3.3331; 8.5006,3.3331; 8.64,3.3331;
+          8.7325,3.3331; 8.8576,3.3331; 8.9201,3.3331; 9.0621,3.3331;
+          9.1246,3.3331; 9.2672,3.3331; 9.3298,3.3298; 9.4724,3.3298;
+          9.5507,3.3331; 9.691,3.3331; 9.7538,3.3364; 9.8928,3.3365; 9.939,
+          3.3331; 10.048,3.3331; 10.126,3.3331; 10.25,3.3331; 10.314,3.3298;
+          10.439,3.3298; 10.502,3.3331; 10.644,3.3331; 10.706,3.3364; 10.77,
+          3.3364; 10.896,3.3331; 10.958,3.3331; 11.1,3.3331; 11.163,3.3298;
+          11.273,3.3331; 11.337,3.3331; 11.462,3.3331; 11.524,3.3331;
+          11.682,3.3331; 11.745,3.3331; 11.87,3.3332; 11.934,3.4832; 12.076,
+          3.4831; 12.139,3.4565; 12.266,3.4565; 12.343,3.4565; 12.453,
+          3.4565; 12.517,3.4565; 12.673,3.4565; 12.736,3.4565; 12.878,
+          3.4565; 12.941,3.4565; 13.083,3.4565; 13.147,3.4565; 13.256,
+          3.4565; 13.335,3.4565; 13.462,3.4565; 13.526,3.4565; 13.682,
+          3.4565; 13.745,3.4532; 13.886,3.4532; 13.95,3.4532; 14.076,3.4532;
+          14.155,3.4465; 14.264,3.4465; 14.342,3.4532; 14.453,3.4532; 14.53,
+          3.4531; 14.672,3.4531; 14.735,3.4531; 14.862,3.4532; 14.924,
+          3.4565], extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint)
+      annotation (Placement(transformation(extent={{-8,180},{12,200}})));
+    Modelica.Blocks.Sources.RealExpression PF_Simulation_REECB_NO_Kqv(y=pwLine3.P12
+          /sqrt(pwLine3.P12^2 + pwLine3.Q12^2))
+      annotation (Placement(transformation(extent={{100,186},{120,206}})));
+    Modelica.Blocks.Sources.RealExpression SIMULATION_I_Mag_REECB(y=sqrt(pwLine1.p.ir
+          ^2 + pwLine1.p.ii^2))
+      annotation (Placement(transformation(extent={{-120,74},{-100,54}})));
+    Modelica.Blocks.Sources.RealExpression SIMULATION_I_Ang_REECA(y=pwLine2.is.im/
+          pwLine2.is.re)
+      annotation (Placement(transformation(extent={{-88,-40},{-68,-20}})));
+    Modelica.Blocks.Sources.RealExpression SIMULATION_I_Mag_REECA(y=sqrt(pwLine2.p.ir
+          ^2 + pwLine2.p.ii^2))
+      annotation (Placement(transformation(extent={{-120,-46},{-100,-66}})));
+    Modelica.Blocks.Sources.RealExpression SIMULATION_I_Mag_REECB_NO_Kqv(y=sqrt(
+          pwLine3.p.ir^2 + pwLine3.p.ii^2))
+      annotation (Placement(transformation(extent={{-120,-160},{-100,-180}})));
+    Modelica.Blocks.Sources.CombiTimeTable VOLTAGE(table=[0.1029,350.94;
+          0.16424,350.94; 0.2742,350.94; 0.32103,350.94; 0.49463,350.94;
+          0.54171,350.95; 0.68271,350.95; 0.73009,350.95; 0.87236,350.95;
+          0.93493,350.94; 1.0606,350.94; 1.1397,350.94; 1.2503,350.94;
+          1.313,350.94; 1.4387,350.94; 1.5022,350.94; 1.5647,350.94; 1.7077,
+          350.94; 1.7554,350.94; 1.8966,350.94; 2.0375,350.94; 2.1155,
+          350.94; 2.2414,350.94; 2.3054,350.94; 2.4464,350.94; 2.5094,
+          350.95; 2.5553,350.95; 2.6963,350.95; 2.7582,350.94; 2.9009,
+          350.94; 3.0579,350.94; 3.1351,350.94; 3.2589,350.94; 3.306,350.95;
+          3.4474,350.95; 3.5109,350.93; 3.6359,350.93; 3.714,350.94; 3.762,
+          350.94; 3.9193,350.94; 4.0448,350.95; 4.1078,350.94; 4.1696,
+          350.94; 4.279,350.94; 4.3577,350.94; 4.4993,350.94; 4.5628,350.94;
+          4.7039,350.94; 4.7679,350.94; 4.8768,350.94; 4.9551,350.94;
+          5.0809,350.94; 5.1439,350.94; 5.2686,350.94; 5.3313,350.94;
+          5.4727,350.94; 5.5509,350.94; 5.6599,350.94; 5.738,350.94; 5.8478,
+          350.94; 5.9099,350.94; 6.0507,350.94; 6.113,350.95; 6.16,350.95;
+          6.286,350.95; 6.3486,350.94; 6.4744,350.94; 6.5525,350.94; 6.6619,
+          350.94; 6.7416,350.94; 6.866,350.94; 6.9447,350.95; 7.087,350.95;
+          7.1497,350.94; 7.2759,350.94; 7.338,350.94; 7.4779,350.94; 7.5247,
+          350.94; 7.6508,350.94; 7.7294,350.94; 7.8561,350.94; 7.9187,
+          350.94; 8.0442,350.94; 8.1067,350.94; 8.1694,350.94; 8.2967,
+          350.95; 8.3589,350.95; 8.5006,350.95; 8.64,350.94; 8.7325,350.95;
+          8.8576,350.95; 8.9201,350.94; 9.0621,350.94; 9.1246,350.95;
+          9.2672,350.95; 9.3298,350.94; 9.4724,350.94; 9.5507,350.94; 9.691,
+          350.94; 9.7538,350.95; 9.8928,350.95; 9.939,350.94; 10.048,350.94;
+          10.126,350.95; 10.25,350.95; 10.314,350.94; 10.439,350.94; 10.502,
+          350.94; 10.644,350.94; 10.706,350.95; 10.77,350.95; 10.896,350.94;
+          10.958,350.94; 11.1,350.94; 11.163,350.94; 11.273,350.94; 11.337,
+          350.94; 11.462,350.94; 11.524,350.95; 11.682,350.95; 11.745,
+          350.94; 11.87,350.94; 11.934,344.75; 12.076,344.75; 12.139,336.39;
+          12.266,336.39; 12.343,336.38; 12.453,336.38; 12.517,336.37;
+          12.673,336.37; 12.736,336.37; 12.878,336.37; 12.941,336.37;
+          13.083,336.37; 13.147,336.37; 13.256,336.37; 13.335,336.38;
+          13.462,336.38; 13.526,336.37; 13.682,336.37; 13.745,336.38;
+          13.886,336.38; 13.95,336.37; 14.076,336.37; 14.155,336.36; 14.264,
+          336.36; 14.342,336.37; 14.453,336.37; 14.53,336.37; 14.672,336.37;
+          14.735,336.38; 14.862,336.38; 14.924,336.37],
+                          extrapolation=Modelica.Blocks.Types.Extrapolation.LastTwoPoints)
+      annotation (Placement(transformation(extent={{-68,152},{-48,172}})));
+    Modelica.Blocks.Sources.RealExpression Im1(y=sqrt(pwLine1.p.ir^2 +
+          pwLine1.p.ii^2)*30000/VOLTAGE.table[1, 2])
+      annotation (Placement(transformation(extent={{-120,56},{-100,36}})));
+    Modelica.Blocks.Sources.RealExpression Im2(y=sqrt(pwLine2.p.ir^2 +
+          pwLine2.p.ii^2)*SysData.S_b/VOLTAGE.table[1, 2])
+      annotation (Placement(transformation(extent={{-120,-66},{-100,-86}})));
+    Modelica.Blocks.Sources.RealExpression Im3(y=sqrt(pwLine3.p.ir^2 +
+          pwLine3.p.ii^2)*SysData.S_b/VOLTAGE.table[1, 2])
+      annotation (Placement(transformation(extent={{-120,-180},{-100,-200}})));
+    Modelica.Blocks.Sources.RealExpression VR(y=VOLTAGE.y[1]*COS.y)
+      annotation (Placement(transformation(extent={{-36,174},{-16,154}})));
+    Modelica.Blocks.Sources.RealExpression VI(y=VOLTAGE.y[1]*SIN.y)
+      annotation (Placement(transformation(extent={{-8,174},{12,154}})));
+    Modelica.Blocks.Sources.RealExpression Ir1(y=Im1.y*cos(
+          SIMULATION_IAng_REECB.y))
+      annotation (Placement(transformation(extent={{-88,74},{-68,54}})));
+    Modelica.Blocks.Sources.RealExpression Ii1(y=Im1.y*sin(
+          SIMULATION_IAng_REECB.y))
+      annotation (Placement(transformation(extent={{-88,56},{-68,36}})));
+    Modelica.Blocks.Sources.RealExpression Ir2(y=Im2.y*cos(
+          SIMULATION_IAng_REECA.y))
+      annotation (Placement(transformation(extent={{-92,-46},{-72,-66}})));
+    Modelica.Blocks.Sources.RealExpression Ii2(y=Im2.y*sin(
+          SIMULATION_IAng_REECA.y))
+      annotation (Placement(transformation(extent={{-92,-66},{-72,-86}})));
+    Modelica.Blocks.Sources.RealExpression Ir3(y=Im3.y*cos(
+          SIMULATION_IAng_REECB_NO_Kqv.y))
+      annotation (Placement(transformation(extent={{-90,-160},{-70,-180}})));
+    Modelica.Blocks.Sources.RealExpression Ii3(y=Im3.y*sin(
+          SIMULATION_IAng_REECB_NO_Kqv.y))
+      annotation (Placement(transformation(extent={{-90,-180},{-70,-200}})));
+  equation
+    connect(pV1.pwPin,InverterBus1. p)
+      annotation (Line(points={{-100,120},{-70,120}},color={0,0,255}));
+    connect(GridBus2.p,voltageSourceReImInput. p)
+      annotation (Line(points={{-10,120},{9,120}}, color={0,0,255}));
+    connect(pwLine1.p,InverterBus1. p)
+      annotation (Line(points={{-49,120},{-70,120}}, color={0,0,255}));
+    connect(SIMULATION_I_Ang_REECB.y, SIMULATION_IAng_REECB.u)
+      annotation (Line(points={{-67,84},{-46,84}}, color={0,0,127}));
+    connect(A.y[1],COS. u) annotation (Line(points={{79,110},{78,110},{78,
+            88},{60.8,88}},
+                  color={0,0,127}));
+    connect(SIN.u, A.y[1]) annotation (Line(points={{60.8,100},{78,100},{78,
+            110},{79,110}},
+                  color={0,0,127}));
+    connect(voltageSourceReImInput.vRe, product1.y)
+      annotation (Line(points={{32,124},{32,131},{37.7,131}},
+                                                           color={0,0,127}));
+    connect(voltageSourceReImInput.vIm, product2.y)
+      annotation (Line(points={{32,116},{32,111},{37.7,111}},
+                                                           color={0,0,127}));
+    connect(COS.y, product1.u2) annotation (Line(points={{51.6,88},{44,88},
+            {44,66},{112,66},{112,152},{44.6,152},{44.6,132.8}},
+                                                     color={0,0,127}));
+    connect(V.y[1], product1.u1) annotation (Line(points={{79,130},{50,130},
+            {50,129.2},{44.6,129.2}},
+                          color={0,0,127}));
+    connect(SIN.y, product2.u1) annotation (Line(points={{51.6,100},{48,100},
+            {48,109.2},{44.6,109.2}},
+                          color={0,0,127}));
+    connect(product2.u2, V.y[1])
+      annotation (Line(points={{44.6,112.8},{79,112.8},{79,130}},
+                                                               color={0,0,127}));
+    connect(pwLine1.n, GridBus2.p)
+      annotation (Line(points={{-31,120},{-10,120}},
+                                                 color={0,0,255}));
+    connect(wind.pwPin, InverterBus2.p)
+      annotation (Line(points={{-110,0},{-70,0}},     color={0,0,255}));
+    connect(GridBus1.p, voltageSourceReImInput1.p)
+      annotation (Line(points={{-10,0},{9,0}},    color={0,0,255}));
+    connect(pwLine2.p,InverterBus2. p)
+      annotation (Line(points={{-49,0},{-70,0}},     color={0,0,255}));
+    connect(A1.y[1],COS1. u) annotation (Line(points={{79,-10},{78,-10},{78,
+            -32},{60.8,-32}},
+                        color={0,0,127}));
+    connect(SIN1.u, A1.y[1]) annotation (Line(points={{60.8,-20},{78,-20},{
+            78,-10},{79,-10}},
+                       color={0,0,127}));
+    connect(voltageSourceReImInput1.vRe, product3.y)
+      annotation (Line(points={{32,4},{32,11},{37.7,11}},     color={0,0,127}));
+    connect(voltageSourceReImInput1.vIm, product4.y)
+      annotation (Line(points={{32,-4},{32,-9},{37.7,-9}},    color={0,0,127}));
+    connect(COS1.y, product3.u2) annotation (Line(points={{51.6,-32},{44,
+            -32},{44,-54},{112,-54},{112,32},{44.6,32},{44.6,12.8}},
+                                                                 color={0,0,127}));
+    connect(V1.y[1], product3.u1) annotation (Line(points={{79,10},{50,10},
+            {50,9.2},{44.6,9.2}},
+                           color={0,0,127}));
+    connect(SIN1.y, product4.u1) annotation (Line(points={{51.6,-20},{48,
+            -20},{48,-10.8},{44.6,-10.8}},
+                                  color={0,0,127}));
+    connect(product4.u2, V1.y[1]) annotation (Line(points={{44.6,-7.2},{79,
+            -7.2},{79,10}},
+                       color={0,0,127}));
+    connect(pwLine2.n, GridBus1.p)
+      annotation (Line(points={{-31,0},{-10,0}},   color={0,0,255}));
+    connect(pV2.pwPin,InverterBus3. p)
+      annotation (Line(points={{-110,-120},{-70,-120}},
+                                                     color={0,0,255}));
+    connect(GridBus3.p, voltageSourceReImInput2.p)
+      annotation (Line(points={{-10,-120},{9,-120}},color={0,0,255}));
+    connect(pwLine3.p,InverterBus3. p)
+      annotation (Line(points={{-49,-120},{-70,-120}},
+                                                     color={0,0,255}));
+    connect(SIMULATION_I_Ang_REECA_NO_Kqv.y, SIMULATION_IAng_REECB_NO_Kqv.u)
+      annotation (Line(points={{-67,-150},{-50,-150}}, color={0,0,127}));
+    connect(A2.y[1],COS2. u) annotation (Line(points={{79,-130},{78,-130},{
+            78,-152},{60.8,-152}},
+                                color={0,0,127}));
+    connect(SIN2.u, A2.y[1]) annotation (Line(points={{60.8,-140},{78,-140},
+            {78,-130},{79,-130}},color={0,0,127}));
+    connect(voltageSourceReImInput2.vRe, product5.y) annotation (Line(points={{32,-116},
+            {32,-109},{37.7,-109}},            color={0,0,127}));
+    connect(voltageSourceReImInput2.vIm, product6.y) annotation (Line(points={{32,-124},
+            {32,-129},{37.7,-129}},            color={0,0,127}));
+    connect(COS2.y, product5.u2) annotation (Line(points={{51.6,-152},{44,
+            -152},{44,-174},{112,-174},{112,-88},{44.6,-88},{44.6,-107.2}},
+          color={0,0,127}));
+    connect(V2.y[1], product5.u1) annotation (Line(points={{79,-110},{50,
+            -110},{50,-110.8},{44.6,-110.8}},
+                                        color={0,0,127}));
+    connect(SIN2.y, product6.u1) annotation (Line(points={{51.6,-140},{48,
+            -140},{48,-130.8},{44.6,-130.8}}, color={0,0,127}));
+    connect(product6.u2, V2.y[1]) annotation (Line(points={{44.6,-127.2},{
+            79,-127.2},{79,-110}},
+                                color={0,0,127}));
+    connect(pwLine3.n,GridBus3. p)
+      annotation (Line(points={{-31,-120},{-10,-120}},
+                                                 color={0,0,255}));
+    connect(SIMULATION_I_Ang_REECA.y, SIMULATION_IAng_REECA.u)
+      annotation (Line(points={{-67,-30},{-50,-30}}, color={0,0,127}));
+    annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-140,
+              -240},{140,240}})),                                  Diagram(
+          coordinateSystem(preserveAspectRatio=false, extent={{-140,-240},{
+              140,240}})),
+      experiment(
+        StopTime=7.8,
+        __Dymola_NumberOfIntervals=1000,
+        __Dymola_Algorithm="Dassl"));
+  end VoltageVariation_350_to_335_V;
+
+  model VoltageVariation_350_to_330_V
+    extends Modelica.Icons.Example;
+    OpenIPSL.Electrical.Renewables.PSSE.PV pV1(
+      V_b=353.92049703035,
+      P_0(displayUnit="W") = EXPERIMENT_P.table[1, 2],
+      Q_0(displayUnit="V.A") = EXPERIMENT_Q.table[1, 2],
+      angle_0(displayUnit="rad"),
+      QFunctionality=0,
+      redeclare
+        OpenIPSL.Electrical.Renewables.PSSE.InverterInterface.REGCA1
+        RenewableGenerator(Tg=0.01, Tfltr=0.01),
+      redeclare
+        OpenIPSL.Electrical.Renewables.PSSE.ElectricalController.REECB1_modified
+        RenewableController(
+        Trv=0.01,
+        dbd1=-0.00001,
+        dbd2=0.00001,
+        Kqv=0.011,
+        Tp=0.01,
+        Tiq=0.01,
+        Tpord=0.01),
+      redeclare OpenIPSL.Electrical.Renewables.PSSE.PlantController.REPCA1
+        PlantController) annotation (Placement(transformation(extent={{-120,
+              110},{-100,130}})));
+    OpenIPSL.Electrical.Buses.Bus InverterBus1(V_b=353.92049703035, angle_0
+        =0)
+      annotation (Placement(transformation(extent={{-80,110},{-60,130}})));
+    OpenIPSL.Electrical.Sources.VoltageSourceReImInput voltageSourceReImInput(V_b=
+          353.920497030345)
+      annotation (Placement(transformation(extent={{30,110},{10,130}})));
+    inner OpenIPSL.Electrical.SystemBase SysData(fn=60, S_b(displayUnit=
+            "V.A") = 30000)
+      annotation (Placement(transformation(extent={{-128,194},{-88,214}})));
+    OpenIPSL.Electrical.Buses.Bus GridBus2(V_b=353.92049703035, angle_0=0)
+      annotation (Placement(transformation(extent={{-20,110},{0,130}})));
+    OpenIPSL.Electrical.Branches.PwLine pwLine1(
+      R=0,
+      X=0.0000000000001,
+      G=0,
+      B=0)
+      annotation (Placement(transformation(extent={{-50,110},{-30,130}})));
+    Modelica.Blocks.Math.Atan SIMULATION_IAng_REECB
+      annotation (Placement(transformation(extent={{-44,74},{-24,94}})));
+    Modelica.Blocks.Sources.RealExpression SIMULATION_I_Ang_REECB(y=pwLine1.is.im/
+          pwLine1.is.re)
+      annotation (Placement(transformation(extent={{-88,74},{-68,94}})));
+    Modelica.Blocks.Sources.CombiTimeTable EXPERIMENT_P(table=[0.077046,
+          1030.3; 0.15395,1030.3; 0.29358,1028.4; 0.43438,1028.4; 0.49787,
+          1031.9; 0.54389,1031.9; 0.69879,1031.5; 0.74567,1030.4; 0.8557,
+          1030.4; 0.91768,1030.4; 1.0283,1030.4; 1.0917,1030.7; 1.1556,
+          1030.7; 1.2956,1028.1; 1.4351,1028.1; 1.4989,1032.1; 1.5461,
+          1032.1; 1.6864,1031.3; 1.75,1030.2; 1.873,1030.4; 1.9502,1030.4;
+          2.0607,1030.6; 2.1381,1030.6; 2.2627,1030.9; 2.3252,1029.9;
+          2.4657,1029.4; 2.5267,1030.4; 2.6677,1030.6; 2.7308,1030.6;
+          2.8568,1030.4; 2.9187,1029.3; 3.0426,1029.3; 3.1053,1029.4;
+          3.2467,1029.4; 3.3247,1030.7; 3.4489,1030.4; 3.4951,1030.4;
+          3.5576,1030.4; 3.7136,1030.6; 3.8236,1030.6; 3.8856,1030.7;
+          3.9466,1030.7; 4.0545,1034.1; 4.131,1069.6; 4.2694,1072; 4.3311,
+          1028.2; 4.4509,1028.3; 4.5144,1027.2; 4.6244,1027.2; 4.7033,
+          1028.5; 4.8289,1028.5; 4.89,1028.5; 4.9519,1028.5; 5.0759,1027.4;
+          5.1384,1027.4; 5.2628,1027.6; 5.3237,1028.6; 5.4482,1028.6;
+          5.4948,1027.6; 5.5576,1027.6; 5.7127,1027.4; 5.8205,1027.4;
+          5.8818,1027.6; 5.9434,1027.6; 6.0524,1027.6; 6.1307,1028.6;
+          6.2713,1028.7; 6.3337,1026.8; 6.4436,1026.7; 6.5054,1026.7;
+          6.6479,1026.7; 6.7265,1027.3; 6.8646,1027.2; 6.9263,1026.2;
+          7.0496,1026.9; 7.111,1026.9],
+                          extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint)
+      annotation (Placement(transformation(extent={{-68,180},{-48,200}})));
+    Modelica.Blocks.Sources.CombiTimeTable EXPERIMENT_Q(table=[0.077046,-553.74;
+          0.15395,-553.74; 0.29358,-552.33; 0.43438,-552.33; 0.49787,-553.28;
+          0.54389,-553.28; 0.69879,-554.13; 0.74567,-553.57; 0.8557,-553.56;
+          0.91768,-553.57; 1.0283,-553.57; 1.0917,-553.02; 1.1556,-553.02;
+          1.2956,-552.95; 1.4351,-552.95; 1.4989,-552.92; 1.5461,-552.92;
+          1.6864,-554.48; 1.75,-553.92; 1.873,-553.68; 1.9502,-553.68;
+          2.0607,-553.21; 2.1381,-553.21; 2.2627,-552.6; 2.3252,-552.04;
+          2.4657,-553; 2.5267,-553.56; 2.6677,-553.26; 2.7308,-553.28;
+          2.8568,-553.64; 2.9187,-553.06; 3.0426,-553.12; 3.1053,-553.06;
+          3.2467,-553; 3.3247,-553.04; 3.4489,-553.57; 3.4951,-553.56;
+          3.5576,-553.56; 3.7136,-553.22; 3.8236,-553.22; 3.8856,-553.1;
+          3.9466,-553.1; 4.0545,-546.7; 4.131,-565.43; 4.2694,-560.83;
+          4.3311,-537.92; 4.4509,-537.78; 4.5144,-537.2; 4.6244,-537.2;
+          4.7033,-536.94; 4.8289,-536.94; 4.89,-536.93; 4.9519,-536.93;
+          5.0759,-536.74; 5.1384,-536.74; 5.2628,-536.32; 5.3237,-536.81;
+          5.4482,-536.87; 5.4948,-536.37; 5.5576,-536.37; 5.7127,-536.79;
+          5.8205,-536.79; 5.8818,-536.37; 5.9434,-536.37; 6.0524,-536.37;
+          6.1307,-536.88; 6.2713,-536.63; 6.3337,-535.61; 6.4436,-535.79;
+          6.5054,-535.79; 6.6479,-535.79; 6.7265,-536.89; 6.8646,-537.01;
+          6.9263,-536.48; 7.0496,-535.29; 7.111,-535.3],
+                   extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint)
+      annotation (Placement(transformation(extent={{-38,180},{-18,200}})));
+    Modelica.Blocks.Sources.CombiTimeTable V(table=[0.077046,1; 0.15395,1;
+          0.29358,1; 0.43438,1; 0.49787,1; 0.54389,1; 0.69879,1; 0.74567,1;
+          0.8557,1; 0.91768,1; 1.0283,1; 1.0917,0.99999; 1.1556,0.99999;
+          1.2956,0.99999; 1.4351,0.99999; 1.4989,1; 1.5461,1; 1.6864,1;
+          1.75,1; 1.873,1; 1.9502,1; 2.0607,1; 2.1381,1; 2.2627,1; 2.3252,1;
+          2.4657,1; 2.5267,1; 2.6677,1; 2.7308,1; 2.8568,1; 2.9187,0.99998;
+          3.0426,0.99998; 3.1053,1; 3.2467,1; 3.3247,1; 3.4489,1; 3.4951,1;
+          3.5576,1; 3.7136,1; 3.8236,1; 3.8856,1; 3.9466,1; 4.0545,1; 4.131,
+          0.98225; 4.2694,0.98225; 4.3311,0.94482; 4.4509,0.94482; 4.5144,
+          0.94468; 4.6244,0.94468; 4.7033,0.94468; 4.8289,0.94468; 4.89,
+          0.94467; 4.9519,0.94467; 5.0759,0.94469; 5.1384,0.94469; 5.2628,
+          0.94469; 5.3237,0.94467; 5.4482,0.94467; 5.4948,0.94468; 5.5576,
+          0.94468; 5.7127,0.94467; 5.8205,0.94467; 5.8818,0.94467; 5.9434,
+          0.94467; 6.0524,0.94467; 6.1307,0.94468; 6.2713,0.94468; 6.3337,
+          0.94468; 6.4436,0.94468; 6.5054,0.94468; 6.6479,0.94468; 6.7265,
+          0.94466; 6.8646,0.94466; 6.9263,0.94465; 7.0496,0.94465; 7.111,
+          0.94466],
+        extrapolation=Modelica.Blocks.Types.Extrapolation.LastTwoPoints)
+      annotation (Placement(transformation(extent={{100,120},{80,140}})));
+    Modelica.Blocks.Sources.CombiTimeTable A(table=[0.077046,-0.52325;
+          0.15395,-0.52325; 0.29358,-0.52325; 0.43438,-0.52325; 0.49787,-0.52325;
+          0.54389,-0.52325; 0.69879,-0.52325; 0.74567,-0.52325; 0.8557,-0.52325;
+          0.91768,-0.52325; 1.0283,-0.52325; 1.0917,-0.52325; 1.1556,-0.52325;
+          1.2956,-0.52331; 1.4351,-0.52331; 1.4989,-0.52325; 1.5461,-0.52325;
+          1.6864,-0.52325; 1.75,-0.52325; 1.873,-0.52325; 1.9502,-0.52325;
+          2.0607,-0.52325; 2.1381,-0.52325; 2.2627,-0.52325; 2.3252,-0.52325;
+          2.4657,-0.52325; 2.5267,-0.52325; 2.6677,-0.52325; 2.7308,-0.52325;
+          2.8568,-0.52325; 2.9187,-0.52325; 3.0426,-0.52331; 3.1053,-0.52331;
+          3.2467,-0.52325; 3.3247,-0.52325; 3.4489,-0.52331; 3.4951,-0.52331;
+          3.5576,-0.52331; 3.7136,-0.52325; 3.8236,-0.52325; 3.8856,-0.52325;
+          3.9466,-0.52325; 4.0545,-0.52377; 4.131,-0.52377; 4.2694,-0.52319;
+          4.3311,-0.52319; 4.4509,-0.52342; 4.5144,-0.52342; 4.6244,-0.52342;
+          4.7033,-0.52337; 4.8289,-0.52337; 4.89,-0.52342; 4.9519,-0.52342;
+          5.0759,-0.52342; 5.1384,-0.52342; 5.2628,-0.52342; 5.3237,-0.52342;
+          5.4482,-0.52342; 5.4948,-0.52342; 5.5576,-0.52342; 5.7127,-0.52342;
+          5.8205,-0.52342; 5.8818,-0.52342; 5.9434,-0.52342; 6.0524,-0.52342;
+          6.1307,-0.52342; 6.2713,-0.52342; 6.3337,-0.52342; 6.4436,-0.52342;
+          6.5054,-0.52342; 6.6479,-0.52342; 6.7265,-0.52342; 6.8646,-0.52342;
+          6.9263,-0.52342; 7.0496,-0.52342; 7.111,-0.52342],
+        extrapolation=Modelica.Blocks.Types.Extrapolation.LastTwoPoints)
+      annotation (Placement(transformation(extent={{100,100},{80,120}})));
+    Modelica.Blocks.Math.Cos COS
+      annotation (Placement(transformation(extent={{60,84},{52,92}})));
+    Modelica.Blocks.Math.Sin SIN
+      annotation (Placement(transformation(extent={{60,96},{52,104}})));
+    Modelica.Blocks.Math.Product product1 annotation (Placement(transformation(
+          extent={{-3,-3},{3,3}},
+          rotation=180,
+          origin={41,131})));
+    Modelica.Blocks.Math.Product product2 annotation (Placement(transformation(
+          extent={{-3,-3},{3,3}},
+          rotation=180,
+          origin={41,111})));
+    Modelica.Blocks.Sources.CombiTimeTable EXPERIMENT_IAngle(table=[
+          0.077046,-0.030104; 0.15395,-0.030104; 0.29358,-0.030399; 0.43438,
+          -0.030399; 0.49787,-0.031096; 0.54389,-0.031096; 0.69879,-0.030278;
+          0.74567,-0.030271; 0.8557,-0.030273; 0.91768,-0.030273; 1.0283,-0.030273;
+          1.0917,-0.030795; 1.1556,-0.030795; 1.2956,-0.029854; 1.4351,-0.029854;
+          1.4989,-0.031439; 1.5461,-0.031439; 1.6864,-0.029932; 1.75,-0.029926;
+          1.873,-0.030162; 1.9502,-0.030162; 2.0607,-0.030616; 2.1381,-0.030616;
+          2.2627,-0.031204; 2.3252,-0.03122; 2.4657,-0.030292; 2.5267,-0.030276;
+          2.6677,-0.030567; 2.7308,-0.030567; 2.8568,-0.030217; 2.9187,-0.03021;
+          3.0426,-0.03021; 3.1053,-0.03029; 3.2467,-0.03029; 3.3247,-0.030795;
+          3.4489,-0.030337; 3.4951,-0.030337; 3.5576,-0.030337; 3.7136,-0.03062;
+          3.8236,-0.03062; 3.8856,-0.030738; 3.9466,-0.030738; 4.0545,-0.037461;
+          4.131,-0.037478; 4.2694,-0.041195; 4.3311,-0.041195; 4.4509,-0.041553;
+          4.5144,-0.041545; 4.6244,-0.041545; 4.7033,-0.042248; 4.8289,-0.042248;
+          4.89,-0.042308; 4.9519,-0.042308; 5.0759,-0.042007; 5.1384,-0.042007;
+          5.2628,-0.042414; 5.3237,-0.042422; 5.4482,-0.042365; 5.4948,-0.042358;
+          5.5576,-0.042358; 5.7127,-0.041949; 5.8205,-0.041949; 5.8818,-0.042357;
+          5.9434,-0.042357; 6.0524,-0.042358; 6.1307,-0.042366; 6.2713,-0.042598;
+          6.3337,-0.042604; 6.4436,-0.042426; 6.5054,-0.042426; 6.6479,-0.042426;
+          6.7265,-0.041837; 6.8646,-0.041722; 6.9263,-0.041735; 7.0496,-0.042894;
+          7.111,-0.042894],                extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint)
+      annotation (Placement(transformation(extent={{20,180},{40,200}})));
+    Modelica.Blocks.Sources.RealExpression EXPERIMENT_PF(y=EXPERIMENT_P.y[1]/sqrt(
+           EXPERIMENT_P.y[1]^2 + EXPERIMENT_Q.y[1]^2))
+      annotation (Placement(transformation(extent={{66,186},{86,206}})));
+    Modelica.Blocks.Sources.RealExpression PF_Simulation_REECB(y=pwLine1.P12/sqrt(
+           pwLine1.P12^2 + pwLine1.Q12^2))
+      annotation (Placement(transformation(extent={{66,194},{86,174}})));
+    OpenIPSL.Electrical.Renewables.PSSE.Wind wind(
+      V_b=353.92049703035,
+      P_0(displayUnit="W") = EXPERIMENT_P.table[1, 2],
+      Q_0(displayUnit="V.A") = EXPERIMENT_Q.table[1, 2],
+      angle_0(displayUnit="rad"),
+      QFunctionality=0,
+      redeclare
+        OpenIPSL.Electrical.Renewables.PSSE.InverterInterface.REGCA1
+        RenewableGenerator(Tg=0.01, Tfltr=0.01),
+      redeclare
+        OpenIPSL.Electrical.Renewables.PSSE.ElectricalController.REECA1
+        RenewableController(
+        dbd1=-0.0001,
+        dbd2=0.0001,
+        Kqv=0.011,
+        Tp=0.01,
+        Tiq=0.01,
+        Tpord=0.01),
+      redeclare OpenIPSL.Electrical.Renewables.PSSE.PlantController.REPCA1
+        PlantController,
+      redeclare OpenIPSL.Electrical.Renewables.PSSE.WindDriveTrain.WTDTA1
+        DriveTrain,
+      W0=0)
+      annotation (Placement(transformation(extent={{-130,-10},{-110,10}})));
+
+    OpenIPSL.Electrical.Buses.Bus InverterBus2(V_b=352.01, angle_0=0)
+      annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
+    OpenIPSL.Electrical.Sources.VoltageSourceReImInput voltageSourceReImInput1(V_b=
+          353.920497030345)
+      annotation (Placement(transformation(extent={{30,-10},{10,10}})));
+    OpenIPSL.Electrical.Buses.Bus GridBus1(V_b=353.92049703035, angle_0=0)
+      annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
+    OpenIPSL.Electrical.Branches.PwLine pwLine2(
+      R=0,
+      X=0.00000000001,
+      G=0,
+      B=0)
+      annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
+    Modelica.Blocks.Sources.CombiTimeTable V1(table=[0.077046,1; 0.15395,1;
+          0.29358,1; 0.43438,1; 0.49787,1; 0.54389,1; 0.69879,1; 0.74567,1;
+          0.8557,1; 0.91768,1; 1.0283,1; 1.0917,0.99999; 1.1556,0.99999;
+          1.2956,0.99999; 1.4351,0.99999; 1.4989,1; 1.5461,1; 1.6864,1;
+          1.75,1; 1.873,1; 1.9502,1; 2.0607,1; 2.1381,1; 2.2627,1; 2.3252,1;
+          2.4657,1; 2.5267,1; 2.6677,1; 2.7308,1; 2.8568,1; 2.9187,0.99998;
+          3.0426,0.99998; 3.1053,1; 3.2467,1; 3.3247,1; 3.4489,1; 3.4951,1;
+          3.5576,1; 3.7136,1; 3.8236,1; 3.8856,1; 3.9466,1; 4.0545,1; 4.131,
+          0.98225; 4.2694,0.98225; 4.3311,0.94482; 4.4509,0.94482; 4.5144,
+          0.94468; 4.6244,0.94468; 4.7033,0.94468; 4.8289,0.94468; 4.89,
+          0.94467; 4.9519,0.94467; 5.0759,0.94469; 5.1384,0.94469; 5.2628,
+          0.94469; 5.3237,0.94467; 5.4482,0.94467; 5.4948,0.94468; 5.5576,
+          0.94468; 5.7127,0.94467; 5.8205,0.94467; 5.8818,0.94467; 5.9434,
+          0.94467; 6.0524,0.94467; 6.1307,0.94468; 6.2713,0.94468; 6.3337,
+          0.94468; 6.4436,0.94468; 6.5054,0.94468; 6.6479,0.94468; 6.7265,
+          0.94466; 6.8646,0.94466; 6.9263,0.94465; 7.0496,0.94465; 7.111,
+          0.94466],
+        extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint)
+      annotation (Placement(transformation(extent={{100,0},{80,20}})));
+    Modelica.Blocks.Sources.CombiTimeTable A1(table=[0.077046,-0.52325;
+          0.15395,-0.52325; 0.29358,-0.52325; 0.43438,-0.52325; 0.49787,-0.52325;
+          0.54389,-0.52325; 0.69879,-0.52325; 0.74567,-0.52325; 0.8557,-0.52325;
+          0.91768,-0.52325; 1.0283,-0.52325; 1.0917,-0.52325; 1.1556,-0.52325;
+          1.2956,-0.52331; 1.4351,-0.52331; 1.4989,-0.52325; 1.5461,-0.52325;
+          1.6864,-0.52325; 1.75,-0.52325; 1.873,-0.52325; 1.9502,-0.52325;
+          2.0607,-0.52325; 2.1381,-0.52325; 2.2627,-0.52325; 2.3252,-0.52325;
+          2.4657,-0.52325; 2.5267,-0.52325; 2.6677,-0.52325; 2.7308,-0.52325;
+          2.8568,-0.52325; 2.9187,-0.52325; 3.0426,-0.52331; 3.1053,-0.52331;
+          3.2467,-0.52325; 3.3247,-0.52325; 3.4489,-0.52331; 3.4951,-0.52331;
+          3.5576,-0.52331; 3.7136,-0.52325; 3.8236,-0.52325; 3.8856,-0.52325;
+          3.9466,-0.52325; 4.0545,-0.52377; 4.131,-0.52377; 4.2694,-0.52319;
+          4.3311,-0.52319; 4.4509,-0.52342; 4.5144,-0.52342; 4.6244,-0.52342;
+          4.7033,-0.52337; 4.8289,-0.52337; 4.89,-0.52342; 4.9519,-0.52342;
+          5.0759,-0.52342; 5.1384,-0.52342; 5.2628,-0.52342; 5.3237,-0.52342;
+          5.4482,-0.52342; 5.4948,-0.52342; 5.5576,-0.52342; 5.7127,-0.52342;
+          5.8205,-0.52342; 5.8818,-0.52342; 5.9434,-0.52342; 6.0524,-0.52342;
+          6.1307,-0.52342; 6.2713,-0.52342; 6.3337,-0.52342; 6.4436,-0.52342;
+          6.5054,-0.52342; 6.6479,-0.52342; 6.7265,-0.52342; 6.8646,-0.52342;
+          6.9263,-0.52342; 7.0496,-0.52342; 7.111,-0.52342],
+        extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint)
+      annotation (Placement(transformation(extent={{100,-20},{80,0}})));
+    Modelica.Blocks.Math.Cos COS1
+      annotation (Placement(transformation(extent={{60,-36},{52,-28}})));
+    Modelica.Blocks.Math.Sin SIN1
+      annotation (Placement(transformation(extent={{60,-24},{52,-16}})));
+    Modelica.Blocks.Math.Product product3 annotation (Placement(transformation(
+          extent={{-3,-3},{3,3}},
+          rotation=180,
+          origin={41,11})));
+    Modelica.Blocks.Math.Product product4 annotation (Placement(transformation(
+          extent={{-3,-3},{3,3}},
+          rotation=180,
+          origin={41,-9})));
+    Modelica.Blocks.Sources.RealExpression PF_Simulation_REECA(y=pwLine1.P12/sqrt(
+           pwLine2.P12^2 + pwLine2.Q12^2))
+      annotation (Placement(transformation(extent={{100,194},{120,174}})));
+    Modelica.Blocks.Math.Atan SIMULATION_IAng_REECA
+      annotation (Placement(transformation(extent={{-48,-40},{-28,-20}})));
+    OpenIPSL.Electrical.Renewables.PSSE.PV pV2(
+      V_b=353.92049703035,
+      P_0(displayUnit="W") = EXPERIMENT_P.table[1, 2],
+      Q_0(displayUnit="V.A") = EXPERIMENT_Q.table[1, 2],
+      angle_0(displayUnit="rad"),
+      QFunctionality=0,
+      redeclare
+        OpenIPSL.Electrical.Renewables.PSSE.InverterInterface.REGCA1
+        RenewableGenerator(Tg=0.01, Tfltr=0.01),
+      redeclare
+        OpenIPSL.Electrical.Renewables.PSSE.ElectricalController.REECB1_modified
+        RenewableController(
+        Trv=0.01,
+        dbd1=-0.0001,
+        dbd2=0.0001,
+        Kqv=0,
+        Tp=0.01,
+        Tiq=0.01,
+        Tpord=0.01),
+      redeclare OpenIPSL.Electrical.Renewables.PSSE.PlantController.REPCA1
+        PlantController) annotation (Placement(transformation(extent={{-130,
+              -130},{-110,-110}})));
+    OpenIPSL.Electrical.Buses.Bus InverterBus3(V_b=353.92049703035, angle_0
+        =0) annotation (Placement(transformation(extent={{-80,-130},{-60,-110}})));
+    OpenIPSL.Electrical.Sources.VoltageSourceReImInput voltageSourceReImInput2(V_b=
+          353.920497030345)
+      annotation (Placement(transformation(extent={{30,-130},{10,-110}})));
+    OpenIPSL.Electrical.Buses.Bus GridBus3(V_b=353.92049703035, angle_0=0)
+      annotation (Placement(transformation(extent={{-20,-130},{0,-110}})));
+    OpenIPSL.Electrical.Branches.PwLine pwLine3(
+      R=0,
+      X=0.0000000000001,
+      G=0,
+      B=0) annotation (Placement(transformation(extent={{-50,-130},{-30,-110}})));
+    Modelica.Blocks.Math.Atan SIMULATION_IAng_REECB_NO_Kqv
+      annotation (Placement(transformation(extent={{-48,-160},{-28,-140}})));
+    Modelica.Blocks.Sources.RealExpression SIMULATION_I_Ang_REECA_NO_Kqv(y=pwLine3.is.im
+          /pwLine3.is.re)
+      annotation (Placement(transformation(extent={{-88,-160},{-68,-140}})));
+    Modelica.Blocks.Sources.CombiTimeTable V2(table=[0.077046,1; 0.15395,1;
+          0.29358,1; 0.43438,1; 0.49787,1; 0.54389,1; 0.69879,1; 0.74567,1;
+          0.8557,1; 0.91768,1; 1.0283,1; 1.0917,0.99999; 1.1556,0.99999;
+          1.2956,0.99999; 1.4351,0.99999; 1.4989,1; 1.5461,1; 1.6864,1;
+          1.75,1; 1.873,1; 1.9502,1; 2.0607,1; 2.1381,1; 2.2627,1; 2.3252,1;
+          2.4657,1; 2.5267,1; 2.6677,1; 2.7308,1; 2.8568,1; 2.9187,0.99998;
+          3.0426,0.99998; 3.1053,1; 3.2467,1; 3.3247,1; 3.4489,1; 3.4951,1;
+          3.5576,1; 3.7136,1; 3.8236,1; 3.8856,1; 3.9466,1; 4.0545,1; 4.131,
+          0.98225; 4.2694,0.98225; 4.3311,0.94482; 4.4509,0.94482; 4.5144,
+          0.94468; 4.6244,0.94468; 4.7033,0.94468; 4.8289,0.94468; 4.89,
+          0.94467; 4.9519,0.94467; 5.0759,0.94469; 5.1384,0.94469; 5.2628,
+          0.94469; 5.3237,0.94467; 5.4482,0.94467; 5.4948,0.94468; 5.5576,
+          0.94468; 5.7127,0.94467; 5.8205,0.94467; 5.8818,0.94467; 5.9434,
+          0.94467; 6.0524,0.94467; 6.1307,0.94468; 6.2713,0.94468; 6.3337,
+          0.94468; 6.4436,0.94468; 6.5054,0.94468; 6.6479,0.94468; 6.7265,
+          0.94466; 6.8646,0.94466; 6.9263,0.94465; 7.0496,0.94465; 7.111,
+          0.94466],                        extrapolation=Modelica.Blocks.Types.Extrapolation.LastTwoPoints)
+      annotation (Placement(transformation(extent={{100,-120},{80,-100}})));
+    Modelica.Blocks.Sources.CombiTimeTable A2(table=[0.077046,-0.52325;
+          0.15395,-0.52325; 0.29358,-0.52325; 0.43438,-0.52325; 0.49787,-0.52325;
+          0.54389,-0.52325; 0.69879,-0.52325; 0.74567,-0.52325; 0.8557,-0.52325;
+          0.91768,-0.52325; 1.0283,-0.52325; 1.0917,-0.52325; 1.1556,-0.52325;
+          1.2956,-0.52331; 1.4351,-0.52331; 1.4989,-0.52325; 1.5461,-0.52325;
+          1.6864,-0.52325; 1.75,-0.52325; 1.873,-0.52325; 1.9502,-0.52325;
+          2.0607,-0.52325; 2.1381,-0.52325; 2.2627,-0.52325; 2.3252,-0.52325;
+          2.4657,-0.52325; 2.5267,-0.52325; 2.6677,-0.52325; 2.7308,-0.52325;
+          2.8568,-0.52325; 2.9187,-0.52325; 3.0426,-0.52331; 3.1053,-0.52331;
+          3.2467,-0.52325; 3.3247,-0.52325; 3.4489,-0.52331; 3.4951,-0.52331;
+          3.5576,-0.52331; 3.7136,-0.52325; 3.8236,-0.52325; 3.8856,-0.52325;
+          3.9466,-0.52325; 4.0545,-0.52377; 4.131,-0.52377; 4.2694,-0.52319;
+          4.3311,-0.52319; 4.4509,-0.52342; 4.5144,-0.52342; 4.6244,-0.52342;
+          4.7033,-0.52337; 4.8289,-0.52337; 4.89,-0.52342; 4.9519,-0.52342;
+          5.0759,-0.52342; 5.1384,-0.52342; 5.2628,-0.52342; 5.3237,-0.52342;
+          5.4482,-0.52342; 5.4948,-0.52342; 5.5576,-0.52342; 5.7127,-0.52342;
+          5.8205,-0.52342; 5.8818,-0.52342; 5.9434,-0.52342; 6.0524,-0.52342;
+          6.1307,-0.52342; 6.2713,-0.52342; 6.3337,-0.52342; 6.4436,-0.52342;
+          6.5054,-0.52342; 6.6479,-0.52342; 6.7265,-0.52342; 6.8646,-0.52342;
+          6.9263,-0.52342; 7.0496,-0.52342; 7.111,-0.52342],extrapolation=
+          Modelica.Blocks.Types.Extrapolation.LastTwoPoints)
+      annotation (Placement(transformation(extent={{100,-140},{80,-120}})));
+    Modelica.Blocks.Math.Cos COS2
+      annotation (Placement(transformation(extent={{60,-156},{52,-148}})));
+    Modelica.Blocks.Math.Sin SIN2
+      annotation (Placement(transformation(extent={{60,-144},{52,-136}})));
+    Modelica.Blocks.Math.Product product5 annotation (Placement(transformation(
+          extent={{-3,-3},{3,3}},
+          rotation=180,
+          origin={41,-109})));
+    Modelica.Blocks.Math.Product product6 annotation (Placement(transformation(
+          extent={{-3,-3},{3,3}},
+          rotation=180,
+          origin={41,-129})));
+    Modelica.Blocks.Sources.CombiTimeTable EXPERIMENT_IMagnitude(table=[
+          0.077046,3.3331; 0.15395,3.3331; 0.29358,3.3265; 0.43438,3.3265;
+          0.49787,3.3364; 0.54389,3.3364; 0.69879,3.3365; 0.74567,3.3331;
+          0.8557,3.3331; 0.91768,3.3331; 1.0283,3.3331; 1.0917,3.3331;
+          1.1556,3.3331; 1.2956,3.3265; 1.4351,3.3265; 1.4989,3.3364;
+          1.5461,3.3364; 1.6864,3.3364; 1.75,3.3331; 1.873,3.3331; 1.9502,
+          3.3331; 2.0607,3.3331; 2.1381,3.3331; 2.2627,3.3331; 2.3252,
+          3.3298; 2.4657,3.3298; 2.5267,3.3331; 2.6677,3.3331; 2.7308,
+          3.3331; 2.8568,3.3331; 2.9187,3.3298; 3.0426,3.3298; 3.1053,
+          3.3298; 3.2467,3.3298; 3.3247,3.3331; 3.4489,3.3331; 3.4951,
+          3.3331; 3.5576,3.3331; 3.7136,3.3331; 3.8236,3.3331; 3.8856,
+          3.3331; 3.9466,3.3331; 4.0545,3.3332; 4.131,3.5098; 4.2694,3.5098;
+          4.3311,3.4998; 4.4509,3.4998; 4.5144,3.4965; 4.6244,3.4965;
+          4.7033,3.4998; 4.8289,3.4998; 4.89,3.4998; 4.9519,3.4998; 5.0759,
+          3.4965; 5.1384,3.4965; 5.2628,3.4965; 5.3237,3.4998; 5.4482,
+          3.4998; 5.4948,3.4965; 5.5576,3.4965; 5.7127,3.4965; 5.8205,
+          3.4965; 5.8818,3.4965; 5.9434,3.4965; 6.0524,3.4965; 6.1307,
+          3.4998; 6.2713,3.4998; 6.3337,3.4932; 6.4436,3.4932; 6.5054,
+          3.4932; 6.6479,3.4932; 6.7265,3.4965; 6.8646,3.4965; 6.9263,
+          3.4932; 7.0496,3.4932; 7.111,3.4932],
+                   extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint)
+      annotation (Placement(transformation(extent={{-8,180},{12,200}})));
+    Modelica.Blocks.Sources.RealExpression PF_Simulation_REECB_NO_Kqv(y=pwLine3.P12
+          /sqrt(pwLine3.P12^2 + pwLine3.Q12^2))
+      annotation (Placement(transformation(extent={{100,186},{120,206}})));
+    Modelica.Blocks.Sources.RealExpression SIMULATION_I_Mag_REECB(y=sqrt(pwLine1.p.ir
+          ^2 + pwLine1.p.ii^2))
+      annotation (Placement(transformation(extent={{-120,74},{-100,54}})));
+    Modelica.Blocks.Sources.RealExpression SIMULATION_I_Ang_REECA(y=pwLine2.is.im/
+          pwLine2.is.re)
+      annotation (Placement(transformation(extent={{-88,-40},{-68,-20}})));
+    Modelica.Blocks.Sources.RealExpression SIMULATION_I_Mag_REECA(y=sqrt(pwLine2.p.ir
+          ^2 + pwLine2.p.ii^2))
+      annotation (Placement(transformation(extent={{-120,-46},{-100,-66}})));
+    Modelica.Blocks.Sources.RealExpression SIMULATION_I_Mag_REECB_NO_Kqv(y=sqrt(
+          pwLine3.p.ir^2 + pwLine3.p.ii^2))
+      annotation (Placement(transformation(extent={{-120,-160},{-100,-180}})));
+    Modelica.Blocks.Sources.CombiTimeTable VOLTAGE(table=[0.077046,350.93;
+          0.15395,350.93; 0.29358,350.94; 0.43438,350.94; 0.49787,350.94;
+          0.54389,350.94; 0.69879,350.94; 0.74567,350.94; 0.8557,350.94;
+          0.91768,350.94; 1.0283,350.94; 1.0917,350.93; 1.1556,350.93;
+          1.2956,350.93; 1.4351,350.93; 1.4989,350.94; 1.5461,350.94;
+          1.6864,350.94; 1.75,350.94; 1.873,350.94; 1.9502,350.94; 2.0607,
+          350.94; 2.1381,350.94; 2.2627,350.94; 2.3252,350.94; 2.4657,
+          350.94; 2.5267,350.94; 2.6677,350.94; 2.7308,350.95; 2.8568,
+          350.95; 2.9187,350.93; 3.0426,350.93; 3.1053,350.94; 3.2467,
+          350.94; 3.3247,350.94; 3.4489,350.94; 3.4951,350.94; 3.5576,
+          350.94; 3.7136,350.94; 3.8236,350.94; 3.8856,350.94; 3.9466,
+          350.94; 4.0545,350.94; 4.131,344.7; 4.2694,344.7; 4.3311,331.57;
+          4.4509,331.57; 4.5144,331.52; 4.6244,331.52; 4.7033,331.52;
+          4.8289,331.52; 4.89,331.52; 4.9519,331.52; 5.0759,331.52; 5.1384,
+          331.52; 5.2628,331.52; 5.3237,331.52; 5.4482,331.52; 5.4948,
+          331.52; 5.5576,331.52; 5.7127,331.52; 5.8205,331.52; 5.8818,
+          331.52; 5.9434,331.52; 6.0524,331.52; 6.1307,331.52; 6.2713,
+          331.52; 6.3337,331.52; 6.4436,331.52; 6.5054,331.52; 6.6479,
+          331.52; 6.7265,331.51; 6.8646,331.51; 6.9263,331.51; 7.0496,
+          331.51; 7.111,331.51],
+                          extrapolation=Modelica.Blocks.Types.Extrapolation.LastTwoPoints)
+      annotation (Placement(transformation(extent={{-68,152},{-48,172}})));
+    Modelica.Blocks.Sources.RealExpression Im1(y=sqrt(pwLine1.p.ir^2 +
+          pwLine1.p.ii^2)*30000/VOLTAGE.table[1, 2])
+      annotation (Placement(transformation(extent={{-120,56},{-100,36}})));
+    Modelica.Blocks.Sources.RealExpression Im2(y=sqrt(pwLine2.p.ir^2 +
+          pwLine2.p.ii^2)*SysData.S_b/VOLTAGE.table[1, 2])
+      annotation (Placement(transformation(extent={{-120,-66},{-100,-86}})));
+    Modelica.Blocks.Sources.RealExpression Im3(y=sqrt(pwLine3.p.ir^2 +
+          pwLine3.p.ii^2)*SysData.S_b/VOLTAGE.table[1, 2])
+      annotation (Placement(transformation(extent={{-120,-180},{-100,-200}})));
+    Modelica.Blocks.Sources.RealExpression VR(y=VOLTAGE.y[1]*COS.y)
+      annotation (Placement(transformation(extent={{-36,174},{-16,154}})));
+    Modelica.Blocks.Sources.RealExpression VI(y=VOLTAGE.y[1]*SIN.y)
+      annotation (Placement(transformation(extent={{-8,174},{12,154}})));
+    Modelica.Blocks.Sources.RealExpression Ir1(y=Im1.y*cos(
+          SIMULATION_IAng_REECB.y))
+      annotation (Placement(transformation(extent={{-88,74},{-68,54}})));
+    Modelica.Blocks.Sources.RealExpression Ii1(y=Im1.y*sin(
+          SIMULATION_IAng_REECB.y))
+      annotation (Placement(transformation(extent={{-88,56},{-68,36}})));
+    Modelica.Blocks.Sources.RealExpression Ir2(y=Im2.y*cos(
+          SIMULATION_IAng_REECA.y))
+      annotation (Placement(transformation(extent={{-92,-46},{-72,-66}})));
+    Modelica.Blocks.Sources.RealExpression Ii2(y=Im2.y*sin(
+          SIMULATION_IAng_REECA.y))
+      annotation (Placement(transformation(extent={{-92,-66},{-72,-86}})));
+    Modelica.Blocks.Sources.RealExpression Ir3(y=Im3.y*cos(
+          SIMULATION_IAng_REECB_NO_Kqv.y))
+      annotation (Placement(transformation(extent={{-90,-160},{-70,-180}})));
+    Modelica.Blocks.Sources.RealExpression Ii3(y=Im3.y*sin(
+          SIMULATION_IAng_REECB_NO_Kqv.y))
+      annotation (Placement(transformation(extent={{-90,-180},{-70,-200}})));
+  equation
+    connect(pV1.pwPin,InverterBus1. p)
+      annotation (Line(points={{-100,120},{-70,120}},color={0,0,255}));
+    connect(GridBus2.p,voltageSourceReImInput. p)
+      annotation (Line(points={{-10,120},{9,120}}, color={0,0,255}));
+    connect(pwLine1.p,InverterBus1. p)
+      annotation (Line(points={{-49,120},{-70,120}}, color={0,0,255}));
+    connect(SIMULATION_I_Ang_REECB.y, SIMULATION_IAng_REECB.u)
+      annotation (Line(points={{-67,84},{-46,84}}, color={0,0,127}));
+    connect(A.y[1],COS. u) annotation (Line(points={{79,110},{78,110},{78,
+            88},{60.8,88}},
+                  color={0,0,127}));
+    connect(SIN.u, A.y[1]) annotation (Line(points={{60.8,100},{78,100},{78,
+            110},{79,110}},
+                  color={0,0,127}));
+    connect(voltageSourceReImInput.vRe, product1.y)
+      annotation (Line(points={{32,124},{32,131},{37.7,131}},
+                                                           color={0,0,127}));
+    connect(voltageSourceReImInput.vIm, product2.y)
+      annotation (Line(points={{32,116},{32,111},{37.7,111}},
+                                                           color={0,0,127}));
+    connect(COS.y, product1.u2) annotation (Line(points={{51.6,88},{44,88},
+            {44,66},{112,66},{112,152},{44.6,152},{44.6,132.8}},
+                                                     color={0,0,127}));
+    connect(V.y[1], product1.u1) annotation (Line(points={{79,130},{50,130},
+            {50,129.2},{44.6,129.2}},
+                          color={0,0,127}));
+    connect(SIN.y, product2.u1) annotation (Line(points={{51.6,100},{48,100},
+            {48,109.2},{44.6,109.2}},
+                          color={0,0,127}));
+    connect(product2.u2, V.y[1])
+      annotation (Line(points={{44.6,112.8},{79,112.8},{79,130}},
+                                                               color={0,0,127}));
+    connect(pwLine1.n, GridBus2.p)
+      annotation (Line(points={{-31,120},{-10,120}},
+                                                 color={0,0,255}));
+    connect(wind.pwPin, InverterBus2.p)
+      annotation (Line(points={{-110,0},{-70,0}},     color={0,0,255}));
+    connect(GridBus1.p, voltageSourceReImInput1.p)
+      annotation (Line(points={{-10,0},{9,0}},    color={0,0,255}));
+    connect(pwLine2.p,InverterBus2. p)
+      annotation (Line(points={{-49,0},{-70,0}},     color={0,0,255}));
+    connect(A1.y[1],COS1. u) annotation (Line(points={{79,-10},{78,-10},{78,
+            -32},{60.8,-32}},
+                        color={0,0,127}));
+    connect(SIN1.u, A1.y[1]) annotation (Line(points={{60.8,-20},{78,-20},{
+            78,-10},{79,-10}},
+                       color={0,0,127}));
+    connect(voltageSourceReImInput1.vRe, product3.y)
+      annotation (Line(points={{32,4},{32,11},{37.7,11}},     color={0,0,127}));
+    connect(voltageSourceReImInput1.vIm, product4.y)
+      annotation (Line(points={{32,-4},{32,-9},{37.7,-9}},    color={0,0,127}));
+    connect(COS1.y, product3.u2) annotation (Line(points={{51.6,-32},{44,
+            -32},{44,-54},{112,-54},{112,32},{44.6,32},{44.6,12.8}},
+                                                                 color={0,0,127}));
+    connect(V1.y[1], product3.u1) annotation (Line(points={{79,10},{50,10},
+            {50,9.2},{44.6,9.2}},
+                           color={0,0,127}));
+    connect(SIN1.y, product4.u1) annotation (Line(points={{51.6,-20},{48,
+            -20},{48,-10.8},{44.6,-10.8}},
+                                  color={0,0,127}));
+    connect(product4.u2, V1.y[1]) annotation (Line(points={{44.6,-7.2},{79,
+            -7.2},{79,10}},
+                       color={0,0,127}));
+    connect(pwLine2.n, GridBus1.p)
+      annotation (Line(points={{-31,0},{-10,0}},   color={0,0,255}));
+    connect(pV2.pwPin,InverterBus3. p)
+      annotation (Line(points={{-110,-120},{-70,-120}},
+                                                     color={0,0,255}));
+    connect(GridBus3.p, voltageSourceReImInput2.p)
+      annotation (Line(points={{-10,-120},{9,-120}},color={0,0,255}));
+    connect(pwLine3.p,InverterBus3. p)
+      annotation (Line(points={{-49,-120},{-70,-120}},
+                                                     color={0,0,255}));
+    connect(SIMULATION_I_Ang_REECA_NO_Kqv.y, SIMULATION_IAng_REECB_NO_Kqv.u)
+      annotation (Line(points={{-67,-150},{-50,-150}}, color={0,0,127}));
+    connect(A2.y[1],COS2. u) annotation (Line(points={{79,-130},{78,-130},{
+            78,-152},{60.8,-152}},
+                                color={0,0,127}));
+    connect(SIN2.u, A2.y[1]) annotation (Line(points={{60.8,-140},{78,-140},
+            {78,-130},{79,-130}},color={0,0,127}));
+    connect(voltageSourceReImInput2.vRe, product5.y) annotation (Line(points={{32,-116},
+            {32,-109},{37.7,-109}},            color={0,0,127}));
+    connect(voltageSourceReImInput2.vIm, product6.y) annotation (Line(points={{32,-124},
+            {32,-129},{37.7,-129}},            color={0,0,127}));
+    connect(COS2.y, product5.u2) annotation (Line(points={{51.6,-152},{44,
+            -152},{44,-174},{112,-174},{112,-88},{44.6,-88},{44.6,-107.2}},
+          color={0,0,127}));
+    connect(V2.y[1], product5.u1) annotation (Line(points={{79,-110},{50,
+            -110},{50,-110.8},{44.6,-110.8}},
+                                        color={0,0,127}));
+    connect(SIN2.y, product6.u1) annotation (Line(points={{51.6,-140},{48,
+            -140},{48,-130.8},{44.6,-130.8}}, color={0,0,127}));
+    connect(product6.u2, V2.y[1]) annotation (Line(points={{44.6,-127.2},{
+            79,-127.2},{79,-110}},
+                                color={0,0,127}));
+    connect(pwLine3.n,GridBus3. p)
+      annotation (Line(points={{-31,-120},{-10,-120}},
+                                                 color={0,0,255}));
+    connect(SIMULATION_I_Ang_REECA.y, SIMULATION_IAng_REECA.u)
+      annotation (Line(points={{-67,-30},{-50,-30}}, color={0,0,127}));
+    annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-140,
+              -240},{140,240}})),                                  Diagram(
+          coordinateSystem(preserveAspectRatio=false, extent={{-140,-240},{
+              140,240}})),
+      experiment(
+        StopTime=7.8,
+        __Dymola_NumberOfIntervals=1000,
+        __Dymola_Algorithm="Dassl"));
+  end VoltageVariation_350_to_330_V;
+end Under085PowerFactor;

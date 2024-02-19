@@ -1,0 +1,4 @@
+within OpenRESV.Electrical;
+package Modified_PV_Model "This package contains the modifications made to the RES models."
+
+end Modified_PV_Model;

@@ -1,0 +1,3 @@
+within OpenRESV.RES_Model_vs_PHIL_Inverter;
+package ConstantPowerFactorWithPrefChange
+end ConstantPowerFactorWithPrefChange;
