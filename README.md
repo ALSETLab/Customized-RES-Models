@@ -84,4 +84,4 @@ This Source Code Form is subject to the terms of the [3-Clause BSD license](http
 
 ## Acknowledgements
 
-The development of the OpenIMDML library is based upon work supported by the U.S. Department of Energy’s Office of Energy Efficiency and Renewable Energy (EERE) under the Advanced Manufacturing Office, Award Number DE-EE0009139.
+The development of the OpenRESV library is based upon work supported by the U.S. Department of Energy’s Office of Energy Efficiency and Renewable Energy (EERE) under the Advanced Manufacturing Office, Award Number DE-EE0009139.
