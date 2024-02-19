@@ -37,11 +37,11 @@ In case the reader would like to read more about the Volta Facility, [folder](do
 ## OpenRESV Library Structure
 The library is structured into five sub-packages (illustrated in Figure shown below): Examples, NonMultiDomain, MultiDomain, Controls, and Functions.\
 ![Library Structure](docs/Figures/Library_Structure.png "Library Structure")
-- **Examples:** contains Modelica model examples of all the components and models developed in the OpenIMDML Library. The **Examples** package contains three sub-packages, namely **MultiDomainExamples**, **NonMultiDomainExamples**, and **BaseClasses**. The **MultiDomainExamples** sub-package presents examples of the single-phase and three-phase multi-domain motor developed in the library, including motor validation examples, examples including a variable speed drive and its controls, and a simple example of a multi-domain motor interacting with a pump that fills up a reservoir. The **NonMultiDomainExamples** sub-package contains examples of single-phase and three-phase non multi-domain motor models from the library, including examples that incorporate the variable speed drive. The difference between multi-domain and non multi-domain is linked to the driven load representation. Lastly, the **BaseClasses** sub-package contains partial models that are re-utilized in several of the examples from the package.
-- **NonMultiDomain:** contains single-phase and three-phase non multi-domain induction motor models.
--  **MultiDomain:**  contains single-phase and three-phase multi-domain induction motor models.
--  **Controls:** contains power electronics and controller logic models for the variable speed drive model.
--  **Functions:** contains one function that implements an iterative method for estimating the induction motor equivalent circuit parameters using only the motor nameplate data.
+- **RES_Model_vs_PHIL_Inverter_Examples:** contains Modelica model examples of all the validation tests conducted on the ALSETLab Volta PHIL Setup.
+- **Electrical:** contains the bare minimum electrical components (from the OpenIPSL library) necessary for running the simulations.
+-  **NonElectrical:**  contains the bare minimum nonelectrical components (from the OpenIPSL library) necessary for running the simulations.
+-  **Types:** contains variable types created in OpenIPSL and extended in this library.
+-  **Interfaces:** interfaces used in the models.
 
 ## How to run an example in OpenModelica?
 
