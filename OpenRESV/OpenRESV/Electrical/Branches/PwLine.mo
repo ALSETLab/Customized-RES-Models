@@ -5,24 +5,24 @@ model PwLine "Model for a transmission Line based on the pi-equivalent circuit"
   import Modelica.ComplexMath.real;
   import Modelica.ComplexMath.imag;
   import Modelica.ComplexMath.j;
-  OpenIPSL.Interfaces.PwPin_p p annotation (Placement(transformation(extent={{-100,
+  OpenRESV.Interfaces.PwPin_p p annotation (Placement(transformation(extent={{-100,
             -10},{-80,10}}), iconTransformation(extent={{-100,-10},{-80,10}})));
-  OpenIPSL.Interfaces.PwPin_n n annotation (Placement(transformation(extent={{80,
+  OpenRESV.Interfaces.PwPin_n n annotation (Placement(transformation(extent={{80,
             -10},{100,10}}), iconTransformation(extent={{80,-10},{100,10}})));
-  parameter OpenIPSL.Types.PerUnit R "Resistance"
+  parameter OpenRESV.Types.PerUnit R "Resistance"
     annotation (Dialog(group="Line parameters"));
-  parameter OpenIPSL.Types.PerUnit X "Reactance"
+  parameter OpenRESV.Types.PerUnit X "Reactance"
     annotation (Dialog(group="Line parameters"));
-  parameter OpenIPSL.Types.PerUnit G "Shunt half conductance"
+  parameter OpenRESV.Types.PerUnit G "Shunt half conductance"
     annotation (Dialog(group="Line parameters"));
-  parameter OpenIPSL.Types.PerUnit B "Shunt half susceptance"
+  parameter OpenRESV.Types.PerUnit B "Shunt half susceptance"
     annotation (Dialog(group="Line parameters"));
-  parameter OpenIPSL.Types.ApparentPower S_b=SysData.S_b
+  parameter OpenRESV.Types.ApparentPower S_b=SysData.S_b
     "System base power"
     annotation (Dialog(group="Line parameters", enable=false));
-  parameter OpenIPSL.Types.Time t1=Modelica.Constants.inf
+  parameter OpenRESV.Types.Time t1=Modelica.Constants.inf
     annotation (Dialog(group="Perturbation parameters"));
-  parameter OpenIPSL.Types.Time t2=Modelica.Constants.inf
+  parameter OpenRESV.Types.Time t2=Modelica.Constants.inf
     annotation (Dialog(group="Perturbation parameters"));
   parameter Integer opening=1 annotation (Dialog(group=
           "Perturbation parameters"), choices(
@@ -34,10 +34,10 @@ model PwLine "Model for a transmission Line based on the pi-equivalent circuit"
       group="Visualisation",
       __Dymola_compact=true,
       __Dymola_descriptionLabel=true), choices(checkBox=true));
-  OpenIPSL.Types.ActivePower P12;
-  OpenIPSL.Types.ActivePower P21;
-  OpenIPSL.Types.ReactivePower Q12;
-  OpenIPSL.Types.ReactivePower Q21;
+  OpenRESV.Types.ActivePower P12;
+  OpenRESV.Types.ActivePower P21;
+  OpenRESV.Types.ReactivePower Q12;
+  OpenRESV.Types.ReactivePower Q21;
   Complex vs(re=p.vr, im=p.vi);
   Complex is(re=p.ir, im=p.ii);
   Complex vr(re=n.vr, im=n.vi);
@@ -77,7 +77,7 @@ equation
           extent={{-200,160},{-20,40}},
           lineColor={255,0,0},
           textString=DynamicSelect("0.0 MW",
-            OpenIPSL.NonElectrical.Functions.displayPower(P12, " MW"))),Polygon(
+            OpenRESV.NonElectrical.Functions.displayPower(P12, " MW"))),Polygon(
           visible=displayPF,
           points=DynamicSelect({{-120,70},{-120,50},{-80,60},{-120,70}}, if P12
              >= 0 then {{-120,70},{-120,50},{-80,60},{-120,70}} else {{-80,70},
@@ -89,7 +89,7 @@ equation
           extent={{20,160},{200,40}},
           lineColor={255,0,0},
           textString=DynamicSelect("0.0 MW",
-            OpenIPSL.NonElectrical.Functions.displayPower(P21, " MW"))),Polygon(
+            OpenRESV.NonElectrical.Functions.displayPower(P21, " MW"))),Polygon(
           visible=displayPF,
           points=DynamicSelect({{80,70},{80,50},{120,60},{80,70}}, if P21 >= 0
              then {{80,70},{80,50},{120,60},{80,70}} else {{120,70},{120,50},{
@@ -101,7 +101,7 @@ equation
           extent={{-200,-40},{-20,-160}},
           lineColor={0,255,0},
           textString=DynamicSelect("0.0 Mvar",
-            OpenIPSL.NonElectrical.Functions.displayPower(Q12, " Mvar"))),
+            OpenRESV.NonElectrical.Functions.displayPower(Q12, " Mvar"))),
           Polygon(
           visible=displayPF,
           points=DynamicSelect({{-120,-70},{-120,-50},{-80,-60},{-120,-70}},
@@ -114,7 +114,7 @@ equation
           extent={{20,-40},{200,-160}},
           lineColor={0,255,0},
           textString=DynamicSelect("0.0 Mvar",
-            OpenIPSL.NonElectrical.Functions.displayPower(Q21, " Mvar"))),
+            OpenRESV.NonElectrical.Functions.displayPower(Q21, " Mvar"))),
           Polygon(
           visible=displayPF,
           points=DynamicSelect({{80,-70},{80,-50},{120,-60},{80,-70}}, if Q21

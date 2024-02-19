@@ -4,50 +4,50 @@ model REECA1 "Electrical control model for large scale wind"
     OpenRESV.Electrical.Renewables.PSSE.ElectricalController.BaseClasses.BaseREECA(
      Iqcmd, Ipcmd);
 
-  parameter OpenIPSL.Types.PerUnit Vdip = -99 "Low voltage threshold to activate reactive current injection logic (0.85 - 0.9)";
-  parameter OpenIPSL.Types.PerUnit Vup = 99 "Voltage above which reactive current injection logic is activated (>1.1)";
-  parameter OpenIPSL.Types.Time Trv = 0.01 "Filter time constant for voltage measurement (0.01 - 0.02)";
-  parameter OpenIPSL.Types.PerUnit dbd1 = -0.05 "Voltage error dead band lower threshold (-0.1 - 0)";
-  parameter OpenIPSL.Types.PerUnit dbd2 = 0.05 "Voltage error dead band upper threshold (0 - 0.1)";
+  parameter OpenRESV.Types.PerUnit Vdip = -99 "Low voltage threshold to activate reactive current injection logic (0.85 - 0.9)";
+  parameter OpenRESV.Types.PerUnit Vup = 99 "Voltage above which reactive current injection logic is activated (>1.1)";
+  parameter OpenRESV.Types.Time Trv = 0.01 "Filter time constant for voltage measurement (0.01 - 0.02)";
+  parameter OpenRESV.Types.PerUnit dbd1 = -0.05 "Voltage error dead band lower threshold (-0.1 - 0)";
+  parameter OpenRESV.Types.PerUnit dbd2 = 0.05 "Voltage error dead band upper threshold (0 - 0.1)";
   parameter Real Kqv = 0 "Reactive current injection gain during over and undervoltage conditions (0 - 10)";
-  parameter OpenIPSL.Types.PerUnit Iqh1 = 1.05 "Upper limit on reactive current injection Iqinj (1 - 1.1)";
-  parameter OpenIPSL.Types.PerUnit Iql1 = -1.05 "Lower limit on reactive current injection Iqinj (-1.1 - 1)";
-  parameter OpenIPSL.Types.PerUnit vref0 = 0 "User defined voltage reference (0.95 - 1.05)";
-  parameter OpenIPSL.Types.PerUnit Iqfrz = 0.15 "Value at which Iqinj is held for Thld seconds following a voltage dip if Thld > 0";
-  parameter OpenIPSL.Types.Time Thld = 0 "Time for which Iqinj is held at Iqfrz after voltage dip returns to zero";
-  parameter OpenIPSL.Types.Time Tp = 0.05 "Filter time constant for electrical power (0.01 - 0.1)";
-  parameter OpenIPSL.Types.PerUnit Qmax = 0.4 "Upper limits of the limit for reactive power regulator (0.4 - 1.0)";
-  parameter OpenIPSL.Types.PerUnit Qmin = -0.4 "Lower limits of the limit for reactive power regulator (-1.0 - -0.4)";
-  parameter OpenIPSL.Types.PerUnit Vmax = 1.1 "Maximum limit for voltage control (1.05 - 1.1)";
-  parameter OpenIPSL.Types.PerUnit Vmin = 0.9 "Lower limits of input signals (0.9 - 0.95)";
+  parameter OpenRESV.Types.PerUnit Iqh1 = 1.05 "Upper limit on reactive current injection Iqinj (1 - 1.1)";
+  parameter OpenRESV.Types.PerUnit Iql1 = -1.05 "Lower limit on reactive current injection Iqinj (-1.1 - 1)";
+  parameter OpenRESV.Types.PerUnit vref0 = 0 "User defined voltage reference (0.95 - 1.05)";
+  parameter OpenRESV.Types.PerUnit Iqfrz = 0.15 "Value at which Iqinj is held for Thld seconds following a voltage dip if Thld > 0";
+  parameter OpenRESV.Types.Time Thld = 0 "Time for which Iqinj is held at Iqfrz after voltage dip returns to zero";
+  parameter OpenRESV.Types.Time Tp = 0.05 "Filter time constant for electrical power (0.01 - 0.1)";
+  parameter OpenRESV.Types.PerUnit Qmax = 0.4 "Upper limits of the limit for reactive power regulator (0.4 - 1.0)";
+  parameter OpenRESV.Types.PerUnit Qmin = -0.4 "Lower limits of the limit for reactive power regulator (-1.0 - -0.4)";
+  parameter OpenRESV.Types.PerUnit Vmax = 1.1 "Maximum limit for voltage control (1.05 - 1.1)";
+  parameter OpenRESV.Types.PerUnit Vmin = 0.9 "Lower limits of input signals (0.9 - 0.95)";
   parameter Real Kqp = 0 "Reactive power regulator proportional gain (No predefined range)";
   parameter Real Kqi = 0.1 "Reactive power regulator integral gain (No predefined range)";
   parameter Real Kvp = 0 "Voltage regulator proportional gain (No predefined range)";
   parameter Real Kvi = 120 "Voltage regulator integral gain (No predefined range)";
-  parameter OpenIPSL.Types.PerUnit Vbias = 0 "User-defined reference/bias on the inner-loop voltage control (No predefined range)";
-  parameter OpenIPSL.Types.Time Tiq = 0.02 "Time constant on lag delay (0.01 - 0.02)";
+  parameter OpenRESV.Types.PerUnit Vbias = 0 "User-defined reference/bias on the inner-loop voltage control (No predefined range)";
+  parameter OpenRESV.Types.Time Tiq = 0.02 "Time constant on lag delay (0.01 - 0.02)";
   parameter Real dPmax = 99 "Power reference maximum ramp rate (No predefined range)";
   parameter Real dPmin = -99 "Lower limits of input signals (No predefined range)";
-  parameter OpenIPSL.Types.PerUnit Pmax = 1 "Maximum power limit";
-  parameter OpenIPSL.Types.PerUnit Pmin = 0 "Minimum power limit";
-  parameter OpenIPSL.Types.PerUnit Imax = 1.7 "Maximum limit on total converter current (1.1 - 1.3)";
-  parameter OpenIPSL.Types.Time Tpord = 0.04 "Power filter time constant (0.01 - 0.02) ";
-  parameter OpenIPSL.Types.PerUnit Vq1 = 0.29 "Reactive Power V-I pair, voltage (user defined)";
-  parameter OpenIPSL.Types.PerUnit Iq1 = 1.25 "Reactive Power V-I pair, current (user defined)";
-  parameter OpenIPSL.Types.PerUnit Vq2 = 1.33 "Reactive Power V-I pair, voltage (user defined)";
-  parameter OpenIPSL.Types.PerUnit Iq2 = 0.00 "Reactive Power V-I pair, current (user defined)";
-  parameter OpenIPSL.Types.PerUnit Vq3 = 1.33 "Reactive Power V-I pair, voltage (user defined)";
-  parameter OpenIPSL.Types.PerUnit Iq3 = 0.00 "Reactive Power V-I pair, current (user defined)";
-  parameter OpenIPSL.Types.PerUnit Vq4 = 1.33 "Reactive Power V-I pair, voltage (user defined)";
-  parameter OpenIPSL.Types.PerUnit Iq4 = 0.00 "Reactive Power V-I pair, current (user defined)";
-  parameter OpenIPSL.Types.PerUnit Vp1 = 0.00 "Real Power V-I pair, voltage (user defined)";
-  parameter OpenIPSL.Types.PerUnit Ip1 = 1.15 "Real Power V-I pair, current (user defined)";
-  parameter OpenIPSL.Types.PerUnit Vp2 = 1.1 "Real Power V-I pair, voltage (user defined)";
-  parameter OpenIPSL.Types.PerUnit Ip2 = 1.24 "Real Power V-I pair, current (user defined)";
-  parameter OpenIPSL.Types.PerUnit Vp3 = 2 "Real Power V-I pair, voltage (user defined)";
-  parameter OpenIPSL.Types.PerUnit Ip3 = 1.24 "Real Power V-I pair, current (user defined)";
-  parameter OpenIPSL.Types.PerUnit Vp4 = 2 "Real Power V-I pair, voltage (user defined)";
-  parameter OpenIPSL.Types.PerUnit Ip4 = 1.24 "Real Power V-I pair, current (user defined)";
+  parameter OpenRESV.Types.PerUnit Pmax = 1 "Maximum power limit";
+  parameter OpenRESV.Types.PerUnit Pmin = 0 "Minimum power limit";
+  parameter OpenRESV.Types.PerUnit Imax = 1.7 "Maximum limit on total converter current (1.1 - 1.3)";
+  parameter OpenRESV.Types.Time Tpord = 0.04 "Power filter time constant (0.01 - 0.02) ";
+  parameter OpenRESV.Types.PerUnit Vq1 = 0.29 "Reactive Power V-I pair, voltage (user defined)";
+  parameter OpenRESV.Types.PerUnit Iq1 = 1.25 "Reactive Power V-I pair, current (user defined)";
+  parameter OpenRESV.Types.PerUnit Vq2 = 1.33 "Reactive Power V-I pair, voltage (user defined)";
+  parameter OpenRESV.Types.PerUnit Iq2 = 0.00 "Reactive Power V-I pair, current (user defined)";
+  parameter OpenRESV.Types.PerUnit Vq3 = 1.33 "Reactive Power V-I pair, voltage (user defined)";
+  parameter OpenRESV.Types.PerUnit Iq3 = 0.00 "Reactive Power V-I pair, current (user defined)";
+  parameter OpenRESV.Types.PerUnit Vq4 = 1.33 "Reactive Power V-I pair, voltage (user defined)";
+  parameter OpenRESV.Types.PerUnit Iq4 = 0.00 "Reactive Power V-I pair, current (user defined)";
+  parameter OpenRESV.Types.PerUnit Vp1 = 0.00 "Real Power V-I pair, voltage (user defined)";
+  parameter OpenRESV.Types.PerUnit Ip1 = 1.15 "Real Power V-I pair, current (user defined)";
+  parameter OpenRESV.Types.PerUnit Vp2 = 1.1 "Real Power V-I pair, voltage (user defined)";
+  parameter OpenRESV.Types.PerUnit Ip2 = 1.24 "Real Power V-I pair, current (user defined)";
+  parameter OpenRESV.Types.PerUnit Vp3 = 2 "Real Power V-I pair, voltage (user defined)";
+  parameter OpenRESV.Types.PerUnit Ip3 = 1.24 "Real Power V-I pair, current (user defined)";
+  parameter OpenRESV.Types.PerUnit Vp4 = 2 "Real Power V-I pair, voltage (user defined)";
+  parameter OpenRESV.Types.PerUnit Ip4 = 1.24 "Real Power V-I pair, current (user defined)";
 
   Boolean Voltage_dip;
 
@@ -172,7 +172,7 @@ model REECA1 "Electrical control model for large scale wind"
   Modelica.Blocks.Sources.BooleanExpression StateTransitionLogic(y=if
         Voltage_dip == true then true else false)
     annotation (Placement(transformation(extent={{-68,220},{-48,240}})));
-  OpenIPSL.NonElectrical.Continuous.SimpleLag simpleLag1(
+  OpenRESV.NonElectrical.Continuous.SimpleLag simpleLag1(
     K=1,
     T=Tp,
     y_start=p00)
@@ -204,21 +204,21 @@ model REECA1 "Electrical control model for large scale wind"
     annotation (Placement(transformation(extent={{-88,112},{-68,132}})));
   Modelica.Blocks.Sources.BooleanExpression VLogic(y=Voltage_dip)
     annotation (Placement(transformation(extent={{-40,146},{0,174}})));
-  OpenIPSL.NonElectrical.Continuous.SimpleLag VFilter(
+  OpenRESV.NonElectrical.Continuous.SimpleLag VFilter(
     K=1,
     T=Trv,
     y_start=V0) annotation (Placement(transformation(extent={{-282,210},
             {-262,230}})));
 protected
   parameter Real pfaref=p00/sqrt(p00^2 +q00^2) "Power Factor of choice.";
-  parameter OpenIPSL.Types.Angle pfangle = if q00 > 0 then acos(pfaref) else -acos(pfaref);
-  parameter OpenIPSL.Types.PerUnit Ip0(fixed=false);
-  parameter OpenIPSL.Types.PerUnit Iq0(fixed=false);
-  parameter OpenIPSL.Types.PerUnit V0(fixed=false);
-  parameter OpenIPSL.Types.PerUnit p00(fixed=false);
-  parameter OpenIPSL.Types.PerUnit q00(fixed=false);
-  parameter OpenIPSL.Types.PerUnit Vref0 = if vref0 == 0 then V0 else vref0;
-  OpenIPSL.Types.PerUnit Vmod;
+  parameter OpenRESV.Types.Angle pfangle = if q00 > 0 then acos(pfaref) else -acos(pfaref);
+  parameter OpenRESV.Types.PerUnit Ip0(fixed=false);
+  parameter OpenRESV.Types.PerUnit Iq0(fixed=false);
+  parameter OpenRESV.Types.PerUnit V0(fixed=false);
+  parameter OpenRESV.Types.PerUnit p00(fixed=false);
+  parameter OpenRESV.Types.PerUnit q00(fixed=false);
+  parameter OpenRESV.Types.PerUnit Vref0 = if vref0 == 0 then V0 else vref0;
+  OpenRESV.Types.PerUnit Vmod;
 initial equation
 
   Ip0 = ip0;
@@ -397,9 +397,9 @@ are Vt, Pgen, and Qgen while the two inputs that could potentially be constant v
 <p>The modelling of such devices is based, mainly, on the following references:</p>
 <ul>
 <li>Siemens: \"PSS&reg;E Model Library\"
-<a href=\"modelica://OpenIPSL.UsersGuide.References\">[PSSE-MODELS]</a>,</li>
+<a href=\"modelica://OpenRESV.UsersGuide.References\">[PSSE-MODELS]</a>,</li>
 <li>WECC: \"Wind Power Plant Dynamic Modeling Guideline\"
-<a href=\"modelica://OpenIPSL.UsersGuide.References\">[WECCWind]</a>.</li>
+<a href=\"modelica://OpenRESV.UsersGuide.References\">[WECCWind]</a>.</li>
 </ul>
 </html>"));
 end REECA1;

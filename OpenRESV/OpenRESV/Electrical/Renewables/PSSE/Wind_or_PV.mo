@@ -1,7 +1,7 @@
 within OpenRESV.Electrical.Renewables.PSSE;
 model Wind_or_PV
   "Framework for a wind plant including controllers"
-parameter OpenIPSL.Types.ApparentPower M_b=RenewableGenerator.SysData.S_b
+parameter OpenRESV.Types.ApparentPower M_b=RenewableGenerator.SysData.S_b
     "Machine base power" annotation (Dialog(group="Power flow data"));
 extends OpenRESV.Electrical.Essentials.pfComponent(
     final enablefn=false,
@@ -26,7 +26,7 @@ extends OpenRESV.Electrical.Essentials.pfComponent(
     v_0=v_0,
     angle_0=angle_0) annotation (choicesAllMatching=true, Placement(
         transformation(extent={{30,-20},{70,20}})));
-  OpenIPSL.Interfaces.PwPin pwPin
+  OpenRESV.Interfaces.PwPin pwPin
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
 
   replaceable ElectricalController.BaseClasses.BaseREECA RenewableController(

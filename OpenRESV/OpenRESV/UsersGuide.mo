@@ -27,7 +27,7 @@ package UsersGuide "User's Guide"
             coordinateSystem(preserveAspectRatio=false)),
         Documentation(info="<html>
 <h4>What&apos;s Changed</h4>
-<p>This mini library is an excerpt from the OpenIPSL library containing validation examples that replicate the experiments conducted at the ALSETLab Volta Facility. </p>
+<p>This mini library is an excerpt from the OpenRESV library containing validation examples that replicate the experiments conducted at the ALSETLab Volta Facility. </p>
 <h5>Highlights</h5>
 <ul>
 <li>Multi-domain models of three-phase and single-phase induction motors.</li>
@@ -50,7 +50,7 @@ package UsersGuide "User's Guide"
                 Documentation(info="<html>
 <dl>
 <dt>[Baudette2018]</dt>
-<dd>M.Baudette, et al , OpenIPSL: Open-instance power system li-
+<dd>M.Baudette, et al , OpenRESV: Open-instance power system li-
 brary—update 1.5 to “iTesla power systems library (iPSL): A modelica
 library for phasor time-domain simulations”, SoftwareX 7 (2018) 34–36.
 </dd>
@@ -68,7 +68,7 @@ for industry, US Department of Energy (2014).
 <dt>[Fachini2022]</dt>
 <dd>F. Fachini, M. De Castro, M. Liu, T. Bogodorova, L. Vanfretti, W. Zuo,
 Multi-domain power and thermo-fluid system stability modeling using
-Modelica and OpenIPSL, in: 2022 IEEE Power & Energy Society General
+Modelica and OpenRESV, in: 2022 IEEE Power & Energy Society General
 Meeting (PESGM), IEEE, 2022, pp. 1–5.
 </dd>
 <dt>[Fitzgerald2003]</dt>
@@ -106,9 +106,9 @@ Business Media, 2010.
 MATLAB/SIMULINK, Vol. 5, Prentice hall PTR Upper Saddle River,
 NJ, 1998.
 </dd>
-<dt>[OpenIPSL2023]</dt>
+<dt>[OpenRESV2023]</dt>
 <dd>M. de Castro, D. Winkler, G. Laera, L. Vanfretti, S. A. Dorado-Rojas,
-T. Rabuzin, B. Mukherjee, M. Navarro, Version [openipsl 2.0. 0]-[itesla
+T. Rabuzin, B. Mukherjee, M. Navarro, Version [OpenRESV 2.0. 0]-[itesla
 power systems library (IPSL): A Modelica library for phasor time-domain
 simulations], SoftwareX 21 (2023) 101277.
 </dd>
@@ -129,8 +129,8 @@ annotation(preferredView = "info", Documentation(info="<html>
 The <strong>Open-Instance Renewable Energy Source Validation - <code>OpenRESV</code></strong>
 contains several examples that were implemented to validate the WECC-based renewable energy source models against real power-hardware-in-the-loop (PHIL) experimental data conducted at the 
   <a href=\"https://alsetlab.github.io/lab/\">ALSETLab Volta Facility</a>. The <code>OpenRESV</code></strong> library is a stand-alone library that contains the 
-system examples developed to represent the PHIL setup, and a minimum number of components from the <strong>Open-Instance Power System Library - <code>OpenIPSL</code></strong> that are used
-in the validation examples. In case the user is interested in learning more about the <code>OpenIPSL</code></strong> Library, refer to <a href=\"https://github.com/OpenIPSL/OpenIPSL\">OpenIPSL Github Page</a>.
+system examples developed to represent the PHIL setup, and a minimum number of components from the <strong>Open-Instance Power System Library - <code>OpenRESV</code></strong> that are used
+in the validation examples. In case the user is interested in learning more about the <code>OpenRESV</code></strong> Library, refer to <a href=\"https://github.com/OpenRESV/OpenRESV\">OpenRESV Github Page</a>.
 </p>
 </html>"));
 end UsersGuide;

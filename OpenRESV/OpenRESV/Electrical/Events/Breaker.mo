@@ -2,19 +2,19 @@ within OpenRESV.Electrical.Events;
 model Breaker "Circuit breaker with time or signal control"
   parameter Boolean enableTrigger=false "=true, if external trigger signal is used"
     annotation (Evaluate=true, choices(checkBox=true));
-  parameter OpenIPSL.Types.Time t_o=Modelica.Constants.inf "Opening time"
+  parameter OpenRESV.Types.Time t_o=Modelica.Constants.inf "Opening time"
     annotation (Dialog(enable=not enableTrigger));
   parameter Boolean rc_enabled=false "Enable reclosure" annotation (
     Evaluate=true,
     choices(checkBox=true),
     Dialog(enable=not enableTrigger));
-  parameter OpenIPSL.Types.Time t_rc=Modelica.Constants.inf
+  parameter OpenRESV.Types.Time t_rc=Modelica.Constants.inf
     "Reclosing time"
     annotation (Dialog(enable=not enableTrigger and rc_enabled));
-  OpenIPSL.Interfaces.PwPin s "Sending pin" annotation (Placement(
+  OpenRESV.Interfaces.PwPin s "Sending pin" annotation (Placement(
         transformation(extent={{-110,-10},{-90,10}}), iconTransformation(
           extent={{-110,-10},{-90,10}})));
-  OpenIPSL.Interfaces.PwPin r "Receiving pin" annotation (Placement(
+  OpenRESV.Interfaces.PwPin r "Receiving pin" annotation (Placement(
         transformation(extent={{90,-10},{110,10}}), iconTransformation(
           extent={{90,-10},{110,10}})));
   Modelica.Blocks.Interfaces.BooleanInput Trigger if enableTrigger annotation (Placement(transformation(

@@ -3,7 +3,7 @@ model FrequencyCalc "Frequency deviation calculation from a rotating phasor"
   parameter Boolean start_guess=false;
   parameter Real real_start=1 "Phasor initial real part";
   parameter Real imag_start=0 "Phasor initial imaginary part";
-  parameter OpenIPSL.Types.Time Ts=0.01 "Smoothing filter time constant";
+  parameter OpenRESV.Types.Time Ts=0.01 "Smoothing filter time constant";
 
   Modelica.Blocks.Interfaces.RealInput real_part
     annotation (Placement(transformation(extent={{-140,40},{-100,80}})));

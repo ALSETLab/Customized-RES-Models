@@ -287,9 +287,11 @@ model VoltageVariation_350_to_340_V "Voltage drop from 350 V to 340 V"
     Q_0(displayUnit="V.A") = EXPERIMENT_Q.table[1, 2],
     angle_0(displayUnit="rad"),
     QFunctionality=0,
-    redeclare OpenRESV.Electrical.Renewables.PSSE.InverterInterface.REGCA1
+    redeclare
+      OpenRESV.Electrical.Renewables.PSSE.InverterInterface.REGCA1
       RenewableGenerator(Tg=0.01, Tfltr=0.01),
-    redeclare OpenRESV.Electrical.Renewables.PSSE.ElectricalController.REECB1
+    redeclare
+      OpenRESV.Electrical.Renewables.PSSE.ElectricalController.REECB1
       RenewableController(
       Trv=0.01,
       dbd1=-0.0001,
@@ -298,9 +300,10 @@ model VoltageVariation_350_to_340_V "Voltage drop from 350 V to 340 V"
       Tp=0.01,
       Tiq=0.01,
       Tpord=0.01),
-    redeclare OpenRESV.Electrical.Renewables.PSSE.PlantController.REPCA1
-      PlantController)
-    annotation (Placement(transformation(extent={{-130,-130},{-110,-110}})));
+    redeclare
+      OpenRESV.Electrical.Renewables.PSSE.PlantController.REPCA1
+      PlantController) annotation (Placement(transformation(extent={{-130,
+            -130},{-110,-110}})));
   OpenRESV.Electrical.Buses.Bus InverterBus3(V_b=353.92049703035, angle_0
       =0) annotation (Placement(transformation(extent={{-80,-130},{-60,-110}})));
   OpenRESV.Electrical.Sources.VoltageSourceReImInput voltageSourceReImInput2(V_b=
@@ -528,8 +531,8 @@ equation
           -7.2},{79,-7.2},{79,10}}, color={0,0,127}));
   connect(pwLine2.n, SEL_735_PQ_Meter_Bus_2.p)
     annotation (Line(points={{-31,0},{-10,0}}, color={0,0,255}));
-  connect(PV_WITH_NO_MODIFIED_MODELS.pwPin, InverterBus3.p)
-    annotation (Line(points={{-110,-120},{-70,-120}}, color={0,0,255}));
+  connect(PV_WITH_NO_MODIFIED_MODELS.pwPin, InverterBus3.p) annotation (
+     Line(points={{-110,-120},{-70,-120}}, color={0,0,255}));
   connect(SEL_735_PQ_Meter_Bus_3.p, voltageSourceReImInput2.p)
     annotation (Line(points={{-10,-120},{9,-120}}, color={0,0,255}));
   connect(pwLine3.p,InverterBus3. p)
@@ -560,8 +563,8 @@ equation
     annotation (Line(points={{-67,-30},{-50,-30}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-160,
             -240},{160,240}})),                                  Diagram(
-        coordinateSystem(preserveAspectRatio=false, extent={{-160,-240},{160,
-            240}}), graphics={
+        coordinateSystem(preserveAspectRatio=false, extent={{-160,-240},
+            {160,240}}), graphics={
         Text(
           extent={{-171,85},{171,-85}},
           textColor={238,46,47},

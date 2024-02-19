@@ -74,7 +74,7 @@ Specific PI with no variable limiter component for the WECC-based renewable ener
 <p>The modelling of such component is based, mainly, on the following reference:</p>
 <ul>
 <li>Mohammed, M., Federico, M.: \"Modeling and Simulation of PI-Controllers Limiters for the Dynamic Analysis of VSC-Based Devices\"
-<a href=\"modelica://OpenIPSL.UsersGuide.References\">[Mohammed2019]</a>,</li>
+<a href=\"modelica://OpenRESV.UsersGuide.References\">[Mohammed2019]</a>,</li>
 </ul>
 </html>"));
 end PIwithNoVariableLimiter;

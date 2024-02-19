@@ -2,7 +2,7 @@ within OpenRESV.NonElectrical.Continuous;
 block SimpleLead "First order lead transfer function block"
   extends Modelica.Blocks.Interfaces.SISO;
   parameter Real K "Gain" annotation (Evaluate=false);
-  parameter OpenIPSL.Types.Time T "Lead time constant"
+  parameter OpenRESV.Types.Time T "Lead time constant"
     annotation (Evaluate=false);
   parameter Real y_start "Output start value"
     annotation (Dialog(group="Initialization"));

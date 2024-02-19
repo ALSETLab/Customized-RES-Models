@@ -1,7 +1,7 @@
 within OpenRESV.Electrical.Renewables.PSSE.InverterInterface.BaseClasses;
 model LVACM "Low Voltage Active Control Management"
-        parameter OpenIPSL.Types.PerUnit lvpnt0 "Low voltage point for low voltage active current management";
-        parameter OpenIPSL.Types.PerUnit lvpnt1 "High voltage point for low voltage active current management";
+        parameter OpenRESV.Types.PerUnit lvpnt0 "Low voltage point for low voltage active current management";
+        parameter OpenRESV.Types.PerUnit lvpnt1 "High voltage point for low voltage active current management";
   Modelica.Blocks.Interfaces.RealOutput y
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
   Modelica.Blocks.Interfaces.RealInput Vt
@@ -27,7 +27,7 @@ These blocks represent logic associated with the dynamic model and the limit in 
 <p>The modelling of such devices is based, mainly, on the following reference:</p>
 <ul>
 <li><p>Siemens: \"PSS&reg;E Model Library\"
-<a href=\"modelica://OpenIPSL.UsersGuide.References\">[PSSE-MODELS]</a>.</p>
+<a href=\"modelica://OpenRESV.UsersGuide.References\">[PSSE-MODELS]</a>.</p>
 </li>
 </ul>
 </html>"));

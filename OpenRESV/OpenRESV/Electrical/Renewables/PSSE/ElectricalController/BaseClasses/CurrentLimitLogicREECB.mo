@@ -1,9 +1,9 @@
 within OpenRESV.Electrical.Renewables.PSSE.ElectricalController.BaseClasses;
 model CurrentLimitLogicREECB "Current Limit Logic for REECB"
 
-  parameter OpenIPSL.Types.PerUnit start_ii "Starting current value from Iqcmd (comes from power flow simulation)";
-  parameter OpenIPSL.Types.PerUnit start_ir "Starting current value from Ipcmd (comes from power flow simulation)";
-  parameter OpenIPSL.Types.PerUnit Imax "Maximum limit on total converter current";
+  parameter OpenRESV.Types.PerUnit start_ii "Starting current value from Iqcmd (comes from power flow simulation)";
+  parameter OpenRESV.Types.PerUnit start_ir "Starting current value from Ipcmd (comes from power flow simulation)";
+  parameter OpenRESV.Types.PerUnit Imax "Maximum limit on total converter current";
 
   Modelica.Blocks.Interfaces.RealInput Iqcmd annotation (Placement(transformation(extent={{140,30},{100,70}})));
   Modelica.Blocks.Interfaces.RealInput Ipcmd annotation (Placement(transformation( extent={{140,-70},{100,-30}})));
@@ -104,9 +104,9 @@ end
 <p>The modelling of the current limit logic for the REECB electrical controller is based on the following references:</p>
 <ul>
 <li>Siemens: \"PSS&reg;E Model Library\"
-<a href=\"modelica://OpenIPSL.UsersGuide.References\">[PSSE-MODELS]</a>,</li>
+<a href=\"modelica://OpenRESV.UsersGuide.References\">[PSSE-MODELS]</a>,</li>
 <li>WECC: \"Solar Photovoltaic Power Plant Modeling and Validation Guideline\"
-<a href=\"modelica://OpenIPSL.UsersGuide.References\">[WECCPhotovoltaic]</a>.</li>
+<a href=\"modelica://OpenRESV.UsersGuide.References\">[WECCPhotovoltaic]</a>.</li>
 </ul>
 </html>"));
 end CurrentLimitLogicREECB;

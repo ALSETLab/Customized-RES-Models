@@ -6,7 +6,7 @@ block SimpleLagLim
     annotation (Placement(transformation(extent={{-58,32},{-38,52}})));
   Real state;
   parameter Real K "Gain";
-  parameter OpenIPSL.Types.Time T "Lag time constant";
+  parameter OpenRESV.Types.Time T "Lag time constant";
   parameter Real y_start "Output start value";
   parameter Real outMax "Maximum output value";
   parameter Real outMin "Minimum output value";
@@ -42,7 +42,7 @@ equation
 </tr>
 <tr>
 <td><p>Contact</p></td>
-<td><p>see <a href=\"modelica://OpenIPSL.UsersGuide.Contact\">UsersGuide.Contact</a></p></td>
+<td><p>see <a href=\"modelica://OpenRESV.UsersGuide.Contact\">UsersGuide.Contact</a></p></td>
 </tr>
 </table>
 </html>"), Icon(graphics={Line(points={{40,100},{60,140},{100,140}}, color={0,0,

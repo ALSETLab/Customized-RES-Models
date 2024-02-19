@@ -8,7 +8,7 @@ partial model BaseREPC
   import Modelica.ComplexMath.imag;
   import Modelica.ComplexMath.conj;
   import Modelica.Blocks.Interfaces.*;
-  parameter OpenIPSL.Types.ApparentPower M_b=SysData.S_b "Machine base power" annotation (Dialog(group="Power flow data"));
+  parameter OpenRESV.Types.ApparentPower M_b=SysData.S_b "Machine base power" annotation (Dialog(group="Power flow data"));
   extends OpenRESV.Electrical.Essentials.pfComponent(
     final enabledisplayPF=false,
     final enablefn=false,

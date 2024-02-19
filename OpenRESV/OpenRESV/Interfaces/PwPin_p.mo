@@ -5,7 +5,7 @@ connector PwPin_p
  annotation (defaultComponentName="p", Documentation(info="<html>
 <p>
 This connector <code>PwPin_p</code> is nearly identical to 
-<a href=\"modelica://OpenIPSL.Interfaces.PwPin\">PwPin</a>. 
+<a href=\"modelica://OpenRESV.Interfaces.PwPin\">PwPin</a>. 
 The only difference is that the default component name is set to \"p\" 
 in order to identify more easily the pins of a component.
 </p>

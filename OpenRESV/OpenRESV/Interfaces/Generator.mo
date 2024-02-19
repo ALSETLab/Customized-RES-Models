@@ -12,8 +12,8 @@ partial model Generator "Interface for a generator which provides the PwPin"
   OpenRESV.Interfaces.PwPin pwPin annotation (Placement(transformation(
           extent={{100,-10},{120,10}}), iconTransformation(extent={{100,-10},
             {120,10}})));
-  OpenIPSL.Types.ActivePower P "Active power";
-  OpenIPSL.Types.ReactivePower Q "Reactive power";
+  OpenRESV.Types.ActivePower P "Active power";
+  OpenRESV.Types.ReactivePower Q "Reactive power";
 equation
   -P = (pwPin.vr*pwPin.ir + pwPin.vi*pwPin.ii)*S_b "Active power";
   -Q = (pwPin.vi*pwPin.ir - pwPin.vr*pwPin.ii)*S_b "Reactive power";
@@ -31,7 +31,7 @@ equation
           extent={{-80,160},{80,80}},
           lineColor={255,0,0},
           textString=DynamicSelect("0.0 MW",
-            OpenIPSL.NonElectrical.Functions.displayPower(P, " MW"))),Polygon(
+            OpenRESV.NonElectrical.Functions.displayPower(P, " MW"))),Polygon(
           visible=displayPF,
           points=DynamicSelect({{-20,80},{-20,60},{20,70},{-20,80}}, if P >= 0
              then {{-20,80},{-20,60},{20,70},{-20,80}} else {{20,80},{20,60},{-20,
@@ -43,7 +43,7 @@ equation
           extent={{-80,-80},{80,-160}},
           lineColor={0,255,0},
           textString=DynamicSelect("0.0 Mvar",
-            OpenIPSL.NonElectrical.Functions.displayPower(Q, " Mvar"))),Polygon(
+            OpenRESV.NonElectrical.Functions.displayPower(Q, " Mvar"))),Polygon(
           visible=displayPF,
           points=DynamicSelect({{-20,-80},{-20,-60},{20,-70},{-20,-80}}, if Q
              >= 0 then {{-20,-80},{-20,-60},{20,-70},{-20,-80}} else {{20,-80},

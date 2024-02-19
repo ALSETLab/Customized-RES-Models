@@ -1,11 +1,11 @@
 within OpenRESV.Interfaces;
 connector PwPin
   "Connector for electrical blocks treating voltage and current as complex variables"
-  OpenIPSL.Types.PerUnit vr "Real part of the voltage";
-  OpenIPSL.Types.PerUnit vi "Imaginary part of the voltage";
-  flow OpenIPSL.Types.PerUnit ir(start=Modelica.Constants.eps)
+  OpenRESV.Types.PerUnit vr "Real part of the voltage";
+  OpenRESV.Types.PerUnit vi "Imaginary part of the voltage";
+  flow OpenRESV.Types.PerUnit ir(start=Modelica.Constants.eps)
     "Real part of the current";
-  flow OpenIPSL.Types.PerUnit ii(start=Modelica.Constants.eps)
+  flow OpenRESV.Types.PerUnit ii(start=Modelica.Constants.eps)
     "Imaginary part of the current";
   annotation (
     Icon(graphics={Rectangle(

@@ -2,13 +2,13 @@ within OpenRESV.Electrical.Sources;
 model CurrentSourceReImInput
   "Ideal current source with user defined real and imaginary parts of the current phasor"
   extends OpenRESV.Electrical.Essentials.pfComponent(enableS_b = true);
-  OpenIPSL.Types.Angle angle "Bus voltage angle";
-  OpenIPSL.Types.Voltage v "Bus voltage magnitude";
-  OpenIPSL.Types.ActivePower P
+  OpenRESV.Types.Angle angle "Bus voltage angle";
+  OpenRESV.Types.Voltage v "Bus voltage magnitude";
+  OpenRESV.Types.ActivePower P
     "Active Power absorbed or provided by the source";
-  OpenIPSL.Types.ReactivePower Q
+  OpenRESV.Types.ReactivePower Q
     "Reactive Power absorbed or provided by the source";
-  OpenIPSL.Interfaces.PwPin p
+  OpenRESV.Interfaces.PwPin p
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
   Modelica.Blocks.Interfaces.RealInput iRe "Real Part of voltage phasor"
     annotation (Placement(transformation(extent={{-140,20},{-100,60}})));
@@ -51,7 +51,7 @@ equation
 </tr>
 <tr>
 <td><p>Contact</p></td>
-<td><p>see <a href=\"modelica://OpenIPSL.UsersGuide.Contact\">UsersGuide.Contact</a></p></td>
+<td><p>see <a href=\"modelica://OpenRESV.UsersGuide.Contact\">UsersGuide.Contact</a></p></td>
 </tr>
 </table>
 </html>", info="<html>

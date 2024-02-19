@@ -6,36 +6,36 @@ model REPCA1 "Renewable energy plant controller model A"
   parameter Real Ki=5 "Reactive power PI control integral gain";
   parameter Modelica.Units.SI.Time Tft=0 "Lead time constant";
   parameter Modelica.Units.SI.Time Tfv=0.075 "Lag time constant";
-  parameter OpenIPSL.Types.PerUnit Vfrz=0 "Voltage below which State s2 is frozen";
-  parameter OpenIPSL.Types.PerUnit Rc=0.0025 "Line drop compensation resistance";
-  parameter OpenIPSL.Types.PerUnit Xc=0.0025 "Line drop compensation reactance";
+  parameter OpenRESV.Types.PerUnit Vfrz=0 "Voltage below which State s2 is frozen";
+  parameter OpenRESV.Types.PerUnit Rc=0.0025 "Line drop compensation resistance";
+  parameter OpenRESV.Types.PerUnit Xc=0.0025 "Line drop compensation reactance";
   parameter Real Kc=0.02 "Reactive current compensation gain";
-  parameter OpenIPSL.Types.PerUnit emax=0.1 "Upper limit on deadband output";
-  parameter OpenIPSL.Types.PerUnit emin=-0.1 "Lower limit on deadband output";
-  parameter OpenIPSL.Types.PerUnit dbd1=0 "Lower threshold for reactive power control deadband (<=0)";
-  parameter OpenIPSL.Types.PerUnit dbd2=0 "Upper threshold for reactive power control deadband (>=0)";
-  parameter OpenIPSL.Types.PerUnit Qmax=0.4360 "Upper limit on output of V/Q control";
-  parameter OpenIPSL.Types.PerUnit Qmin=-0.4360 "Lower limit on output of V/Q control";
+  parameter OpenRESV.Types.PerUnit emax=0.1 "Upper limit on deadband output";
+  parameter OpenRESV.Types.PerUnit emin=-0.1 "Lower limit on deadband output";
+  parameter OpenRESV.Types.PerUnit dbd1=0 "Lower threshold for reactive power control deadband (<=0)";
+  parameter OpenRESV.Types.PerUnit dbd2=0 "Upper threshold for reactive power control deadband (>=0)";
+  parameter OpenRESV.Types.PerUnit Qmax=0.4360 "Upper limit on output of V/Q control";
+  parameter OpenRESV.Types.PerUnit Qmin=-0.4360 "Lower limit on output of V/Q control";
   parameter Real Kpg=0.1 "Proportional gain for power control";
   parameter Real Kig=0.05 "Proportional gain for power control";
   parameter Modelica.Units.SI.Time Tp=0.25 "Real power measurement filter time constant";
-  parameter OpenIPSL.Types.PerUnit fdbd1=0 "Deadband for frequency control, lower threshold (<=0)";
-  parameter OpenIPSL.Types.PerUnit fdbd2=0 "Deadband for frequency control, upper threshold (>=0)";
-  parameter OpenIPSL.Types.PerUnit femax=999 "Frequency error upper limit";
-  parameter OpenIPSL.Types.PerUnit femin=-999 "Frequency error lower limit";
-  parameter OpenIPSL.Types.PerUnit Pmax=999 "Upper limit on power reference";
-  parameter OpenIPSL.Types.PerUnit Pmin=-999 "Lower limit on power reference";
+  parameter OpenRESV.Types.PerUnit fdbd1=0 "Deadband for frequency control, lower threshold (<=0)";
+  parameter OpenRESV.Types.PerUnit fdbd2=0 "Deadband for frequency control, upper threshold (>=0)";
+  parameter OpenRESV.Types.PerUnit femax=999 "Frequency error upper limit";
+  parameter OpenRESV.Types.PerUnit femin=-999 "Frequency error lower limit";
+  parameter OpenRESV.Types.PerUnit Pmax=999 "Upper limit on power reference";
+  parameter OpenRESV.Types.PerUnit Pmin=-999 "Lower limit on power reference";
   parameter Modelica.Units.SI.Time Tg=0.1 "Power Controller lag time constant";
-  parameter OpenIPSL.Types.PerUnit Ddn=20 "Reciprocal of droop for over-frequency conditions";
-  parameter OpenIPSL.Types.PerUnit Dup=0 "Reciprocal of droop for under-frequency conditions";
+  parameter OpenRESV.Types.PerUnit Ddn=20 "Reciprocal of droop for over-frequency conditions";
+  parameter OpenRESV.Types.PerUnit Dup=0 "Reciprocal of droop for under-frequency conditions";
   parameter Real Vref=v_0 "Regulated bus initial voltage";
 
   extends BaseClasses.BaseREPC(Qext, Pref);
 
-  OpenIPSL.Types.PerUnit voltage_diff;
-  OpenIPSL.Types.PerUnit vreg;
-  OpenIPSL.Types.PerUnit qbranch;
-  OpenIPSL.Types.PerUnit pbranch;
+  OpenRESV.Types.PerUnit voltage_diff;
+  OpenRESV.Types.PerUnit vreg;
+  OpenRESV.Types.PerUnit qbranch;
+  OpenRESV.Types.PerUnit pbranch;
   Boolean Voltage_dip;
 
   Modelica.Blocks.Math.Add add(k1=-1)
@@ -52,7 +52,7 @@ model REPCA1 "Renewable energy plant controller model A"
     annotation (Placement(transformation(extent={{-68,-154},{-48,-134}})));
   Modelica.Blocks.Math.Add3 add3_1(k2=-1)
     annotation (Placement(transformation(extent={{-36,-146},{-16,-126}})));
-  OpenIPSL.NonElectrical.Continuous.SimpleLag simpleLag(
+  OpenRESV.NonElectrical.Continuous.SimpleLag simpleLag(
     K=1,
     T=Tp,
     y_start=p00) annotation (Placement(transformation(extent={{-128,-106},
@@ -67,7 +67,7 @@ model REPCA1 "Renewable energy plant controller model A"
     annotation (Placement(transformation(extent={{54,-146},{74,-126}})));
   Modelica.Blocks.Nonlinear.Limiter limiter3(uMax=Pmax, uMin=Pmin)
     annotation (Placement(transformation(extent={{82,-146},{102,-126}})));
-  OpenIPSL.NonElectrical.Continuous.SimpleLag simpleLag1(
+  OpenRESV.NonElectrical.Continuous.SimpleLag simpleLag1(
     K=1,
     T=Tg,
     y_start=p00) annotation (Placement(transformation(extent={{118,-128},
@@ -92,7 +92,7 @@ model REPCA1 "Renewable energy plant controller model A"
     annotation (Placement(transformation(extent={{-150,50},{-130,70}})));
   Modelica.Blocks.Sources.BooleanConstant VCFLAG_logic(k=vcflag)
     annotation (Placement(transformation(extent={{-180,126},{-160,146}})));
-  OpenIPSL.NonElectrical.Continuous.SimpleLag simpleLag2(
+  OpenRESV.NonElectrical.Continuous.SimpleLag simpleLag2(
     K=1,
     T=Tfltr,
     y_start=q00) annotation (Placement(transformation(extent={{-144,12},
@@ -103,7 +103,7 @@ model REPCA1 "Renewable energy plant controller model A"
     annotation (Placement(transformation(extent={{-36,80},{-16,100}})));
   Modelica.Blocks.Sources.BooleanConstant REFFLAG_logic(k=refflag)
     annotation (Placement(transformation(extent={{-82,80},{-62,100}})));
-  OpenIPSL.NonElectrical.Continuous.SimpleLag simpleLag3(
+  OpenRESV.NonElectrical.Continuous.SimpleLag simpleLag3(
     K=1,
     T=Tfltr,
     y_start=Vref) annotation (Placement(transformation(extent={{-100,110},
@@ -114,7 +114,7 @@ model REPCA1 "Renewable energy plant controller model A"
     annotation (Placement(transformation(extent={{24,80},{44,100}})));
   Modelica.Blocks.Sources.Constant VREF(k=Vref)
     annotation (Placement(transformation(extent={{-100,146},{-80,166}})));
-  OpenIPSL.NonElectrical.Continuous.LeadLag leadLag(
+  OpenRESV.NonElectrical.Continuous.LeadLag leadLag(
     K=1,
     T1=Tft,
     T2=Tfv,
@@ -137,10 +137,10 @@ model REPCA1 "Renewable energy plant controller model A"
   Modelica.Blocks.Sources.BooleanExpression VLogic(y=Voltage_dip)
     annotation (Placement(transformation(extent={{20,120},{40,140}})));
 protected
-  parameter OpenIPSL.Types.PerUnit V0(fixed=false);
-  parameter OpenIPSL.Types.PerUnit p00(fixed=false);
-  parameter OpenIPSL.Types.PerUnit q00(fixed=false);
-  parameter OpenIPSL.Types.PerUnit Vref0 = if Vref == 0 then V0 else Vref;
+  parameter OpenRESV.Types.PerUnit V0(fixed=false);
+  parameter OpenRESV.Types.PerUnit p00(fixed=false);
+  parameter OpenRESV.Types.PerUnit q00(fixed=false);
+  parameter OpenRESV.Types.PerUnit Vref0 = if Vref == 0 then V0 else Vref;
 
 initial equation
 
@@ -278,7 +278,7 @@ provides active reactive power command references to the electrical controller c
 <p>The modelling of such devices is based, mainly, on the following reference:</p>
 <ul>
 <li>Siemens: \"PSS&reg;E Model Library\"
-<a href=\"modelica://OpenIPSL.UsersGuide.References\">[PSSE-MODELS]</a>,</li>
+<a href=\"modelica://OpenRESV.UsersGuide.References\">[PSSE-MODELS]</a>,</li>
 </ul>
 </html>"));
 end REPCA1;

@@ -6,7 +6,7 @@ partial model BaseREGC "Base renewable generator/converter for PSSE models"
   import Modelica.ComplexMath.imag;
   import Modelica.ComplexMath.conj;
   import Modelica.Blocks.Interfaces.*;
-  parameter OpenIPSL.Types.ApparentPower M_b=SysData.S_b "Machine base power" annotation (Dialog(group="Power flow data"));
+  parameter OpenRESV.Types.ApparentPower M_b=SysData.S_b "Machine base power" annotation (Dialog(group="Power flow data"));
   extends OpenRESV.Electrical.Essentials.pfComponent(
     final enabledisplayPF=false,
     final enablefn=false,
@@ -20,13 +20,13 @@ partial model BaseREGC "Base renewable generator/converter for PSSE models"
   // Set of Model Parameters
   parameter Modelica.Units.SI.Time Tg = 0.02 "Converter time constant" annotation (Dialog(group="Input Parameters"));
   parameter Modelica.Units.SI.TimeAging rrpwr = 10 "Low Voltage Power Logic (LVPL) ramp rate limit" annotation (Dialog(group="Input Parameters"));
-  parameter OpenIPSL.Types.PerUnit Brkpt = 0.9 "LVPL characteristic voltage 2" annotation (Dialog(group="Input Parameters"));
-  parameter OpenIPSL.Types.PerUnit Zerox = 0.5 "LVPL characteristic voltage 1" annotation (Dialog(group="Input Parameters"));
-  parameter OpenIPSL.Types.PerUnit Lvpl1 = 1.22 "LVPL gain" annotation (Dialog(group="Input Parameters"));
-  parameter OpenIPSL.Types.PerUnit Volim = 1.2 "Voltage limit for high voltage reactive current management" annotation (Dialog(group="Input Parameters"));
-  parameter OpenIPSL.Types.PerUnit lvpnt1 = 0.8 "High voltage point for low voltage active current management" annotation (Dialog(group="Input Parameters"));
-  parameter OpenIPSL.Types.PerUnit lvpnt0 = 0.4 "Low voltage point for low voltage active current management" annotation (Dialog(group="Input Parameters"));
-  parameter OpenIPSL.Types.PerUnit Iolim = -1.3 "Current limit for high voltage reactive current management (specified as a negative value)" annotation (Dialog(group="Input Parameters"));
+  parameter OpenRESV.Types.PerUnit Brkpt = 0.9 "LVPL characteristic voltage 2" annotation (Dialog(group="Input Parameters"));
+  parameter OpenRESV.Types.PerUnit Zerox = 0.5 "LVPL characteristic voltage 1" annotation (Dialog(group="Input Parameters"));
+  parameter OpenRESV.Types.PerUnit Lvpl1 = 1.22 "LVPL gain" annotation (Dialog(group="Input Parameters"));
+  parameter OpenRESV.Types.PerUnit Volim = 1.2 "Voltage limit for high voltage reactive current management" annotation (Dialog(group="Input Parameters"));
+  parameter OpenRESV.Types.PerUnit lvpnt1 = 0.8 "High voltage point for low voltage active current management" annotation (Dialog(group="Input Parameters"));
+  parameter OpenRESV.Types.PerUnit lvpnt0 = 0.4 "Low voltage point for low voltage active current management" annotation (Dialog(group="Input Parameters"));
+  parameter OpenRESV.Types.PerUnit Iolim = -1.3 "Current limit for high voltage reactive current management (specified as a negative value)" annotation (Dialog(group="Input Parameters"));
   parameter Modelica.Units.SI.Time Tfltr = 0.02 "Voltage filter time constant for low voltage active current management" annotation (Dialog(group="Input Parameters"));
   parameter Real Khv = 0.7 "Overvoltage compensation gain used in the high voltage reactive current management" annotation (Dialog(group="Input Parameters"));
   parameter Modelica.Units.SI.TimeAging Iqrmax = 9999 "Upper limit on rate of change for reactive current" annotation (Dialog(group="Input Parameters"));
@@ -34,7 +34,7 @@ partial model BaseREGC "Base renewable generator/converter for PSSE models"
 
   parameter Boolean Lvplsw=true "Enable (true) or disable (false) low voltage power logic." annotation (Dialog(tab="Controls"));
 
-  OpenIPSL.Interfaces.PwPin p(
+  OpenRESV.Interfaces.PwPin p(
     vr(start=vr0),
     vi(start=vi0),
     ir(start=-ir0*CoB),
@@ -83,19 +83,19 @@ partial model BaseREGC "Base renewable generator/converter for PSSE models"
         rotation=90,
         origin={80,150})));
 protected
-  OpenIPSL.Types.Angle delta(start=angle_0);
-  OpenIPSL.Types.PerUnit VT(start=v_0) "Bus voltage magnitude";
-  OpenIPSL.Types.Angle anglev(start=angle_0) "Bus voltage angle";
-  parameter OpenIPSL.Types.PerUnit p0=P_0/M_b "Initial active power (machine base)";
-  parameter OpenIPSL.Types.PerUnit q0=Q_0/M_b "Initial reactive power (machine base)";
-  parameter OpenIPSL.Types.PerUnit vr0=v_0*cos(angle_0);
-  parameter OpenIPSL.Types.PerUnit vi0=v_0*sin(angle_0);
-  parameter OpenIPSL.Types.PerUnit ir0=(p0*vr0 + q0*vi0)/(vr0^2 + vi0^2);
-  parameter OpenIPSL.Types.PerUnit ii0=(p0*vi0 - q0*vr0)/(vr0^2 + vi0^2);
-  parameter OpenIPSL.Types.PerUnit Isr0=ir0 "Source current re M_b";
-  parameter OpenIPSL.Types.PerUnit Isi0=ii0 "Source current im M_b";
-  parameter OpenIPSL.Types.PerUnit Ip0=Isr0*cos(-angle_0) - Isi0*sin(-angle_0);
-  parameter OpenIPSL.Types.PerUnit Iq0=(Isr0*sin(-angle_0) + cos(-angle_0)*Isi0);
+  OpenRESV.Types.Angle delta(start=angle_0);
+  OpenRESV.Types.PerUnit VT(start=v_0) "Bus voltage magnitude";
+  OpenRESV.Types.Angle anglev(start=angle_0) "Bus voltage angle";
+  parameter OpenRESV.Types.PerUnit p0=P_0/M_b "Initial active power (machine base)";
+  parameter OpenRESV.Types.PerUnit q0=Q_0/M_b "Initial reactive power (machine base)";
+  parameter OpenRESV.Types.PerUnit vr0=v_0*cos(angle_0);
+  parameter OpenRESV.Types.PerUnit vi0=v_0*sin(angle_0);
+  parameter OpenRESV.Types.PerUnit ir0=(p0*vr0 + q0*vi0)/(vr0^2 + vi0^2);
+  parameter OpenRESV.Types.PerUnit ii0=(p0*vi0 - q0*vr0)/(vr0^2 + vi0^2);
+  parameter OpenRESV.Types.PerUnit Isr0=ir0 "Source current re M_b";
+  parameter OpenRESV.Types.PerUnit Isi0=ii0 "Source current im M_b";
+  parameter OpenRESV.Types.PerUnit Ip0=Isr0*cos(-angle_0) - Isi0*sin(-angle_0);
+  parameter OpenRESV.Types.PerUnit Iq0=(Isr0*sin(-angle_0) + cos(-angle_0)*Isi0);
   parameter Real CoB=M_b/S_b "Change of base";
 
 equation
@@ -158,7 +158,7 @@ This component is the base class for the inverter components from the InverterIn
 <p>The modelling of such devices is based, mainly, on the following reference:</p>
 <ul>
 <li><p>Siemens: \"PSS&reg;E Model Library\"
-<a href=\"modelica://OpenIPSL.UsersGuide.References\">[PSSE-MODELS]</a>.</p>
+<a href=\"modelica://OpenRESV.UsersGuide.References\">[PSSE-MODELS]</a>.</p>
 </li>
 </ul>
 </html>"));

@@ -583,7 +583,7 @@ Original REECB"),
           pattern=LinePattern.Dash,
           lineThickness=0.5)}),
     experiment(
-      StopTime=7.8,
+      StopTime=6.85,
       __Dymola_NumberOfIntervals=1000,
       __Dymola_Algorithm="Dassl"),
     Documentation(info="<html>

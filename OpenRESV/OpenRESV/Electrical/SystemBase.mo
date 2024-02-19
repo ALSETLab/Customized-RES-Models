@@ -1,7 +1,7 @@
 within OpenRESV.Electrical;
 record SystemBase "System Base Definition"
-  parameter OpenIPSL.Types.ApparentPower S_b=100e6 "System base";
-  parameter OpenIPSL.Types.Frequency fn=50 "System frequency";
+  parameter OpenRESV.Types.ApparentPower S_b=100e6 "System base";
+  parameter OpenRESV.Types.Frequency fn=50 "System frequency";
   annotation (
     Icon(coordinateSystem(
         preserveAspectRatio=false,

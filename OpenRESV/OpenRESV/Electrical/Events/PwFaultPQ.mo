@@ -1,13 +1,13 @@
 within OpenRESV.Electrical.Events;
 model PwFaultPQ "Transitory short-circuit on a node with active and reactive power information"
-  OpenIPSL.Interfaces.PwPin p annotation (Placement(transformation(extent={{-40,
+  OpenRESV.Interfaces.PwPin p annotation (Placement(transformation(extent={{-40,
             -10},{-20,10}}), iconTransformation(extent={{-80,-10},{-60,10}})));
-  parameter OpenIPSL.Types.PerUnit R "Resistance";
-  parameter OpenIPSL.Types.PerUnit X "Reactance";
-  parameter OpenIPSL.Types.Time t1 "Start time of the fault";
-  parameter OpenIPSL.Types.Time t2 "End time of the fault";
-  OpenIPSL.Types.PerUnit P "Active power supplied to the fault";
-  OpenIPSL.Types.PerUnit Q "Reactive power supplied to the fault";
+  parameter OpenRESV.Types.PerUnit R "Resistance";
+  parameter OpenRESV.Types.PerUnit X "Reactance";
+  parameter OpenRESV.Types.Time t1 "Start time of the fault";
+  parameter OpenRESV.Types.Time t2 "End time of the fault";
+  OpenRESV.Types.PerUnit P "Active power supplied to the fault";
+  OpenRESV.Types.PerUnit Q "Reactive power supplied to the fault";
 equation
   p.ir = if time < t1 then 0 else if time < t2 then 1/X*(p.vi - R*p.ii) else 0;
   p.ii = if time < t1 then 0 else if time < t2 then (R*p.vi - X*p.vr)/(X*X + R*

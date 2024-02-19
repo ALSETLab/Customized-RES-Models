@@ -1,6 +1,6 @@
 within OpenRESV.Electrical.Renewables.PSSE;
 model PV "Framework for a photovoltaic plant including controllers"
-parameter OpenIPSL.Types.ApparentPower M_b=RenewableGenerator.SysData.S_b
+parameter OpenRESV.Types.ApparentPower M_b=RenewableGenerator.SysData.S_b
     "Machine base power" annotation (Dialog(group="Power flow data"));
 extends OpenRESV.Electrical.Essentials.pfComponent(
     final enablefn=false,
@@ -35,7 +35,7 @@ extends OpenRESV.Electrical.Essentials.pfComponent(
     qflag=qflag,
     pqflag=false) annotation (choicesAllMatching=true, Placement(
         transformation(extent={{-20,-20},{20,20}})));
-  OpenIPSL.Interfaces.PwPin pwPin
+  OpenRESV.Interfaces.PwPin pwPin
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
   replaceable
     OpenRESV.Electrical.Renewables.PSSE.PlantController.BaseClasses.BaseREPC

@@ -10,13 +10,13 @@ in this package are based on the second generation renewable energy models.</p>
 <p>The modelling of such devices is based, mainly, on the following references:</p>
 <ul>
 <li>Siemens: \"PSS&reg;E Model Library\"
-<a href=\"modelica://OpenIPSL.UsersGuide.References\">[PSSE-MODELS]</a>,</li>
+<a href=\"modelica://OpenRESV.UsersGuide.References\">[PSSE-MODELS]</a>,</li>
 <li>WECC: \"Battery Storage Dynamic Modeling Guideline\"
-<a href=\"modelica://OpenIPSL.UsersGuide.References\">[WECCBattery]</a>,</li>
+<a href=\"modelica://OpenRESV.UsersGuide.References\">[WECCBattery]</a>,</li>
 <li>WECC: \"Solar Photovoltaic Power Plant Modeling and Validation Guideline\"
-<a href=\"modelica://OpenIPSL.UsersGuide.References\">[WECCPhotovoltaic]</a>,</li>
+<a href=\"modelica://OpenRESV.UsersGuide.References\">[WECCPhotovoltaic]</a>,</li>
 <li>WECC: \"Wind Power Plant Dynamic Modeling Guideline\"
-<a href=\"modelica://OpenIPSL.UsersGuide.References\">[WECCWind]</a>.</li>
+<a href=\"modelica://OpenRESV.UsersGuide.References\">[WECCWind]</a>.</li>
 </ul>
 </html>"));
 end Renewables;

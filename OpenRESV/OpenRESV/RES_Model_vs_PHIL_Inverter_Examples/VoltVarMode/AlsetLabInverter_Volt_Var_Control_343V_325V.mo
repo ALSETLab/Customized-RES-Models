@@ -23,57 +23,30 @@ model AlsetLabInverter_Volt_Var_Control_343V_325V
       dPmin=-0.0002),
     redeclare OpenRESV.Electrical.Renewables.PSSE.PlantController.REPCA1
       PlantController)
-    annotation (Placement(transformation(extent={{-94,-10},{-74,10}})));
+    annotation (Placement(transformation(extent={{-66,-10},{-46,10}})));
   OpenRESV.Electrical.Buses.Bus InverterBus1(
     V_b=352.01,
     v_0=0.9839,
     angle_0=-0.5235987755983)
-    annotation (Placement(transformation(extent={{-76,-10},{-56,10}})));
-  OpenRESV.Electrical.Branches.PSSE.TwoWindingTransformer twoWindingTransformer1(
-    R=0.01,
-    X=0.034,
-    G=0,
-    B=0,
-    VNOM1(displayUnit="V") = 352.01,
-    VB1(displayUnit="V") = 600,
-    VNOM2(displayUnit="V") = 140.80,
-    VB2(displayUnit="V") = 240)
-    annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
-  OpenRESV.Electrical.Buses.Bus GridBus1(V_b=281.61)
-    annotation (Placement(transformation(extent={{-4,-10},{16,10}})));
+    annotation (Placement(transformation(extent={{-48,-10},{-28,10}})));
   OpenRESV.Electrical.Sources.VoltageSourceReImInput voltageSourceReImInput(V_b=
         281.61)
-    annotation (Placement(transformation(extent={{66,-10},{46,10}})));
+    annotation (Placement(transformation(extent={{38,-10},{18,10}})));
   inner OpenRESV.Electrical.SystemBase SysData(fn=60, S_b(displayUnit="V.A")
        = 30000)
     annotation (Placement(transformation(extent={{-88,74},{-48,94}})));
-  OpenRESV.Electrical.Branches.PwLine pwLine(
-    R=0,
-    X=0.000000001,
-    G=0,
-    B=0) annotation (Placement(transformation(extent={{10,-10},{30,10}})));
   OpenRESV.Electrical.Buses.Bus GridBus2(V_b=281.61)
-    annotation (Placement(transformation(extent={{26,-10},{46,10}})));
+    annotation (Placement(transformation(extent={{-2,-10},{18,10}})));
   Modelica.Blocks.Math.Atan angle_low
     annotation (Placement(transformation(extent={{-40,-50},{-20,-30}})));
   Modelica.Blocks.Sources.RealExpression current_low_side(y=pwLine.is.im/
         pwLine.is.re)
     annotation (Placement(transformation(extent={{-80,-50},{-60,-30}})));
-  OpenRESV.Electrical.Branches.PwLine pwLine1(
+  OpenRESV.Electrical.Branches.PwLine pwLine(
     R=0,
     X=0.00000001,
     G=0,
-    B=0) annotation (Placement(transformation(extent={{-58,-10},{-38,10}})));
-  OpenRESV.Electrical.Buses.Bus InverterBus2(
-    V_b=352.01,
-    v_0=0.9839,
-    angle_0=-0.5235987755983)
-    annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
-  Modelica.Blocks.Math.Atan angle_high
-    annotation (Placement(transformation(extent={{40,-50},{60,-30}})));
-  Modelica.Blocks.Sources.RealExpression current_high_side1(y=pwLine1.is.im
-        /pwLine1.is.re)
-    annotation (Placement(transformation(extent={{0,-50},{20,-30}})));
+    B=0) annotation (Placement(transformation(extent={{-28,-10},{-8,10}})));
   Modelica.Blocks.Sources.CombiTimeTable VM(table=[0.06615,346.9124562;
         0.208891,346.9124562; 0.286918,346.9124562; 0.398074,346.9124562;
         0.458986,346.9297768; 0.585414,346.9297768; 0.648439,346.9182298;
@@ -145,11 +118,11 @@ model AlsetLabInverter_Volt_Var_Control_343V_325V
         20.452005,331.1681144; 20.59406,331.1681144; 20.657084,331.1681144;
         20.800147,331.1681144; 20.863228,331.1681144; 21.006215,331.1681144;
         21.069214,331.1681144; 21.210979,331.1681144])
-    annotation (Placement(transformation(extent={{96,-4},{88,4}})));
+    annotation (Placement(transformation(extent={{68,-4},{60,4}})));
   Modelica.Blocks.Math.Gain gain1(k=0.4*cos(-3.1415/6)/140.80)
-    annotation (Placement(transformation(extent={{80,8},{76,12}})));
+    annotation (Placement(transformation(extent={{52,8},{48,12}})));
   Modelica.Blocks.Math.Gain gain2(k=0.4*sin(-3.1415/6)/140.80)
-    annotation (Placement(transformation(extent={{80,-12},{76,-8}})));
+    annotation (Placement(transformation(extent={{52,-12},{48,-8}})));
   Modelica.Blocks.Sources.CombiTimeTable Q_experiment(table=[0.06615,104;
         0.208891,104; 0.286918,101.37; 0.398074,101.37; 0.458986,103.07;
         0.585414,103.07; 0.648439,100.53; 0.789492,100.53; 0.868379,100.72;
@@ -213,36 +186,26 @@ model AlsetLabInverter_Volt_Var_Control_343V_325V
     annotation (Placement(transformation(extent={{88,-44},{96,-36}})));
 equation
   connect(pV1.pwPin, InverterBus1.p)
-    annotation (Line(points={{-74,0},{-66,0}},     color={0,0,255}));
-  connect(twoWindingTransformer1.n, GridBus1.p)
-    annotation (Line(points={{1,0},{6,0}},       color={0,0,255}));
-  connect(GridBus1.p, pwLine.p)
-    annotation (Line(points={{6,0},{11,0}},     color={0,0,255}));
-  connect(pwLine.n, GridBus2.p)
-    annotation (Line(points={{29,0},{36,0}},     color={0,0,255}));
+    annotation (Line(points={{-46,0},{-38,0}},     color={0,0,255}));
   connect(GridBus2.p, voltageSourceReImInput.p)
-    annotation (Line(points={{36,0},{45,0}},     color={0,0,255}));
+    annotation (Line(points={{8,0},{17,0}},      color={0,0,255}));
   connect(current_low_side.y, angle_low.u)
     annotation (Line(points={{-59,-40},{-42,-40}}, color={0,0,127}));
-  connect(InverterBus2.p, twoWindingTransformer1.p)
-    annotation (Line(points={{-30,0},{-21,0}},     color={0,0,255}));
-  connect(pwLine1.n, InverterBus2.p)
-    annotation (Line(points={{-39,0},{-30,0}},     color={0,0,255}));
-  connect(pwLine1.p, InverterBus1.p)
-    annotation (Line(points={{-57,0},{-66,0}},     color={0,0,255}));
-  connect(current_high_side1.y, angle_high.u)
-    annotation (Line(points={{21,-40},{38,-40}}, color={0,0,127}));
+  connect(pwLine.p, InverterBus1.p)
+    annotation (Line(points={{-27,0},{-38,0}}, color={0,0,255}));
   connect(gain1.u, VM.y[1])
-    annotation (Line(points={{80.4,10},{84,10},{84,0},{87.6,0}},
+    annotation (Line(points={{52.4,10},{56,10},{56,0},{59.6,0}},
                                                      color={0,0,127}));
-  connect(gain1.y, voltageSourceReImInput.vRe) annotation (Line(points={{75.8,10},
-          {74,10},{74,4},{68,4}},                color={0,0,127}));
-  connect(gain2.y, voltageSourceReImInput.vIm) annotation (Line(points={{75.8,
-          -10},{74,-10},{74,-4},{68,-4}},        color={0,0,127}));
+  connect(gain1.y, voltageSourceReImInput.vRe) annotation (Line(points={{47.8,10},
+          {46,10},{46,4},{40,4}},                color={0,0,127}));
+  connect(gain2.y, voltageSourceReImInput.vIm) annotation (Line(points={{47.8,
+          -10},{46,-10},{46,-4},{40,-4}},        color={0,0,127}));
   connect(Q_experiment_per_phase.u, Q_experiment.y[1])
     annotation (Line(points={{87.2,-40},{82.4,-40}}, color={0,0,127}));
-  connect(gain1.u, gain2.u) annotation (Line(points={{80.4,10},{84,10},{84,
-          -10},{80.4,-10}}, color={0,0,127}));
+  connect(gain1.u, gain2.u) annotation (Line(points={{52.4,10},{56,10},{56,-10},
+          {52.4,-10}},      color={0,0,127}));
+  connect(pwLine.n, GridBus2.p)
+    annotation (Line(points={{-9,0},{8,0}}, color={0,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(

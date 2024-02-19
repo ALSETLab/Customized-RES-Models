@@ -4,9 +4,9 @@ model LVPL "Low Voltage Power Logic"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
   Modelica.Blocks.Interfaces.RealInput V
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
-        parameter OpenIPSL.Types.PerUnit Brkpt "LVPL characteristic voltage 2";
-        parameter OpenIPSL.Types.PerUnit Lvpl1 "LVPL gain ";
-        parameter OpenIPSL.Types.PerUnit Zerox "LVPL characteristic voltage 1";
+        parameter OpenRESV.Types.PerUnit Brkpt "LVPL characteristic voltage 2";
+        parameter OpenRESV.Types.PerUnit Lvpl1 "LVPL gain ";
+        parameter OpenRESV.Types.PerUnit Zerox "LVPL characteristic voltage 1";
 equation
 
   y = noEvent(if V < Zerox then 0 else if V > Brkpt then Lvpl1 else (V-Zerox)*(Lvpl1/(Brkpt-Zerox)));
@@ -28,7 +28,7 @@ These blocks represent logic associated with the dynamic model and the limit in 
 <p>The modelling of such devices is based, mainly, on the following reference:</p>
 <ul>
 <li><p>Siemens: \"PSS&reg;E Model Library\"
-<a href=\"modelica://OpenIPSL.UsersGuide.References\">[PSSE-MODELS]</a>.</p>
+<a href=\"modelica://OpenRESV.UsersGuide.References\">[PSSE-MODELS]</a>.</p>
 </li>
 </ul>
 </html>"));

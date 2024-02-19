@@ -7,10 +7,10 @@ model WTDTA1 "Generic Drive Train Model for Type 3 and Type 4 Wind Machines"
 
   parameter Modelica.Units.SI.Frequency fn = SysData.fn "System nominal frequency (50 or 60 Hz)";
   parameter Modelica.Units.SI.Time H = 5.3 "Total inertia constant (No predefined range)";
-  parameter OpenIPSL.Types.PerUnit DAMP = 0 "Machine damping factor (No predefined range)";
+  parameter OpenRESV.Types.PerUnit DAMP = 0 "Machine damping factor (No predefined range)";
   parameter Real Htfrac = 0.92 "Turbine inertia fraction, Ht/H (No predefined range)";
   parameter Modelica.Units.SI.Frequency Freq1 = 2.132 "First shaft torsional resonancy frequency (No predefined range)";
-  parameter OpenIPSL.Types.PerUnit Dshaft = 1 "Shaft damping factor (No predefined range)";
+  parameter OpenRESV.Types.PerUnit Dshaft = 1 "Shaft damping factor (No predefined range)";
 
   Modelica.Blocks.Math.Gain Coef1(k=Dshaft) annotation (Placement(
         transformation(
@@ -85,11 +85,11 @@ model WTDTA1 "Generic Drive Train Model for Type 3 and Type 4 Wind Machines"
   Modelica.Blocks.Math.Division division1
     annotation (Placement(transformation(extent={{-112,-76},{-92,-56}})));
 protected
-  parameter OpenIPSL.Types.PerUnit Ht = H*Htfrac;
-  parameter OpenIPSL.Types.PerUnit Hg = H - Ht;
-  parameter OpenIPSL.Types.PerUnit Kshaft = 2*Ht*Hg*(2*pi*Freq1)^2/(H*w0);
+  parameter OpenRESV.Types.PerUnit Ht = H*Htfrac;
+  parameter OpenRESV.Types.PerUnit Hg = H - Ht;
+  parameter OpenRESV.Types.PerUnit Kshaft = 2*Ht*Hg*(2*pi*Freq1)^2/(H*w0);
   parameter Modelica.Units.SI.AngularVelocity w0 = 2*pi*fn;
-  parameter OpenIPSL.Types.PerUnit T0(fixed=false);
+  parameter OpenRESV.Types.PerUnit T0(fixed=false);
 
 initial equation
 
@@ -169,9 +169,9 @@ simple two mass drive train model represents in the WTDTA1 component. Thus, the 
 <p>The modelling of such devices is based, mainly, on the following references:</p>
 <ul>
 <li>Siemens: \"PSS&reg;E Model Library\"
-<a href=\"modelica://OpenIPSL.UsersGuide.References\">[PSSE-MODELS]</a>,</li>
+<a href=\"modelica://OpenRESV.UsersGuide.References\">[PSSE-MODELS]</a>,</li>
 <li>WECC: \"Wind Power Plant Dynamic Modeling Guideline\"
-<a href=\"modelica://OpenIPSL.UsersGuide.References\">[WECCWind]</a>.</li>
+<a href=\"modelica://OpenRESV.UsersGuide.References\">[WECCWind]</a>.</li>
 </ul>
 </html>"));
 end WTDTA1;

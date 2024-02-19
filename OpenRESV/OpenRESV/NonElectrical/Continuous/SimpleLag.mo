@@ -5,7 +5,7 @@ block SimpleLag "First order lag transfer function block"
     annotation (Placement(transformation(extent={{-58,32},{-38,52}})));
   Real state(start=y_start);
   parameter Real K "Gain";
-  parameter OpenIPSL.Types.Time T "Lag time constant";
+  parameter OpenRESV.Types.Time T "Lag time constant";
   parameter Real y_start "Output start value";
 protected
   parameter Real T_mod=if T < Modelica.Constants.eps then 1000 else T;
@@ -47,7 +47,7 @@ equation
 </tr>
 <tr>
 <td><p>Contact</p></td>
-<td><p>see <a href=\"modelica://OpenIPSL.UsersGuide.Contact\">UsersGuide.Contact</a></p></td>
+<td><p>see <a href=\"modelica://OpenRESV.UsersGuide.Contact\">UsersGuide.Contact</a></p></td>
 </tr>
 </table>
 </html>"));

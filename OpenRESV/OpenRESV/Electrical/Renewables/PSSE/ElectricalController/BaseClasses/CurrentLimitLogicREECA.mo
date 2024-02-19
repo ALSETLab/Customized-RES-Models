@@ -1,12 +1,12 @@
 within OpenRESV.Electrical.Renewables.PSSE.ElectricalController.BaseClasses;
 model CurrentLimitLogicREECA "Current limit logic for REECA"
 
-  parameter OpenIPSL.Types.PerUnit start_ii "Starting current value from Iqcmd (comes from power flow simulation)";
-  parameter OpenIPSL.Types.PerUnit start_ir "Starting current value from Ipcmd (comes from power flow simulation)";
-  parameter OpenIPSL.Types.PerUnit Imax "Maximum limit on total converter current";
+  parameter OpenRESV.Types.PerUnit start_ii "Starting current value from Iqcmd (comes from power flow simulation)";
+  parameter OpenRESV.Types.PerUnit start_ir "Starting current value from Ipcmd (comes from power flow simulation)";
+  parameter OpenRESV.Types.PerUnit Imax "Maximum limit on total converter current";
 
-  OpenIPSL.Types.PerUnit Ipost;
-  OpenIPSL.Types.PerUnit Ipre;
+  OpenRESV.Types.PerUnit Ipost;
+  OpenRESV.Types.PerUnit Ipre;
 
   Modelica.Blocks.Interfaces.RealInput VDL1_out annotation (Placement(
         transformation(
@@ -139,9 +139,9 @@ end
 <p>The modelling of the current limit logic for the REECA electrical controller is based on the following references:</p>
 <ul>
 <li>Siemens: \"PSS&reg;E Model Library\"
-<a href=\"modelica://OpenIPSL.UsersGuide.References\">[PSSE-MODELS]</a>,</li>
+<a href=\"modelica://OpenRESV.UsersGuide.References\">[PSSE-MODELS]</a>,</li>
 <li>WECC: \"Wind Power Plant Dynamic Modeling Guideline\"
-<a href=\"modelica://OpenIPSL.UsersGuide.References\">[WECCWind]</a>.</li>
+<a href=\"modelica://OpenRESV.UsersGuide.References\">[WECCWind]</a>.</li>
 </ul>
 </html>"));
 end CurrentLimitLogicREECA;

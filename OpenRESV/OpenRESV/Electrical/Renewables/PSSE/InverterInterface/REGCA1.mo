@@ -17,7 +17,7 @@ model REGCA1 "Renewable energy generator/converter model A"
   OpenRESV.Electrical.Renewables.PSSE.InverterInterface.BaseClasses.LVACM
     LVACM(lvpnt0=lvpnt0, lvpnt1=lvpnt1) annotation (Placement(
         transformation(extent={{62,-80},{82,-60}})));
-  OpenIPSL.NonElectrical.Continuous.SimpleLag simpleLag(
+  OpenRESV.NonElectrical.Continuous.SimpleLag simpleLag(
     K=1,
     T=Tfltr,
     y_start=v_0)
@@ -144,7 +144,7 @@ equation
           textString="REGCA")}), Documentation(info="<html>
 <p>The REGCA1 component is used to represent the renewable source (inverter) interface with the grid. It takes in as input the real current command
 (Ipcmd) and the reactive current command (Iqcmd) from the electrical controller, and outputs real (Ip) and reactive (Iq) injected currents to the grid through
-OpenIPSL's proprietary pwpin connector.</p>
+OpenRESV's proprietary pwpin connector.</p>
 <p>In order to properly initialize all the components that form the renewable energy source, the REGC_A component has five initialization outputs, which its constant output originates from the
 starting power flow: initial real and reactive injection currents (IP0 and IQ0), initial terminal voltage (v_0), and initial active and reactive power
 injections (p_0 and q_0). This method reduces repetitiveness of initialization calculation, being calculated once at the REGCA1 component.</p>
@@ -152,7 +152,7 @@ injections (p_0 and q_0). This method reduces repetitiveness of initialization c
 <p>The modelling of such devices is based, mainly, on the following reference:</p>
 <ul>
 <li><p>Siemens: \"PSS&reg;E Model Library\"
-<a href=\"modelica://OpenIPSL.UsersGuide.References\">[PSSE-MODELS]</a>.</p>
+<a href=\"modelica://OpenRESV.UsersGuide.References\">[PSSE-MODELS]</a>.</p>
 </li>
 </ul>
 </html>"));

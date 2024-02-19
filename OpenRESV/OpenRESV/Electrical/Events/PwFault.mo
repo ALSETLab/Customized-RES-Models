@@ -1,12 +1,12 @@
 within OpenRESV.Electrical.Events;
 model PwFault "Transitory short-circuit on a node. Shunt impedance connected only during a specified interval of time.
               Developed by AIA. 2014/12/16"
-  OpenIPSL.Interfaces.PwPin p annotation (Placement(transformation(extent={{-80,
+  OpenRESV.Interfaces.PwPin p annotation (Placement(transformation(extent={{-80,
             -10},{-60,10}}), iconTransformation(extent={{-80,-10},{-60,10}})));
-  parameter OpenIPSL.Types.PerUnit R "Resistance";
-  parameter OpenIPSL.Types.PerUnit X "Reactance";
-  parameter OpenIPSL.Types.Time t1 "Start time of the fault";
-  parameter OpenIPSL.Types.Time t2 "End time of the fault";
+  parameter OpenRESV.Types.PerUnit R "Resistance";
+  parameter OpenRESV.Types.PerUnit X "Reactance";
+  parameter OpenRESV.Types.Time t1 "Start time of the fault";
+  parameter OpenRESV.Types.Time t2 "End time of the fault";
   import Modelica.Constants.eps;
 protected
   parameter Boolean ground=abs(R) < eps and abs(X) < eps;
