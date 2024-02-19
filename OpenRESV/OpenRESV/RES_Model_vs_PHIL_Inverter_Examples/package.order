@@ -1,0 +1,5 @@
+ConstantPFTerminalVoltageVariance
+PowerFactorVariance
+VoltVarMode
+VoltageRideThrough
+Irradiance2Power
