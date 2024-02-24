@@ -1,4 +1,4 @@
-# OpenRESV - Open Instance Renewable Energy Source Validation
+# OpenIRESV - Open Instance Renewable Energy Source Validation
 ## Scope
 The OpenRESV is an open-source Modelica-based library that is focused on modeling and validation of WECC-based renewable energy models. It was built using the Modelica language, leveraging the Modelica Standard Library, and functions in conjunction with [OpenIPSL](https://github.com/OpenIPSL/OpenIPSL).
 This Modelica Library explores the potential of Power Hardware-in-the-Loop (PHIL) setups for model validation, comparing an actual inverter with generic renewable energy source (RES) models from the Western Electricity Coordinating Council (WECC). 
