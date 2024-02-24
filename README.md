@@ -11,7 +11,7 @@ To round everything off, a comprehensive comparison and validation against a rea
 
 We have submitted a paper to the IEEE Transactions on Energy Conversion, which we would welcome you to cite as:
 
-> Fachini, Fernando, et al. "Using PHIL Setup for Developing Customized Open-Source Renewable Energy Models." IEEE Transactions on Energy Conversion (2024)
+> Fachini, Fernando, et al. "Customized Open-Source Renewable Energy Models Validated through PHIL Lab Experiments" IEEE Transactions on Energy Conversion (2024)
 
 ## Review of the ALSETLab Volta Facility
 
