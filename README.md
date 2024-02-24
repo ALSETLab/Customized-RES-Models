@@ -3,6 +3,7 @@
 The OpenRESV is an open-source Modelica-based library that is focused on modeling and validation of WECC-based renewable energy models. It was built using the Modelica language, leveraging the Modelica Standard Library. 
 The library includes the newly developed customized renewable energy source models (validated against PHIL experiments), and a bare minimum of power system components sourced from the OpenIPSL library. 
 The choice to separate OpenRESV from OpenIPSL was made to lower the entry barrier into Modelica modeling. Additionally, it aims to encourage the concept of developing open-source renewable colaboration between researchers.
+If the user is interested in knowing more about the OpenIPSL library, follow this link: [OpenIPSL](https://github.com/OpenIPSL/OpenIPSL "OpenIPSL Homepage").
 
 This Modelica Library explores the potential of Power Hardware-in-the-Loop (PHIL) setups for model validation, comparing an actual inverter with generic renewable energy source (RES) models from the Western Electricity Coordinating Council (WECC). 
 Utilizing PHIL experimental data, the study not only validates and tests WECC models but also proposes enhancements to improve real-world inverter representation. 
